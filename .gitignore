@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Conda / pip
+.env
+.venv/
+env/
+venv/
+*.conda
+=*
+
+# HuggingFace models (large binary files)
+hugging-face/hub/
+hugging-face/models--*/
+hugging-face/xet/
+hugging-face/stored_tokens
+hugging-face/token
+
+# Data (large files and potentially sensitive patient notes)
+data/raw/
+data/coral/
+data/CiViC/
+data/synthetic/
+database/*
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
