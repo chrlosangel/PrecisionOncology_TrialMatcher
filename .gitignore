@@ -33,7 +33,7 @@ data/raw/
 data/coral/
 data/CiViC/
 data/synthetic/
-database/*
+database/
 
 # OS / editor
 .DS_Store
