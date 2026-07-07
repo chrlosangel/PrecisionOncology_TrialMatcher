@@ -20,8 +20,8 @@ logging.getLogger("vllm").setLevel(logging.WARNING)
 
 import preprocessing.utils.parsingPatients as parsingPatients   
 import preprocessing.utils.chunkPatients as chunkPatients
-import src.preprocessing.utils.keywordsPatients as keywordsPatients
-
+import preprocessing.utils.keywordsPatients as keywordsPatients
+import preprocessing.utils.embeddingPatients as embeddingPatients
 
 AVAILABLE_MODELS = [
     "axiong/PMC_LLaMA_13B",
@@ -45,6 +45,11 @@ def argument_parser():
           choices=AVAILABLE_MODELS,
           help=f"LLM model to use for prompt generation. Choices: {', '.join(AVAILABLE_MODELS)}"
      ) 
+     # ====== Embedding model arguments ======
+     parser.add_argument("--embedding_model", default="ncbi/MedCPT-Query-Encoder", help="Embedding model to use for generating embeddings.")
+     # ====== Save directory arguments ======
+     parser.add_argument("--save_dir", required=True, help="Directory to save the ChromaDB collection and processed trials.") #---
+     
      # Optional argument for sentence tokenizer
      parser.add_argument("--sentence_tokenizer", required=False, default="en_core_sci_sm", help="Tokenizer for sentence chunking.")
      return parser
@@ -107,18 +112,37 @@ def main():
                     max_model_len=13472
                )
                print(f"LLM model '{model}' initialized successfully.")
+
                try:
-                    for p in tqdm(processed_patients, desc="Extracting Keywords", unit="patient", dynamic_ncols=True):
-                         keywordsPatients.extract_patient_sections_keywords(p, n_keywords=5, template=KEYWORD_PROMPT_TEMPLATE, config=config, type_run='hpc', llm=llm)
+
+                    for p in tqdm(processed_patients, desc="Extracting Keywords", 
+                                  unit="patient", dynamic_ncols=True):
+                         
+                         keywordsPatients.extract_patient_sections_keywords(p, n_keywords=5, 
+                                                                            template=KEYWORD_PROMPT_TEMPLATE, 
+                                                                            config=config, type_run='hpc', 
+                                                                            llm=llm)
                except Exception as e:
                     print(f"Error during keyword extraction: {e}")
                     sys.exit(1)
+
 
           except Exception as e:
                print(f"Error initializing LLM: {e}")
                sys.exit(1)
 
+
+          # Now we should have a list of processed patients with their sections and extracted keywords. We can save this data for later use.
+          # processed_patients has p.PatientSections[s_n].keywords which is a list of keywords for each section of the patient note.
+
+          embeddingPatients.save_patients_to_pickle(processed_patients, Path(args.save_dir))
+          
+          #---- Embeddings and ChromaDB ----
+          tokenizer_emb = AutoTokenizer.from_pretrained(args.embedding_model)
+          tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
+
+
      except Exception as e:
-          print(f"Error parsing clinical notes: {e}")
+          print(f"Error processing patients: {e}")
           sys.exit(1)
      

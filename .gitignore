@@ -12,6 +12,7 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb_checkpoints
+*.ipynb
 
 # Conda / pip
 .env

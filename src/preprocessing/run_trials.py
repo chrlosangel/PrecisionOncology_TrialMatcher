@@ -63,6 +63,7 @@ def argument_parser():
      ) 
      # ====== Embedding model arguments ======
      parser.add_argument("--embedding_model", default="ncbi/MedCPT-Query-Encoder", help="Embedding model to use for generating embeddings.")
+     # ====== Save directory arguments ======
      parser.add_argument("--save_dir", required=True, help="Directory to save the ChromaDB collection and processed trials.") #---
      return parser
 
