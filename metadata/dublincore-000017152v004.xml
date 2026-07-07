@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dcterms:dc xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://purl.org/dc/elements/1.1/ https://dublincore.org/schemas/xmls/qdc/2008/02/11/dcterms.xsd">
+  <dc:title>A Test Collection for Matching Patient to Clinical Trials</dc:title>
+  <dc:creator>Bevan Koopman</dc:creator>
+  <dc:subject>Information retrieval and web search</dc:subject>
+  <dc:description>The following is an information retrieval test collection that contains:
+
+* 204,855 publicly available clinical trails was crawled from ClinicalTrials.gov.
+* 60 topics made up of three types: patient case descriptions, patient case summaries and assessor provided ad-hoc queries, totalling an average of 10.2 queries per topic.
+* 4,000 assessor provided relevance assessment for topic, trial pairs.
+
+Further details about the test collection can be found in the following publication:
+
+B. Koopman and G. Zuccon. *A test collection for matching patient trials*. In Proceedings of the 39th annual international ACM SIGIR conference on research and development in information retrieval, Pisa, July 2016.</dc:description>
+  <dc:publisher>CSIRO</dc:publisher>
+  <dc:contributor>Guido Zuccon</dc:contributor>
+  <dc:date>2017-04-04</dc:date>
+  <dc:type />
+  <dc:format />
+  <dc:identifier>https://doi.org/10.4225/08/58e2e83d92c2b</dc:identifier>
+  <dc:language />
+  <dc:rights />
+</dcterms:dc>

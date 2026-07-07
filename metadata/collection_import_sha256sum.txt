@@ -1,0 +1,8 @@
+53adb8f1a8e75dac8cdae8215808b2616deeeb5e424096f521b0bc79b732e474  ./data/adhoc-queries.json
+10e63f2f3e06315546243ac7114383ea31ac52930cb1d1c04aeee46afec20f80  ./data/clinicaltrials.gov-16_dec_2015.tgz
+6029ee4b49d2b043233b0a6c499b15ef5a20b591f59b9e85a726f9ca91ff9eb4  ./data/CLINICALTRIALS.GOV_TERMS_AND_CONDITIONS.txt
+f0b9aa8aa22b4c4eb5405c0bd2dc8220ac43a9c1d75e08782a410324270ce45e  ./data/qrels-clinical_trials.txt
+4dd0d387e45b8d6c493f3343a8f80fa380d90436fca89009c6f722511d38ca44  ./data/README.html
+f150a44a5d6226734aead0e1daa555876159615e9248a05dc093fca48e1e2c3e  ./data/topics-2014_2015-description.topics
+7ba3aff45fe4896a20bf67ce6c5a3a3cb4e50e0ffde480ff50591546fcda5f01  ./data/topics-2014_2015-summary.topics
+81bd833339cc87059f44fd655769d692863dd05ba0b350ff7681b2a944154b65  ./data/Ts.tsv

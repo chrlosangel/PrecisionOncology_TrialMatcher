@@ -1,0 +1,75 @@
+name: trialmatch
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy<2.0                  # numpy 2.x breaks ABI with packages compiled against 1.x
+  - scipy
+  - seaborn
+  - matplotlib
+  - pandas
+  - pip
+  - pip:
+    # XML parsing (trial side)
+    - lxml                      # fast XML parser for ClinicalTrials.gov files
+    - ujson                     # fast JSON serialization for large trial files
+    - tqdm                      # progress bars when processing 375K XMLs
+
+    # Biomedical NLP core (patient side)
+    - scipy>=1.14.0
+    - spacy==3.7.4
+    - medspacy
+    - negspacy                  # negation detection (e.g. "no history of diabetes")
+
+    # SciSpacy biomedical models (install after env is created — see below)
+    #pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_scibert-0.5.4.tar.gz #Transformer based, most accurate for NER and concept extraction, but slow
+    #pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_bc5cdr_md-0.5.4.tar.gz # trained on BC5CDR corpus, good for disease and chemical NER
+    #pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz # small, fast, general-purpose model, good for quick prototyping and less critical tasks
+    #pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_lg-0.5.4.tar.gz # large, accurate, general-purpose model, good for most tasks but slower than scibert
+    #pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_jnlpba_md-0.5.4.tar.gz # trained on JNLPBA corpus, good for gene/protein NER
+    
+    # NER and transformers (entity extraction, concept recognition)
+    - transformers>=5.12.0      # pinned to work with vllm (>=4.56.0) and huggingface_hub 1.x
+    - huggingface_hub>=1.5.0    # required by transformers 5.x; also needed by vllm
+    - tokenizers>=0.22.0,<=0.23.0  # required by transformers 5.x
+    - vllm
+    - torch                     # backend for transformer models
+    - datasets                  # huggingface datasets utility
+
+    # UMLS / ontology normalization
+    - quickumls                 # fast UMLS concept mapping
+    - requests                  # for querying UMLS API if needed
+
+    # Retrieval — lexical
+    - rank-bm25                 # BM25 index for lexical retrieval
+
+    # Retrieval — semantic (MedCPT embeddings)
+    - sentence-transformers     # dense embeddings, wraps MedCPT
+    - faiss-gpu
+                                # use faiss-gpu instead if GPU available
+
+    # Query generation (LLM-based keyword generation)
+    - openai                    # OpenAI API client (GPT-4 / GPT-3.5)
+                                # also works as client for vLLM via base_url override
+
+    # Data handling
+    - jsonlines                 # read/write .jsonl files (corpus format)
+    - pydantic                  # data validation for parsed trial/patient objects
+
+    # Evaluation
+    - pytrec-eval-terrier       # trec_eval in Python (NDCG@10, P@10, etc.)
+    - scikit-learn              # AUROC and other metrics
+
+    # Others, will eval after chacking if we need them or not
+    - keybert
+    - pytorch_lightning
+    - gensim
+    - dotmap
+    - torchmetrics
+    - ir-measures
+    - wandb
+    - flake8
+    - python-dotenv
+    - chromadb

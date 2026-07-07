@@ -1,0 +1,165 @@
+# Description of datasets
+
+## CORAL 
+Real de-identified patients from NEJM AI paper will include more references to this
+
+- data/coral/
+
+## Synthetic
+Synthetic notes from different cancer types
+- data/coral/toy_set
+
+# Trial GPT
+- https://github.com/ncbi-nlp/TrialGPT 
+Their repo is useless in our case because we want to tackle the problem of PARSING messy medical data. They manually cleaned all used data into readable formats, to help the models.
+
+     > "clinical trial matching sometimes requires the recruiters to check the patients' information more comprehensively, which involves longitudinal clinical notes, lab values, and even imaging data. This requires the model to (1) attend to much longer contexts, (2) process structured data, and (3) process multi-modal inputs. These aspects have not been evaluated by this study but are worth exploring in future work."
+
+     >"future evaluations should investigate how TrialGPT performs when integrating data from electronic health records (EHRs), which often include a combination of structured and unstructured data sources."
+
+## SIGIR
+
+* 204,855 publicly available clinical trails was crawled from ClinicalTrials.gov.
+* 60 topics made up of three types: patient case descriptions, patient case summaries and assessor provided ad-hoc queries, totalling an average of 10.2 queries per topic.
+* 4,000 assessor provided relevance assessment for topic, trial pairs.
+
+* Labels as 0 irrelevant, 1 potential, 2 eligible 
+
+| Trial Corpus | Patient Notes |
+|---|---|
+| 204,855 trials from ClinicalTrials.gov [raw XML] | 60 synthetic case notes (clean prose XML) |
+
+Manually downloaded 
+
+- https://data.csiro.au/collection/csiro:17152
+- topics-2014_2015-description.topics full patient info
+- clinicaltrials.gov-16_dec_2015.tgz trial corpus
+- qrels-clinical_trials.txt relevance judgements
+
+```bash
+
+mkdir -p data/synthetic/trials/SIGIR/
+mkdir -p data/synthetic/patients/SIGIR/
+mkdir -p data/synthetic/eval/SIGIR/
+
+unzip data/2017-04-04_Koopman_Bevan_17152v4.zip 
+mv data/topics-2014_2015-description.topics data/synthetic/patients/SIGIR/ 
+
+mv data/qrels-clinical_trials.txt data/synthetic/eval/SIGIR/
+
+mv data/clinicaltrials.gov-16_dec_2015.tgz data/synthetic/trials/SIGIR/
+
+tar -xzf data/synthetic/trials/SIGIR/clinicaltrials.gov-16_dec_2015.tgz -C data/synthetic/trials/SIGIR/
+
+for i in $(seq 0 9); do 
+     rm -r data/synthetic/trials/SIGIR/clinicaltrials.gov-16_dec_2015/._NCT01${i}*
+done
+
+for i in $(seq 0 9); do 
+     rm -r data/synthetic/trials/SIGIR/clinicaltrials.gov-16_dec_2015/._NCT02${i}*
+done
+
+rm data/2017-04-04_Koopman_Bevan_17152v4.zip
+```
+
+
+## TREC
+The trec clinical Trial track is a collection of patient-to-trial notes that enable the evaluation of patient matching systems and the building of a test collection for clinical trial serch. That is, the query/topic will be (synthetic) patient descriptions and the corpus will be a large set of clinical trial descriptions.
+
+Clinical trial descriptions can be quite long, but the core aspect od the trial description are the inclusion/exclusion criteria. These are not all-inclusive statemenst about the trial to the point that all other tiral information can be ignored, but they are key aspects to defininf trial eligibility.
+The patient notes are a lengthy (~10 sentences) patient description that simulates an admission statement in an EHR. 
+
+
+
+### 2021
+
+| Trial Corpus | Patient Notes |
+|---|---|
+| 375,581 trials — April 27, 2021 snapshot (raw xml) | 75 synthetic admission notes (clean prose XML) |
+```bash 
+mkdir -p data/synthetic/trials/TREC_2021
+mkdir -p data/synthetic/patients/TREC_2021
+mkdir -p data/synthetic/eval/TREC_2021
+
+# Trials 
+# April 27, 2021 snapshot
+for i in $(seq 1 5); do 
+     wget https://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part${i}.zip -O data/synthetic/trials/TREC_2021/ClinicalTrials.2021-04-27.part${i}.zip
+     unzip data/synthetic/trials/TREC_2021/ClinicalTrials.2021-04-27.part${i}.zip -d data/synthetic/trials/TREC_2021/
+done
+
+# 75 topics
+#not separated notes, all notes are included in this document
+wget https://www.trec-cds.org/topics2021.xml -O data/synthetic/patients/topics2021.xml
+
+#Patient ID-Placeholder-Trial ID-Relevance(0=not relevant, 1=excluded,2=Elegible)
+wget https://trec.nist.gov/data/trials/qrels2021.txt -O data/synthetic/eval/TREC_2021/qrels2021.txt
+
+
+```
+
+### 2022
+| Trial Corpus | Patient Notes |
+|---|---|
+| 375,581 trials — April 27, 2021 snapshot (raw xml) [same as 2021] | 50 new synthetic admission notes (clean prose XML) |
+
+```bash 
+mkdir -p data/synthetic/trials/TREC_2022
+mkdir -p data/synthetic/patients/TREC_2022
+mkdir -p data/synthetic/eval/TREC_2022
+
+# Trials 
+#Trial corpus is the same as on 2021
+#April 27, 2021 snapshot
+
+
+#Includes 50 new topics
+wget https://www.trec-cds.org/topics2022.xml -O data/synthetic/patients/TREC_2022/topics2022.xml
+
+# same as before
+wget https://trec.nist.gov/data/trials/qrels2022.txt -O data/synthetic/eval/TREC_2022/qrels2022.txt
+
+
+```
+
+### 2023
+| Trial Corpus | Patient Notes |
+|---|---|
+375,000+ trials — May 8, 2023 snapshot | 50 STRCUTURED questionaries |
+
+```bash 
+mkdir -p data/synthetic/trials/TREC_2023
+mkdir -p data/synthetic/patients/TREC_2023
+mkdir -p data/synthetic/eval/TREC_2023
+
+# Trials 
+# May 8, 2023 snapshot 
+
+for i in $(seq 0 5); do 
+     wget https://www.trec-cds.org/2023_data/ClinicalTrials.2023-05-08.trials${i}.zip -O data/synthetic/trials/TREC_2023/ClinicalTrials.2023-05-08.trials${i}.zip
+
+     unzip data/synthetic/trials/TREC_2023/ClinicalTrials.2023-05-08.trials${i}.zip -d data/synthetic/trials/TREC_2023/
+done
+
+
+#Includes 50 new topics not included in 2021 nor 2022
+# The 2021 and 2022 topics had a very different structure (free-text narratives along the lines of a case report or electronic health record note)
+# The topics for the track consist of synthetic patient descriptions based on questionnaire templates.
+# Each row represents one entry (i.e one question based on a disease treat), the second dield is the patient response to it
+wget https://www.trec-cds.org/topics2023.xml -O data/synthetic/patients/TREC_2023/topics2023.xml
+
+# same as before
+wget https://trec.nist.gov/data/trials/qrels2022.txt -O data/synthetic/eval/TREC_2023/qrels2023.txt
+
+```
+
+## CiViC 
+
+```bash
+mkdir -p data/CiViC/
+
+wget https://civicdb.org/downloads/nightly/nightly-ClinicalEvidenceSummaries.tsv -O data/CiViC/nightly-ClinicalEvidenceSummaries.tsv
+
+wget https://civicdb.org/downloads/nightly/nightly-VariantSummaries.tsv -O data/CiViC/nightly-VariantSummaries.tsv
+```
+

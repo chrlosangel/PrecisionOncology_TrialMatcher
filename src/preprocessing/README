@@ -1,0 +1,48 @@
+Also referred as enrichment, this module transforms raw trial criteria text into formats suitable for matching.
+
+## References 
+https://www.sciencedirect.com/science/article/pii/S153204642300165X?via%3Dihub Entity extraction techniques and negation 
+Handle complex eligibility criteria sentences, and data enrichment techniques to improve query representation. 
+The problem inolves semantic complexity of matching patients information with heterogeneous multi fielded CT Documents. In addition the eligibility criteria often use complex language structures, and medical jargon in semi-structured or unstructured ways.
+Existing approaches lack a balance between efficiency and effectiviness. 
+Data enrichment techniques has shown promissing results in supporting CT search;
+It consistts on entity recognition and negation detection modules, applied to both the patient description and the eligibility section of the CTs. Whule providing a classification of both patients descriptions and CT eligibility criteria into current, past and family medical conditions. The extracted information boosts the importance of affirmative and negative mentions of diseases and drugs for both the documents.
+
+CTT eligibility criteria fiield contains inclusion and exclusion criteria, whe core aspect of the CT matching task
+
+Using bag-of-words approach to tackle the patients-to-trial matching problem may pose difficulties as both the patients description and the CTs contain many irrelevant terms, moreover they can both contain negated terms, which handeling properly is essential for deciding eligibility but may not be trivial to extract using NN models. Additionally, some patients data or clinical trials are set as questionaries based on time dependency, past or present conditions, and they can refer to patients or patients family.
+
+Some information extraction works:
+- Identify and segmenting eligibility criteria into semantic categories(such as health status, treatment hsitory, labs, lifestile)
+- EliIE free text to structure
+- NLP methods are widely used, and have shown a significant increase in retrieval
+
+
+
+On CT matching there are multiple attempts of using BERT embedings with different pretrained models. Other option is a T5 based models which have shown outperfom other models in this task. 
+## Clinical trials 
+- Data parsing: Transform messy data into readable formats
+
+- Eligibility Criteria Parsing (Structuring)
+What: Extract key entities (diseases, biomarkers, lab values, medications) and logical relationships from free-text criteria. [analog to entity extraction]
+
+- Normalization: Map extracted entities to standardized vocabularies so that "high blood pressure" matches "hypertension" and "Herceptin" matches "trastuzumab."
+
+-  Criteria Rephrasing: Convert complex eligibility criteria into simplified, independent units while preserving semantics. This is critical for criterion-level matching approaches.
+     - Alkhoury et al. represent biomarker logic as OR-of-ANDs in JSON format, capturing complex cohort-specific requirements (e.g., "Cohort A requires EGFR L858R OR Cohort B requires KRAS G12C
+
+
+
+## Patients 
+
+- Entity extraction: Extract clinically relevant entities from unstructured patient records. NER for clinical entities: Extract diagnoses, medications, procedures, lab values, genomic findings.
+
+- Concept Normalization: Standardize extracted terms and expand them with related concepts. 
+
+     - Synonym expansion: Using SNOMED CT taxonomic structure to expand extracted terms (e.g., "NSCLC" → also search "non-small cell lung cancer," "pulmonary adenocarcinoma").
+     - Code mapping: Map diagnoses to ICD-10, medications to RxNorm, labs to LOINC.
+     -  Biomarker normalization: Normalize gene variant names (e.g., "BRAF V600E" = "BRAF p.V600E" = "BRAF c.1799T>A"). Gueguen et al. found that **gene variant mismatches (e.g., KRAS G12C vs G12V) were the single most frequent cause of false positives** (28–51% of errors across tools).
+
+- Negation detection: Make sure negative statements are not read as positive (known mistake by LLMs)
+
+
