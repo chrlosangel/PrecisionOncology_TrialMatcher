@@ -140,15 +140,11 @@ def main():
                sys.exit(1)
           
           # Save processed trials to a pickle file for later use
-          embeddings_ClinicalTrials.save_questions_to_pickle(trials,Path(args.save_dir))
+          embeddings_ClinicalTrials.save_questions_to_pickle(trials,args.save_dir)
           
           
           
-          #---- Embeddings and ChromaDB - NOT USED
-          #tokenizer = AutoTokenizer.from_pretrained(args.embedding_model)
-          #tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
-          #client = embeddings_ClinicalTrials.generate_chromaDB_CT(trials, tokenizer, tokenizer_model, Path(args.save_dir))
-
+     
      except Exception as e:
           print(f"An error occurred: {e}")
           sys.exit(1)

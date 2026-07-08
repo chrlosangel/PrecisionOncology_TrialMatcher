@@ -153,10 +153,10 @@ def generate_chromaDB(processed_patients: List[Patient], tokenizer: AutoTokenize
 	if option in ["chunks", "both"]:
           #Setting of collection metadata is set to {"hnsw:space": "ip"} to use inner product (cosine similarity) for nearest neighbor search, which is appropriate for embeddings
 		chunks_collection = client.get_or_create_collection("chunks", metadata={"hnsw:space": "ip"})
-		print(f"Created ChromaDB collection for chunks at {save_path / 'chunks'}")
+		print(f"Created ChromaDB collection for chunks at {save_path / 'chromaDB_patients' / 'chunks'}")
 	if option in ["keywords", "both"]:
 		keywords_collection = client.get_or_create_collection("keywords", metadata={"hnsw:space": "ip"})
-		print(f"Created ChromaDB collection for keywords at {save_path / 'keywords'}")
+		print(f"Created ChromaDB collection for keywords at {save_path / 'chromaDB_patients' / 'keywords'}")
 
 	for patient in tqdm(processed_patients, desc="Building ChromaDB", unit="patient"):
 		pid = str(patient.patient_id)
@@ -165,7 +165,7 @@ def generate_chromaDB(processed_patients: List[Patient], tokenizer: AutoTokenize
 			# where= filters by metadata 
 			# because we used one id per patient we can get all the info with that ID
 			# and ['ids'] is just added to retrieve all chunks for that patient
-			# is the list is empty, it means we did not add any chunks and therefore it will go to the next step
+			# is the list is empty, it means we did not add any chunks for the patient and therefore it will go to the next step
 			if chunks_collection.get(where={"patient_id": pid})["ids"]:
 				print(f"Chunk {pid} already exists in chunks collection. Skipping.")
 				continue
@@ -180,25 +180,43 @@ def generate_chromaDB(processed_patients: List[Patient], tokenizer: AutoTokenize
 		if option in ["chunks", "both"]:
 			print(f"Adding chunks for patient {patient.patient_id} to ChromaDB collection.")
 			_add_chunks(patient, tokenizer, model, chunks_collection)
+	print(f"ChromaDB database generated at {save_path / 'chromaDB_patients'}")
 	return client
 
 def save_patients_to_pickle(processed_patients: List[Patient], save_dir:str) -> None:
-	from datetime import datetime
-	timestamp = datetime.now().strftime("%Y%m%d")
+	# Need to change for version were we only have one file and patients already included are not added
 
 	# Make directory if it doesn't exist
+
 	save_path = Path(save_dir)
+
+	#Main file
+	patients_pkl = save_path / f"processed_patients.pkl"
+
 	if not save_path.exists():
 		save_path.mkdir(parents=True, exist_ok=True)
 	
-	# Save the processed trials to a pickle file
-	if (save_path / f"processed_patients_{timestamp}.pkl").exists():
-		print(f"Warning: processed_patients_{timestamp}.pkl already exists and will be overwritten.")
+
+	if patients_pkl.exists():
+		print("Adding new patients to existing dataset.")
+		with open(patients_pkl, "rb") as f:
+			existing_patients = pickle.load(f) 
+
+		existing_patients_ids=[p.patient_id for p in existing_patients]
+		new_patients = [p for p in processed_patients if p.patient_id not in existing_patients_ids]
+		if new_patients:
+			print(f"Adding {len(new_patients)} new patients to existing dataset.")
+			with open(patients_pkl, "wb") as f:
+				pickle.dump(existing_patients + new_patients, f)
+		if not new_patients:
+			print("No new patients to add. Existing dataset remains unchanged.")
+
 	else:
-		with open(save_path / f"processed_patients_{timestamp}.pkl", "wb") as f:
-			pickle.dump(processed_patients, f) # In here we already have the trial information, we jsut need to add the embeddings and metadata to the ChromaDB collection
-			
-	print(f"Processed patients saved to {save_path / f'processed_patients_{timestamp}.pkl'}")
+		with open(patients_pkl, "wb") as f:
+			pickle.dump(processed_patients, f)
+		print(f"Processed patients saved to {patients_pkl}")
+		
+	print(f"Processed patients saved to {save_path / f'processed_patients.pkl'}")
 
 
 

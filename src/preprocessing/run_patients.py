@@ -1,14 +1,12 @@
 import argparse
 import sys, os
 from pathlib import Path
-import requests
-import ast
+
 import logging
-import openai
-import torch
+
 from tqdm import tqdm
 
-from vllm import LLM, SamplingParams
+from vllm import LLM
 import torch.multiprocessing as mp
 from transformers import AutoTokenizer, AutoModel,AutoConfig
 
@@ -141,7 +139,8 @@ def main():
           tokenizer_emb = AutoTokenizer.from_pretrained(args.embedding_model)
           tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
 
-
+          embeddingPatients.generate_chromaDB(processed_patients, tokenizer_emb, 
+                                             tokenizer_model, args.save_dir, option="chunks")
      except Exception as e:
           print(f"Error processing patients: {e}")
           sys.exit(1)

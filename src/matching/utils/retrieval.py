@@ -8,17 +8,12 @@ import numpy as np
 import torch
 
 
-def _load_patientDB(save_dir: str) -> chromadb.Client:
+def _load_patientDB(database_path: Path) -> chromadb.Client:
      """Loads the ChromaDB database for the processed patients.
-     :param save_dir: Path to the directory where the ChromaDB database is saved
+     :param database_path: Path to the directory where the ChromaDB database is saved
      :return: ChromaDB client object
      """
-     save_path = Path(save_dir)
-
-     if not save_path.exists():
-         raise FileNotFoundError(f"ChromaDB directory '{save_dir}' does not exist.")
-     
-     client = chromadb.PersistentClient(path=str(save_path / "chromaDB_patients"))
+     client = chromadb.PersistentClient(path=str(database_path))
 
      return client
 

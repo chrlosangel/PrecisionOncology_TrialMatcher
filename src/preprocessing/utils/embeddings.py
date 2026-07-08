@@ -82,8 +82,7 @@ def _add_questions(trial:ClinicalTrial,  tokenizer: AutoTokenizer, model: AutoMo
 		collection.add(ids=ids, documents=documents, metadatas=metadata, embeddings=embeddings)
 
 def save_questions_to_pickle(processed_trials: List[ClinicalTrial], save_dir:str) -> None:
-	from datetime import datetime
-	timestamp = datetime.now().strftime("%Y%m%d")
+
 
 	# Make directory if it doesn't exist
 	save_path = Path(save_dir)
@@ -91,13 +90,23 @@ def save_questions_to_pickle(processed_trials: List[ClinicalTrial], save_dir:str
 		save_path.mkdir(parents=True, exist_ok=True)
 	
 	# Save the processed trials to a pickle file
-	if (save_path / f"processed_trials_{timestamp}.pkl").exists():
-		print(f"Warning: processed_trials_{timestamp}.pkl already exists and will be overwritten.")
+	if (save_path / f"processed_trials.pkl").exists():
+		print(f"Adding new Clinical Trials to existing dataset.")
+		with open(save_path / f"processed_trials.pkl", "rb") as f:
+			existing_trials = pickle.load(f)
+		existing_trials_ids = {trial.name_id for trial in existing_trials}
+		new_trials = [trial for trial in processed_trials if trial.name_id not in existing_trials_ids]
+		if new_trials:
+			combined_trials = existing_trials + new_trials
+			with open(save_path / f"processed_trials.pkl", "wb") as f:
+				pickle.dump(combined_trials, f)
+			print(f"Added {len(new_trials)} new trials to the existing dataset.")
 	else:
-		with open(save_path / f"processed_trials_{timestamp}.pkl", "wb") as f:
-			pickle.dump(processed_trials, f) # In here we already have the trial information, we jsut need to add the embeddings and metadata to the ChromaDB collection
-			
-	print(f"Processed trials saved to {save_path / f'processed_trials_{timestamp}.pkl'}")
+		with open(save_path / f"processed_trials.pkl", "wb") as f:
+			pickle.dump(processed_trials, f) 
+		print("Processed trials saved to a new pickle file.")
+		
+	print(f"Processed trials saved to {save_path / f'processed_trials.pkl'}")
 
 def generate_chromaDB_CT(processed_trials: List[ClinicalTrial], 
 				  tokenizer:AutoTokenizer, 
