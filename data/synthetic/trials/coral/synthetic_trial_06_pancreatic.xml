@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-PDAC-006</org_study_id>
+    <nct_id>NCT_SYNTH_006</nct_id>
+  </id_info>
+  <brief_title>FOLFIRINOX Plus Adagrasib (KRAS G12V Inhibitor) as Neoadjuvant Therapy in Borderline Resectable PDAC (KRAS-FOLFI)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of FOLFIRINOX With or Without Adagrasib in the Neoadjuvant Treatment of KRAS G12V-Mutant Borderline Resectable Pancreatic Ductal Adenocarcinoma</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates whether adding adagrasib — a selective covalent KRAS G12V inhibitor —
+      to neoadjuvant FOLFIRINOX improves R0 resection rates and pathologic response in patients
+      with borderline resectable pancreatic ductal adenocarcinoma (PDAC) harboring a KRAS G12V
+      mutation, compared to FOLFIRINOX alone.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Pancreatic ductal adenocarcinoma (PDAC) carries KRAS mutations in over 90% of cases, with
+      KRAS G12V representing approximately 20-25% of all KRAS mutations in PDAC. Adagrasib (MRTX849)
+      was initially developed as a KRAS G12C inhibitor but modified analogs targeting G12V have
+      shown promising activity in preclinical PDAC models. Borderline resectable PDAC (BRPC), defined
+      per NCCN/AHPBA criteria as tumor contact with major mesenteric vessels without occlusion or
+      greater than 180-degree encasement of the SMA, is treated with neoadjuvant chemotherapy
+      to improve surgical margin status. FOLFIRINOX remains the preferred neoadjuvant regimen in
+      fit patients. This study randomizes patients with KRAS G12V-mutant BRPC to modified
+      FOLFIRINOX x 8 cycles (4 months) + adagrasib 600 mg BID orally versus modified FOLFIRINOX
+      x 8 cycles alone, followed by restaging and surgical evaluation. Primary endpoint is
+      R0 resection rate (margin-negative resection by &gt;= 1 mm). Key secondary endpoints include
+      pathologic response rate (Evans Grade III-IV), conversion to resectability, progression-free
+      survival, and overall survival. ctDNA dynamics are assessed as an exploratory biomarker.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>R0 Resection Rate (margin-negative resection &gt;= 1 mm)</measure>
+    <time_frame>At time of surgical resection, approximately 4-5 months after treatment initiation</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Pathologic Response Rate (Evans Grade III or IV)</measure>
+    <time_frame>At time of surgical resection, approximately 4-5 months after treatment initiation</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Rate of Surgical Resection (any margin status)</measure>
+    <time_frame>Approximately 5 months after treatment initiation</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Progression-Free Survival (PFS)</measure>
+    <time_frame>From randomization until radiographic progression or death, up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Radiographic Response Rate per RECIST 1.1 after neoadjuvant therapy</measure>
+    <time_frame>After 8 cycles of neoadjuvant treatment, approximately 4 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0)</measure>
+    <time_frame>During treatment period, up to 5 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically or cytologically confirmed pancreatic ductal adenocarcinoma (PDAC); mixed histologies including acinar cell or neuroendocrine components are excluded
+- KRAS G12V mutation confirmed by a validated molecular assay on tumor tissue or ctDNA; patients with other KRAS mutations (G12D, G12C, G12R, etc.) are not eligible for this study (separate cohorts may be available)
+- Borderline resectable disease as defined by NCCN 2024 criteria:
+  (a) Pancreatic head/uncinate process: SMA contact &gt;= 180 degrees, or abutment of first jejunal SMA branch, or SMV/PV involvement with reconstructible occlusion, or IVC contact
+  (b) Pancreatic body/tail: celiac axis abutment &lt;= 180 degrees without aortic involvement
+- No evidence of distant metastatic disease (M0) by CT chest/abdomen/pelvis with IV contrast within 28 days of enrollment
+- No prior systemic chemotherapy, radiation therapy, or surgery for pancreatic cancer
+- Age &gt;= 18 years
+- ECOG Performance Status 0-1
+- Adequate bone marrow: ANC &gt;= 1500/mm3, platelets &gt;= 100,000/mm3, hemoglobin &gt;= 9 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN (&lt; 2x ULN if biliary stent in place), AST/ALT &lt;= 2.5x ULN
+- Adequate renal function: creatinine clearance &gt;= 50 mL/min (Cockcroft-Gault)
+- Adequate nutritional status: albumin &gt;= 3.0 g/dL; weight loss &lt; 15% of body weight over 6 months
+- Biliary stent placement is permitted for bile duct obstruction prior to enrollment; metallic stents preferred for endoscopic biliary decompression
+- Peripheral neuropathy &lt;= Grade 1 at baseline
+- Multidisciplinary pancreatic tumor board review confirming borderline resectable classification required before enrollment
+- Signed informed consent
+
+Exclusion Criteria:
+- Locally advanced (unresectable) PDAC: SMA encasement &gt; 270 degrees, celiac axis encasement, aortic invasion, or unreconstructible SMV/PV occlusion
+- Resectable PDAC (no vascular contact or &lt; 180 degree SMA contact with preserved fat plane)
+- Metastatic disease (M1): liver metastases, peritoneal carcinomatosis, lung metastases, or any distant organ involvement
+- KRAS mutations other than G12V (KRAS WT, G12D, G12C, G12R); KRAS WT PDAC excluded
+- Prior treatment with any KRAS inhibitor
+- Neuroendocrine carcinoma, acinar cell carcinoma, or other non-ductal pancreatic tumors
+- Active biliary sepsis or uncontrolled biliary obstruction at time of enrollment
+- Known dihydropyrimidine dehydrogenase (DPD) deficiency
+- Active or severe hepatic impairment (Child-Pugh B or C)
+- Known hypersensitivity to any component of FOLFIRINOX or adagrasib
+- Concurrent use of strong CYP3A4 inhibitors or inducers
+- Pregnancy or breastfeeding; effective contraception required
+- Gilbert syndrome or UGT1A1 polymorphism (7/7 homozygous): irinotecan dose reduction required per protocol amendment; not excluded
+- Active second malignancy requiring systemic therapy within 3 years
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>FOLFIRINOX + Adagrasib</intervention_name>
+    <description>Modified FOLFIRINOX (oxaliplatin 85 mg/m2 IV + leucovorin 400 mg/m2 IV + irinotecan 150 mg/m2 IV + 5-FU 2400 mg/m2 continuous infusion over 46 hours, without 5-FU bolus) every 2 weeks for 8 cycles, plus adagrasib 600 mg orally twice daily continuously for the duration of neoadjuvant therapy.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>FOLFIRINOX Alone</intervention_name>
+    <description>Modified FOLFIRINOX (oxaliplatin 85 mg/m2 IV + leucovorin 400 mg/m2 IV + irinotecan 150 mg/m2 IV + 5-FU 2400 mg/m2 continuous infusion over 46 hours, without 5-FU bolus) every 2 weeks for 8 cycles.</description>
+  </intervention>
+  <condition>Pancreatic Ductal Adenocarcinoma</condition>
+  <condition>Borderline Resectable Pancreatic Cancer</condition>
+  <condition>KRAS G12V Mutation</condition>
+  <condition>Neoadjuvant Therapy</condition>
+  <keyword>PDAC</keyword>
+  <keyword>KRAS G12V</keyword>
+  <keyword>adagrasib</keyword>
+  <keyword>FOLFIRINOX</keyword>
+  <keyword>neoadjuvant</keyword>
+  <keyword>borderline resectable</keyword>
+  <keyword>pancreatic cancer</keyword>
+  <keyword>KRAS inhibitor</keyword>
+</clinical_study>

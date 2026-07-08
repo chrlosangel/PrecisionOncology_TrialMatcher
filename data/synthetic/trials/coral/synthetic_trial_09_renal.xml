@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-RCC-009</org_study_id>
+    <nct_id>NCT_SYNTH_009</nct_id>
+  </id_info>
+  <brief_title>Ipilimumab/Nivolumab Plus Belzutifan in VHL-Mutated Metastatic Clear Cell Renal Cell Carcinoma (BELZUNIVO-ccRCC)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of Ipilimumab Plus Nivolumab With or Without Belzutifan (HIF-2alpha Inhibitor) as First-Line Therapy in Patients With VHL-Altered Metastatic Clear Cell Renal Cell Carcinoma of Intermediate or Poor IMDC Risk</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates whether the addition of belzutifan (a HIF-2alpha inhibitor) to
+      first-line ipilimumab plus nivolumab (ipi/nivo) dual immunotherapy improves progression-free
+      survival in patients with VHL-mutated metastatic clear cell renal cell carcinoma (ccRCC)
+      compared to ipi/nivo alone, targeting the VHL-HIF-2alpha oncogenic axis in addition to
+      activating anti-tumor immunity.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Clear cell RCC is driven primarily by loss-of-function alterations in the VHL tumor
+      suppressor gene, leading to constitutive activation of HIF-2alpha and downstream VEGF,
+      PDGF, and EPO upregulation. The combination of ipilimumab (anti-CTLA-4) + nivolumab
+      (anti-PD-1) is standard first-line therapy for intermediate/poor IMDC risk ccRCC
+      (CheckMate 214). Belzutifan, a first-in-class selective HIF-2alpha inhibitor, is FDA-approved
+      for VHL disease-associated tumors and has demonstrated single-agent activity in previously
+      treated ccRCC (LITESPARK-003). The combination of HIF-2alpha inhibition with
+      immune checkpoint blockade is mechanistically rational: reducing VEGF-mediated
+      immunosuppression may enhance the T-cell-activating effect of ipi/nivo. This study
+      randomizes VHL-altered metastatic ccRCC patients (IMDC intermediate or poor risk) to
+      ipi/nivo + belzutifan versus ipi/nivo + placebo. Belzutifan 120 mg/day or placebo
+      is given orally continuously from cycle 1 day 1. Ipilimumab 1 mg/kg IV + nivolumab
+      3 mg/kg IV are given Q3W x 4 induction doses, followed by nivolumab 480 mg IV Q4W
+      maintenance. Stratification: IMDC risk (intermediate vs poor), geographic region, and
+      prior nephrectomy (yes vs no). PBRM1 and BAP1 mutation status collected as exploratory
+      biomarkers.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>Double (Participant, Investigator)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Progression-Free Survival (PFS) by RECIST 1.1 (blinded independent central review)</measure>
+    <time_frame>From randomization until radiographic progression or death, assessed up to 30 months</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 48 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Objective Response Rate (ORR) per RECIST 1.1</measure>
+    <time_frame>Best response, up to 30 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Duration of Response (DoR)</measure>
+    <time_frame>From first objective response to progression or death, up to 48 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Complete Response Rate (CRR)</measure>
+    <time_frame>Best response, up to 30 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0)</measure>
+    <time_frame>During treatment period, up to 30 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Health-Related Quality of Life (HRQoL) by FKSI-19 and EQ-5D-5L</measure>
+    <time_frame>Every 12 weeks, up to 30 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed clear cell renal cell carcinoma (ccRCC) or clear cell-predominant RCC (&gt;= 50% clear cell component)
+- Metastatic or advanced/unresectable disease (AJCC 8th edition Stage IV)
+- VHL gene alteration confirmed in tumor tissue: VHL mutation (somatic, any type including nonsense, missense, frameshift, splice site), deletion, or promoter methylation, confirmed by next-generation sequencing (NGS) tissue panel or equivalent validated assay; germline VHL mutation (VHL disease) is included
+- IMDC intermediate-risk (1-2 factors) or poor-risk (&gt;= 3 factors) criteria:
+  Karnofsky performance status &lt; 80%, hemoglobin &lt; LLN, corrected calcium &gt; ULN, time from diagnosis to treatment &lt; 1 year, neutrophil count &gt; ULN, platelet count &gt; ULN
+- No prior systemic therapy for metastatic ccRCC; prior adjuvant therapy (sunitinib, pembrolizumab) is excluded if completed &lt; 12 months before enrollment; cytoreductive nephrectomy allowed
+- At least one measurable lesion per RECIST 1.1 (&gt;= 1 cm in longest diameter)
+- Age &gt;= 18 years
+- ECOG Performance Status 0-2 (Karnofsky &gt;= 50%)
+- Adequate bone marrow: ANC &gt;= 1500/mm3, platelets &gt;= 100,000/mm3, hemoglobin &gt;= 8.5 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 2.5x ULN (or &lt;= 5x ULN with liver metastases)
+- Adequate renal function: creatinine clearance &gt;= 30 mL/min; serum creatinine &lt;= 1.5x ULN
+- Thyroid function: TSH within normal limits or managed on stable replacement therapy
+- Hematocrit collection required at baseline and every 4 weeks (belzutifan causes polycythemia/erythrocytosis in some patients)
+- Signed informed consent; patients with VHL disease (germline) must provide written evidence of genetic counseling and consent specific to VHL disease management
+
+Exclusion Criteria:
+- Non-clear cell RCC (papillary, chromophobe, collecting duct, medullary, translocation, or sarcomatoid-predominant without clear cell component)
+- VHL-wild-type ccRCC confirmed by tissue NGS; patients with unknown VHL status must have tissue available for testing
+- IMDC favorable-risk ccRCC (0 risk factors)
+- Prior systemic therapy for metastatic RCC including VEGF-targeted therapy, mTOR inhibitors, immune checkpoint inhibitors, or any HIF-2alpha inhibitor
+- Prior adjuvant anti-PD-1/PD-L1 therapy completed &lt; 12 months before enrollment
+- Active autoimmune disease requiring systemic treatment (corticosteroids &gt; 10 mg/day prednisone equivalent or immunosuppressants); replacement therapy (thyroid, adrenal, insulin) is allowed
+- Interstitial lung disease (ILD) or pneumonitis requiring systemic corticosteroids
+- Active CNS metastases: brain metastases are allowed only if previously treated (surgery or SRS) and neurologically stable without corticosteroids; untreated brain metastases are excluded
+- Hematocrit &gt;= 50% at baseline (relative polycythemia/erythrocytosis is a known effect of belzutifan; baseline polycythemia may increase risk)
+- Known hypersensitivity to nivolumab, ipilimumab, or belzutifan
+- Concurrent use of strong CYP2C19 inhibitors or UGT2B17 inhibitors (pharmacokinetic interaction with belzutifan)
+- Pregnancy or breastfeeding; adequate contraception required
+- Active hepatitis B or C infection
+- Active tuberculosis or other severe uncontrolled infection
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Ipilimumab + Nivolumab + Belzutifan</intervention_name>
+    <description>Ipilimumab 1 mg/kg IV every 3 weeks x 4 doses + nivolumab 3 mg/kg IV every 3 weeks x 4 doses (induction), followed by nivolumab 480 mg IV every 4 weeks (maintenance) until progression or unacceptable toxicity. Belzutifan 120 mg orally once daily starting day 1, continuously until progression or unacceptable toxicity.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Ipilimumab + Nivolumab + Placebo</intervention_name>
+    <description>Ipilimumab 1 mg/kg IV every 3 weeks x 4 doses + nivolumab 3 mg/kg IV every 3 weeks x 4 doses (induction), followed by nivolumab 480 mg IV every 4 weeks (maintenance) until progression or unacceptable toxicity. Matching placebo orally once daily continuously.</description>
+  </intervention>
+  <condition>Renal Cell Carcinoma</condition>
+  <condition>Clear Cell Renal Cell Carcinoma</condition>
+  <condition>Metastatic Renal Cell Carcinoma</condition>
+  <condition>VHL Mutation</condition>
+  <keyword>clear cell RCC</keyword>
+  <keyword>ipilimumab</keyword>
+  <keyword>nivolumab</keyword>
+  <keyword>belzutifan</keyword>
+  <keyword>HIF-2alpha</keyword>
+  <keyword>VHL</keyword>
+  <keyword>PBRM1</keyword>
+  <keyword>BAP1</keyword>
+  <keyword>IMDC intermediate risk</keyword>
+  <keyword>immune checkpoint blockade</keyword>
+</clinical_study>

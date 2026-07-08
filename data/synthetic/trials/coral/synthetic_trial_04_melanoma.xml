@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-MEL-004</org_study_id>
+    <nct_id>NCT_SYNTH_004</nct_id>
+  </id_info>
+  <brief_title>Nivolumab Plus Dabrafenib/Trametinib in BRAF V600E+ Stage IV Melanoma Progressing on Anti-PD-1 (COMBO-MEL)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of Nivolumab Combined With Dabrafenib and Trametinib Versus Dabrafenib and Trametinib Alone in Patients With BRAF V600E-Mutant Stage IV Cutaneous Melanoma Who Have Progressed or Have Mixed Response on Anti-PD-1 Monotherapy</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates the combination of nivolumab (anti-PD-1) with dabrafenib plus
+      trametinib (BRAF/MEK inhibitor doublet) versus dabrafenib/trametinib alone in patients
+      with BRAF V600E-mutant Stage IV cutaneous melanoma who have evidence of progression or
+      mixed/heterogeneous response (new lesions in one site with response in another) while
+      receiving anti-PD-1 monotherapy. The hypothesis is that BRAF/MEK inhibition can overcome
+      sites of resistance while synergizing with the pre-existing anti-tumor immune response.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Approximately 40-50% of cutaneous melanomas harbor BRAF V600E mutations, making them
+      susceptible to BRAF/MEK inhibitor doublets (dabrafenib + trametinib). Anti-PD-1 therapy
+      (nivolumab, pembrolizumab) and BRAF/MEK inhibition represent the two most active treatment
+      strategies in metastatic melanoma. Mixed response on anti-PD-1 — defined as regression in
+      some lesions concurrent with new or growing lesions elsewhere — occurs in approximately
+      10-15% of patients and represents a clinically challenging scenario. Preclinical data suggest
+      that BRAF inhibition can enhance tumor antigen presentation and augment immune responses.
+      This study randomizes patients with BRAF V600E-mutant Stage IV melanoma and mixed or
+      confirmed progressive disease on anti-PD-1 monotherapy to nivolumab 240 mg Q2W +
+      dabrafenib 150 mg BID + trametinib 2 mg/day versus dabrafenib 150 mg BID + trametinib
+      2 mg/day alone. Crossover is permitted at progression on the control arm.
+      Stratification: presence of active brain metastases (yes vs no), LDH level (normal vs
+      elevated), and prior ipilimumab (yes vs no).
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Progression-Free Survival (PFS) by RECIST 1.1</measure>
+    <time_frame>From randomization until radiographic progression or death, assessed up to 24 months</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Objective Response Rate (ORR) per RECIST 1.1</measure>
+    <time_frame>Up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Intracranial Response Rate (iRR) in patients with baseline brain metastases</measure>
+    <time_frame>Up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Duration of Response (DoR)</measure>
+    <time_frame>From first response to progression or death, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0)</measure>
+    <time_frame>During treatment period, up to 24 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed Stage IV cutaneous melanoma (AJCC 8th edition M1a-d)
+- BRAF V600E mutation confirmed by a validated assay (e.g., cobas 4800 BRAF V600 Mutation Test, next-generation sequencing, or equivalent)
+- Mixed response or confirmed progression on most recent line of anti-PD-1 monotherapy (nivolumab or pembrolizumab) defined as:
+  (a) RECIST 1.1 progressive disease in at least one target lesion, or
+  (b) Appearance of one or more new lesions, with concurrent response or stable disease in other target lesions (mixed response/heterogeneous response)
+- Anti-PD-1 therapy must have been the most recent systemic therapy; patients may not have received prior BRAF or MEK inhibitors
+- At least one measurable lesion by RECIST 1.1
+- Brain metastases are allowed if: neurologically stable, not requiring corticosteroids &gt; 10 mg/day prednisone equivalent, and either previously treated (SRS or surgery) or deemed suitable for systemic therapy by the treating physician
+- Age &gt;= 18 years
+- ECOG Performance Status 0-2
+- Tumor mutational burden (TMB) and PD-L1 status collected at baseline (biomarker correlative; not required for eligibility)
+- Adequate bone marrow: ANC &gt;= 1000/mm3, platelets &gt;= 75,000/mm3, hemoglobin &gt;= 8.5 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 2.5x ULN (or &lt;= 5x ULN with liver metastases)
+- Adequate renal function: creatinine clearance &gt;= 40 mL/min
+- Adequate cardiac function: LVEF &gt;= 50%; QTcF &lt;= 480 ms
+- Women of childbearing potential must use adequate contraception; men must use contraception during treatment and for 6 months after last dose
+- Signed informed consent
+
+Exclusion Criteria:
+- Non-cutaneous melanoma subtypes (uveal, mucosal, acral lentiginous) — these are excluded due to distinct biology
+- BRAF V600K, V600D, or other non-V600E BRAF mutations (may be enrolled in separate cohort at sponsor discretion)
+- Prior BRAF inhibitor (vemurafenib, dabrafenib, encorafenib) or MEK inhibitor (trametinib, cobimetinib, binimetinib) therapy
+- Prior ipilimumab (anti-CTLA-4) within 6 weeks of enrollment (washout allowed if &gt; 6 weeks)
+- Confirmed complete progression on anti-PD-1 with ALL target lesions progressing; patients must have at least some evidence of residual response (mixed response eligibility)
+- Untreated symptomatic brain metastases requiring immediate neurosurgical intervention or corticosteroids &gt; 10 mg/day prednisone equivalent for symptom control
+- Active autoimmune disease requiring systemic immunosuppressive therapy (other than topical agents)
+- History of severe immune-mediated adverse events on prior anti-PD-1 (Grade 3-4 pneumonitis, colitis, hepatitis, or other irAE)
+- Active hepatitis B or C infection
+- Uncontrolled hypertension (&gt; 150/100 mmHg) or history of hypertensive crisis
+- History of retinal vein occlusion or central serous retinopathy
+- Known hypersensitivity to nivolumab, dabrafenib, or trametinib
+- Pregnancy or breastfeeding
+- Concurrent participation in another interventional trial
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Nivolumab + Dabrafenib + Trametinib</intervention_name>
+    <description>Nivolumab 240 mg IV every 2 weeks (or 480 mg IV every 4 weeks per treating physician), plus dabrafenib 150 mg orally twice daily continuously, plus trametinib 2 mg orally once daily continuously, until disease progression, unacceptable toxicity, or patient withdrawal.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Dabrafenib + Trametinib</intervention_name>
+    <description>Dabrafenib 150 mg orally twice daily continuously, plus trametinib 2 mg orally once daily continuously, until disease progression, unacceptable toxicity, or patient withdrawal. Crossover to combination arm permitted at progression.</description>
+  </intervention>
+  <condition>Melanoma</condition>
+  <condition>Stage IV Cutaneous Melanoma</condition>
+  <condition>BRAF V600E Mutation</condition>
+  <condition>Brain Metastases</condition>
+  <keyword>BRAF V600E</keyword>
+  <keyword>melanoma</keyword>
+  <keyword>nivolumab</keyword>
+  <keyword>dabrafenib</keyword>
+  <keyword>trametinib</keyword>
+  <keyword>anti-PD-1</keyword>
+  <keyword>mixed response</keyword>
+  <keyword>BRAF inhibitor</keyword>
+  <keyword>MEK inhibitor</keyword>
+  <keyword>immunotherapy</keyword>
+  <keyword>TMB</keyword>
+  <keyword>PD-L1</keyword>
+</clinical_study>

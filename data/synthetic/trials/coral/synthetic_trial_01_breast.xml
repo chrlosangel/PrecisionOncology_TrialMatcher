@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-BC-001</org_study_id>
+    <nct_id>NCT_SYNTH_001</nct_id>
+  </id_info>
+  <brief_title>Extended Adjuvant Ribociclib After Chemotherapy in HR+/HER2- Node-Positive Early Breast Cancer (EXTEND-RIB)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of Extended Adjuvant Ribociclib Following Completion of Adjuvant Chemotherapy in Hormone Receptor-Positive, HER2-Negative, Node-Positive Early Breast Cancer With High Genomic Risk</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates whether adding ribociclib (a CDK4/6 inhibitor) as extended adjuvant
+      therapy following completion of standard adjuvant chemotherapy improves invasive disease-free
+      survival in patients with hormone receptor-positive, HER2-negative, node-positive early
+      breast cancer who have high genomic risk as defined by Oncotype DX Recurrence Score &gt;= 26.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Patients with HR+/HER2- early breast cancer who are node-positive and have a high Oncotype DX
+      Recurrence Score (&gt;= 26) remain at elevated risk of distant recurrence despite completion of
+      adjuvant chemotherapy and endocrine therapy. CDK4/6 inhibitors such as ribociclib have
+      demonstrated benefit in the metastatic setting and early results from the NATALEE trial
+      suggest adjuvant CDK4/6 inhibition may reduce relapse risk. This study randomizes patients
+      who have completed adjuvant chemotherapy (taxane- and/or anthracycline-containing regimens)
+      to ribociclib 400 mg/day (3 weeks on/1 week off) plus standard adjuvant endocrine therapy
+      versus standard adjuvant endocrine therapy alone. Treatment continues for 3 years or until
+      disease recurrence or unacceptable toxicity. Primary endpoint is invasive disease-free
+      survival (iDFS) at 5 years. Key secondary endpoints include distant relapse-free survival,
+      overall survival, and safety/tolerability.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Invasive Disease-Free Survival (iDFS)</measure>
+    <time_frame>5 years from randomization</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Distant Relapse-Free Survival (DRFS)</measure>
+    <time_frame>5 years from randomization</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>10 years from randomization</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability as assessed by NCI CTCAE v5.0</measure>
+    <time_frame>During treatment period, up to 3 years</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed invasive breast carcinoma, hormone receptor-positive (ER &gt;= 1% and/or PR &gt;= 1% by IHC), HER2-negative (IHC 0 or 1+, or FISH non-amplified)
+- AJCC 8th edition pathologic Stage IIA, IIB, or IIIA (pT1-3, N1-2, M0)
+- Node-positive disease (at least 1 pathologically confirmed lymph node metastasis)
+- Oncotype DX Recurrence Score &gt;= 26 (high risk)
+- Must have completed adjuvant chemotherapy with a taxane- and/or anthracycline-containing regimen (e.g., TC, AC-T, ddAC-T) within 12 months prior to enrollment
+- Currently receiving or planning to initiate standard adjuvant endocrine therapy (aromatase inhibitor or tamoxifen +/- ovarian suppression)
+- Age &gt;= 18 years
+- ECOG Performance Status 0-1
+- Adequate bone marrow function: ANC &gt;= 1500/mm3, platelets &gt;= 100,000/mm3, hemoglobin &gt;= 9 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 2.5x ULN
+- Adequate renal function: creatinine clearance &gt;= 30 mL/min
+- Adequate cardiac function: QTcF &lt;= 450 ms at baseline ECG, LVEF &gt;= 50%
+- No evidence of distant metastatic disease (M0) confirmed by standard staging workup
+- Women of childbearing potential must agree to use adequate contraception
+- Signed informed consent
+
+Exclusion Criteria:
+- Metastatic (Stage IV) breast cancer
+- HER2-positive breast cancer
+- Triple-negative breast cancer (ER-, PR-, HER2-)
+- Oncotype DX Recurrence Score &lt; 26
+- Prior treatment with any CDK4/6 inhibitor (palbociclib, ribociclib, abemaciclib)
+- Active or prior documented autoimmune disease requiring systemic treatment
+- Known uncontrolled cardiac arrhythmia or clinically significant cardiovascular disease
+- Active hepatic impairment (Child-Pugh B or C)
+- Concurrent malignancy other than adequately treated non-melanoma skin cancer or cervical carcinoma in situ
+- Pregnancy or breastfeeding
+- Known hypersensitivity to ribociclib or any of its excipients
+- Inability to swallow oral medications
+- Participation in another interventional clinical trial within 30 days of enrollment
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Ribociclib</intervention_name>
+    <description>Ribociclib 400 mg orally once daily on a 3-weeks-on/1-week-off schedule for up to 3 years, administered concurrently with standard adjuvant endocrine therapy (aromatase inhibitor or tamoxifen +/- ovarian suppression per treating physician discretion).</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Standard Adjuvant Endocrine Therapy (Control Arm)</intervention_name>
+    <description>Standard adjuvant endocrine therapy alone (aromatase inhibitor or tamoxifen +/- ovarian suppression) for up to 5-10 years per standard of care guidelines.</description>
+  </intervention>
+  <condition>Breast Cancer, Hormone Receptor-Positive</condition>
+  <condition>HER2-Negative Breast Cancer</condition>
+  <condition>Node-Positive Breast Cancer</condition>
+  <condition>Early Stage Breast Cancer</condition>
+  <keyword>CDK4/6 inhibitor</keyword>
+  <keyword>ribociclib</keyword>
+  <keyword>adjuvant therapy</keyword>
+  <keyword>HR+ breast cancer</keyword>
+  <keyword>Oncotype DX</keyword>
+  <keyword>node-positive</keyword>
+  <keyword>high genomic risk</keyword>
+</clinical_study>

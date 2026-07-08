@@ -2,6 +2,7 @@ import argparse
 import sys, os
 from pathlib import Path
 import pickle
+from transformers import AutoTokenizer, AutoModel,AutoConfig
 
 import matching.utils.retrieval as retrieval
 
@@ -9,6 +10,7 @@ def argument_parser():
      parser=argparse.ArgumentParser(description="Generate Patient DataBase.")
      parser.add_argument("--patients_database_path", required=True, help="Path to the patients database. This is a ChromaDB database. If generated with run_patients.py it should be named chromaDB_patients.")
      parser.add_argument("--clinical_trials_file", required=True, help="Path to the clinical trials file. This is a pickle file containing the processed clinical trials.")
+     parser.add_argument("--embedding_model", default="ncbi/MedCPT-Query-Encoder", help="Embedding model to use for generating question embeddings. Must be the same used in run_patients.py")
      return parser
 
 def main():
@@ -42,3 +44,6 @@ def main():
           processed_trials = pickle.load(f)
      
      patients_DB = retrieval._load_patientDB(patients_database_path)
+
+     tokenizer_emb = AutoTokenizer.from_pretrained(args.embedding_model)
+     tokenizer_model = AutoModel.from_pretrained(args.embedding_model)

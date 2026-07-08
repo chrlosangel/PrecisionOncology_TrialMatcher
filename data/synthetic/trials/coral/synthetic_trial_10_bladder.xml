@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-UC-010</org_study_id>
+    <nct_id>NCT_SYNTH_010</nct_id>
+  </id_info>
+  <brief_title>Erdafitinib Plus Cetrelimab in FGFR-Altered Platinum-Refractory Urothelial Carcinoma (ERDACEL-UC)</brief_title>
+  <official_title>A Phase 2 Single-Arm Trial of Erdafitinib (Pan-FGFR Inhibitor) Combined With Cetrelimab (Anti-PD-1) in Patients With FGFR2 or FGFR3-Altered Platinum-Refractory Locally Advanced or Metastatic Urothelial Carcinoma Who Are Receiving or Have Received Erdafitinib Monotherapy</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates the safety and efficacy of adding cetrelimab (an investigational
+      anti-PD-1 monoclonal antibody) to ongoing erdafitinib therapy in patients with
+      FGFR2- or FGFR3-altered platinum-refractory urothelial carcinoma (UC) who are currently
+      on erdafitinib and have achieved at least stable disease. The hypothesis is that PD-1
+      blockade can overcome adaptive immune resistance induced by FGFR inhibition-driven
+      immunosuppression, potentially converting stable disease to objective response and
+      prolonging response duration.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      FGFR3 mutations and FGFR2/3 fusions occur in approximately 20% of muscle-invasive and
+      metastatic urothelial carcinoma. Erdafitinib, a pan-FGFR inhibitor, is FDA-approved for
+      FGFR2/3-altered platinum-refractory UC (THOR trial). However, responses are often partial
+      and durable complete responses are uncommon. FGFR inhibition has complex effects on the
+      tumor immune microenvironment: preclinical data suggest FGF signaling promotes an
+      immunosuppressive milieu by excluding T cells, and FGFR inhibition may restore immune
+      competence. Cetrelimab is an investigational fully human IgG4 anti-PD-1 antibody with
+      demonstrated monotherapy activity in UC. This single-arm Phase 2 study enrolls FGFR-altered
+      platinum-refractory UC patients currently receiving or initiating erdafitinib who have
+      demonstrated at least stable disease after 2 cycles (approximately 8 weeks). Cetrelimab
+      375 mg IV Q3W is added to ongoing erdafitinib 8 mg/day (with potential dose-escalation to
+      9 mg/day per FGF23/phosphate monitoring per standard protocol). Primary endpoint is ORR
+      per RECIST 1.1 by independent central review. This cisplatin-ineligible, platinum-refractory
+      population represents a high unmet need given limited options after FGFR inhibitor therapy.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>N/A</allocation>
+    <intervention_model>Single Group Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Objective Response Rate (ORR) per RECIST 1.1 by blinded independent central review (BICR)</measure>
+    <time_frame>Best overall response from combination start, assessed every 9 weeks up to 24 months</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Duration of Response (DoR)</measure>
+    <time_frame>From first objective response to progression or death, up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Progression-Free Survival (PFS) from combination start</measure>
+    <time_frame>From initiation of cetrelimab until progression or death, up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From enrollment until death from any cause, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Disease Control Rate (DCR): CR + PR + SD lasting &gt;= 16 weeks</measure>
+    <time_frame>Up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0)</measure>
+    <time_frame>During treatment period, up to 24 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed urothelial carcinoma (transitional cell carcinoma) of the bladder, urethra, ureter, or renal pelvis; mixed histologies with predominant urothelial component (&gt;= 50%) are eligible
+- Locally advanced (cT4b or unresectable) or metastatic disease (N2-3 or M1); Stage IVA or IVB per AJCC 8th edition
+- FGFR2 or FGFR3 alteration confirmed by a validated assay (NGS-based panel or Therascreen FGFR RGQ RT-PCR Kit): FGFR3 mutations (S249C, R248C, Y373C, G370C, A393E, or others listed in erdafitinib label); FGFR2 or FGFR3 fusions; FGFR2 amplification with confirmed oncogenic significance
+- Currently receiving erdafitinib monotherapy and has achieved at least stable disease (SD) per RECIST 1.1 after a minimum of 2 cycles (approximately 6-8 weeks) of erdafitinib; patients newly initiating erdafitinib may be enrolled and assessed for SD eligibility during a 2-cycle run-in
+- Prior platinum-based chemotherapy: must have received at least one prior platinum-containing regimen (cisplatin or carboplatin-based) for locally advanced or metastatic UC, or in the neoadjuvant/adjuvant setting with recurrence within 12 months
+- Cisplatin-ineligible status documented at time of platinum-containing regimen (GFR &lt; 60 mL/min, ECOG PS &gt;= 2, hearing loss Grade &gt;= 2, CTCAE neuropathy Grade &gt;= 2, or NYHA Class III heart failure) — cisplatin-ineligible patients who received carboplatin-based regimens are eligible
+- May have received prior anti-PD-1/PD-L1 therapy (pembrolizumab, atezolizumab, durvalumab) for UC; washout of &gt;= 6 weeks required
+- May have received prior enfortumab vedotin or sacituzumab govitecan; washout of &gt;= 2 weeks required
+- Age &gt;= 18 years
+- ECOG Performance Status 0-2
+- At least one measurable lesion per RECIST 1.1 (target lesion &gt;= 1 cm in longest diameter by CT, or &gt;= 1.5 cm in short axis for lymph nodes)
+- Adequate bone marrow: ANC &gt;= 1000/mm3, platelets &gt;= 75,000/mm3, hemoglobin &gt;= 8 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 2.5x ULN (or &lt;= 5x ULN with liver metastases)
+- Adequate renal function: creatinine clearance &gt;= 20 mL/min (Cockcroft-Gault); note: erdafitinib can be administered with reduced GFR; cetrelimab dose adjustment not required
+- Serum phosphate and calcium within institutional normal limits at baseline (FGFR inhibitor-related hyperphosphatemia management per erdafitinib label; baseline phosphate &lt; 5.5 mg/dL required prior to combination initiation)
+- Ophthalmologic evaluation (slit-lamp exam) within 28 days of enrollment; central serous retinopathy (CSR) must be resolved or Grade &lt;= 1 prior to combination
+- Signed informed consent
+
+Exclusion Criteria:
+- Non-urothelial primary tumor (pure squamous cell carcinoma, pure adenocarcinoma, small cell carcinoma, or sarcomatoid carcinoma without urothelial component)
+- FGFR1 or FGFR4 alterations only (without FGFR2 or FGFR3 co-alteration); FGFR3 point mutations not listed in the erdafitinib prescribing information require sponsor consultation for eligibility
+- Disease progression on erdafitinib prior to enrollment (PD as best response to erdafitinib excludes the patient; SD or better required)
+- Uncontrolled or symptomatic CNS metastases; treated and stable brain metastases are allowed if neurologically stable for &gt;= 4 weeks and off corticosteroids
+- Active autoimmune disease requiring systemic immunosuppressive therapy that would preclude anti-PD-1 use
+- Prior Grade 3-4 immune-mediated adverse event on anti-PD-1/PD-L1 therapy (except endocrinopathies managed with replacement therapy)
+- Active or unresolved Grade &gt;= 2 ocular toxicity (central serous retinopathy, corneal changes) attributable to erdafitinib; patients must have ophthalmologic clearance prior to adding cetrelimab
+- Uncontrolled hyperphosphatemia (serum phosphate &gt;= 5.5 mg/dL) at time of enrollment; dietary phosphate restriction and/or phosphate binder initiation required prior to enrollment
+- Active hepatitis B (HBsAg positive without antiviral prophylaxis) or active hepatitis C
+- Live vaccine within 30 days prior to enrollment
+- Known hypersensitivity to erdafitinib or cetrelimab
+- Concurrent participation in another interventional trial
+- Pregnancy or breastfeeding; adequate contraception required
+- ECOG Performance Status &gt;= 3
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Erdafitinib + Cetrelimab</intervention_name>
+    <description>Erdafitinib 8 mg orally once daily continuously (with potential dose-escalation to 9 mg/day at day 14-21 if serum phosphate &lt; 5.5 mg/dL per standard pharmacodynamic-guided dosing), plus cetrelimab 375 mg IV every 3 weeks (21-day cycles), until disease progression, unacceptable toxicity, or patient withdrawal. Both agents administered concurrently.</description>
+  </intervention>
+  <condition>Urothelial Carcinoma</condition>
+  <condition>Bladder Cancer</condition>
+  <condition>FGFR3 Mutation</condition>
+  <condition>Metastatic Urothelial Carcinoma</condition>
+  <condition>Platinum-Refractory Bladder Cancer</condition>
+  <keyword>erdafitinib</keyword>
+  <keyword>cetrelimab</keyword>
+  <keyword>FGFR3</keyword>
+  <keyword>FGFR2</keyword>
+  <keyword>urothelial carcinoma</keyword>
+  <keyword>bladder cancer</keyword>
+  <keyword>FGFR inhibitor</keyword>
+  <keyword>anti-PD-1</keyword>
+  <keyword>cisplatin-ineligible</keyword>
+  <keyword>platinum-refractory</keyword>
+  <keyword>FGFR S249C</keyword>
+</clinical_study>

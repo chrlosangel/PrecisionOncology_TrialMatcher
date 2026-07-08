@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-DLBCL-008</org_study_id>
+    <nct_id>NCT_SYNTH_008</nct_id>
+  </id_info>
+  <brief_title>R-CHOP Plus Venetoclax in Richter Syndrome and CLL-Transformed DLBCL (RICHTER-VEN)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of R-CHOP (Rituximab, Cyclophosphamide, Doxorubicin, Vincristine, Prednisone) With or Without Venetoclax in Patients With Richter Syndrome or Transformation of Chronic Lymphocytic Leukemia to Diffuse Large B-Cell Lymphoma</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial tests whether adding venetoclax (BCL-2 inhibitor) to standard R-CHOP
+      chemoimmunotherapy improves complete response rate and progression-free survival in patients
+      with Richter syndrome (RS) or transformation of chronic lymphocytic leukemia (CLL) to
+      diffuse large B-cell lymphoma (DLBCL), a condition associated with BCL2 overexpression
+      and historically poor outcomes with standard chemoimmunotherapy.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Richter transformation (RT) from CLL to DLBCL occurs in approximately 2-10% of CLL patients
+      and carries a median overall survival of 6-12 months with standard R-CHOP therapy. The
+      transformed DLBCL commonly shows BCL2 overexpression due to t(14;18) translocation or
+      gene amplification, MYC rearrangements (creating a dual-expressor or double-hit phenotype),
+      and upregulation of the CLL-associated BCL2 pathway. Venetoclax, a selective BCL-2 inhibitor
+      with established activity in CLL, may synergize with R-CHOP by overcoming BCL2-mediated
+      chemoresistance. This study randomizes patients with biopsy-confirmed RS/CLL-DLBCL
+      transformation to R-CHOP x 6 cycles + venetoclax 400 mg/day (starting cycle 1, day 8)
+      versus R-CHOP x 6 cycles alone. Patients may have received prior CLL-directed therapy
+      (BTK inhibitors, BCL-2 inhibitors, chemoimmunotherapy) provided treatment was not for
+      RS. Stratification: prior CLL therapy (yes vs no), Ann Arbor stage (I-II vs III-IV),
+      IPI score (0-2 vs 3-5), and MYC IHC positivity (&gt;= 40% vs &lt; 40%).
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Complete Response Rate (CRR) by Lugano 2014 criteria (PET-CT) after 6 cycles</measure>
+    <time_frame>Assessed approximately 3 weeks after cycle 6 (approximately 18-19 weeks from treatment initiation)</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Progression-Free Survival (PFS)</measure>
+    <time_frame>From randomization until radiographic progression or death, up to 24 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Response Rate (ORR) including complete and partial responses</measure>
+    <time_frame>After cycle 3 (interim) and after cycle 6 (end of treatment), up to 19 weeks</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Rate of bridging to autologous or allogeneic stem cell transplant</measure>
+    <time_frame>Up to 12 months from randomization</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0), with focus on tumor lysis syndrome and myelosuppression</measure>
+    <time_frame>During treatment period, approximately 18-19 weeks</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Documented prior diagnosis of chronic lymphocytic leukemia (CLL) or small lymphocytic lymphoma (SLL) meeting iwCLL 2018 diagnostic criteria
+- Biopsy-confirmed transformation to diffuse large B-cell lymphoma (DLBCL): new or growing lymph node or extranodal site with histopathologic diagnosis of DLBCL (WHO 2022 classification); DLBCL must be CD20-positive by IHC
+- Richter syndrome definition: DLBCL arising in the setting of CLL/SLL, with clonal relationship to the CLL clone recommended but not mandated (clonal analysis by IGH sequencing encouraged)
+- Dual expressor DLBCL (BCL2 IHC &gt;= 50% and MYC IHC &gt;= 40%) acceptable but not required; BCL2 IHC result and MYC IHC result collected at enrollment
+- Ann Arbor stage I-IV; any stage eligible
+- At least one measurable site of DLBCL disease (&gt;= 1.5 cm in longest diameter on CT or FDG-avid on PET)
+- No prior systemic therapy for Richter syndrome/DLBCL transformation; prior CLL-directed therapy is allowed (BTKi, venetoclax, chemoimmunotherapy) if last dose was &gt;= 2 weeks prior to enrollment and patient has recovered from prior toxicity
+- Age &gt;= 18 years
+- ECOG Performance Status 0-2
+- Adequate bone marrow: ANC &gt;= 1000/mm3, platelets &gt;= 75,000/mm3 (may be disease-related; lower thresholds permitted with documented marrow involvement by DLBCL and at investigator discretion), hemoglobin &gt;= 8 g/dL
+- Adequate cardiac function: LVEF &gt;= 50% by echocardiogram or MUGA scan (required due to doxorubicin)
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN (except Gilbert syndrome), AST/ALT &lt;= 2.5x ULN
+- Adequate renal function: creatinine clearance &gt;= 40 mL/min (Cockcroft-Gault)
+- Signed informed consent
+
+Exclusion Criteria:
+- Burkitt lymphoma, lymphoblastic lymphoma, or other transformation histologies (mantle cell, follicular) — only DLBCL transformation is eligible
+- EBV-associated RS (DLBCL arising in EBV-positive setting): exploratory stratum; not excluded but analyzed separately
+- Prior systemic therapy for Richter transformation or DLBCL (prior CLL treatment is allowed; see inclusion criteria)
+- Prior autologous or allogeneic stem cell transplantation within 6 months; or ongoing graft-versus-host disease requiring systemic immunosuppression
+- Active CNS involvement by lymphoma at enrollment (CNS prophylaxis per institutional guidelines is required and allowed)
+- Known HIV infection with CD4 count &lt; 100 cells/mm3 or detectable HIV viral load; well-controlled HIV (CD4 &gt;= 100 and undetectable viral load on antiretroviral therapy) is allowed
+- Active hepatitis B (HBsAg positive) without antiviral prophylaxis; HBsAg-positive patients may be enrolled with concurrent entecavir/tenofovir prophylaxis
+- Active hepatitis C with detectable HCV RNA
+- Cardiovascular contraindication to anthracycline chemotherapy (LVEF &lt; 50%, symptomatic heart failure NYHA class III-IV, recent MI within 6 months)
+- History of tumor lysis syndrome with prior therapy and contraindication to venetoclax ramp-up
+- Concurrent strong CYP3A4 inhibitors that cannot be held during venetoclax initiation (e.g., voriconazole, posaconazole); azole antifungals must be managed per venetoclax ramp-up guidelines
+- Known hypersensitivity to rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone, or venetoclax
+- Pregnancy or breastfeeding
+- Active second malignancy requiring systemic treatment
+      </textblock>
+    </criteria>
+    <gender>All</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>R-CHOP + Venetoclax</intervention_name>
+    <description>R-CHOP every 21 days x 6 cycles: rituximab 375 mg/m2 IV day 1, cyclophosphamide 750 mg/m2 IV day 1, doxorubicin 50 mg/m2 IV day 1, vincristine 1.4 mg/m2 IV day 1 (cap 2 mg), prednisone 100 mg orally days 1-5. Plus venetoclax ramp-up starting cycle 1 day 8: 20 mg day 8, 50 mg day 9, 100 mg day 10, 200 mg day 11, 400 mg day 12 onward (ramp-up per venetoclax TLS risk guidelines), then 400 mg/day continuously from cycle 2 through end of cycle 6.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>R-CHOP Alone</intervention_name>
+    <description>R-CHOP every 21 days x 6 cycles: rituximab 375 mg/m2 IV day 1, cyclophosphamide 750 mg/m2 IV day 1, doxorubicin 50 mg/m2 IV day 1, vincristine 1.4 mg/m2 IV day 1 (cap 2 mg), prednisone 100 mg orally days 1-5.</description>
+  </intervention>
+  <condition>Richter Syndrome</condition>
+  <condition>Diffuse Large B-Cell Lymphoma</condition>
+  <condition>Chronic Lymphocytic Leukemia</condition>
+  <condition>Richter Transformation</condition>
+  <condition>Dual Expressor DLBCL</condition>
+  <keyword>Richter syndrome</keyword>
+  <keyword>CLL transformation</keyword>
+  <keyword>DLBCL</keyword>
+  <keyword>R-CHOP</keyword>
+  <keyword>venetoclax</keyword>
+  <keyword>BCL2</keyword>
+  <keyword>MYC</keyword>
+  <keyword>dual expressor</keyword>
+  <keyword>chemoimmunotherapy</keyword>
+</clinical_study>

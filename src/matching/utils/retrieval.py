@@ -3,9 +3,42 @@ from chromadb import Collection
 import pickle
 from pathlib import Path
 from typing import List, Optional
+from dataclasses import dataclass, field
+
 from transformers import AutoTokenizer, AutoModel
 import numpy as np
 import torch
+import sys
+
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))  # Add the src directory to the path
+#import preprocessing.utils.embeddings as embeddingTrials 
+
+
+# embeddingTrials contains _parse_questions_from_json
+
+
+# ====== Dataclasses to store the results of the matching process ======
+# Multiple of this inside TrialResult because we have multiple questions per trial
+@dataclass
+class QuestionResult:
+    question: str
+    chunks: List[str]
+    distances: List[float]
+    metadatas: List[dict]
+
+# Multiple of this per patient because we have multiple trials per patient
+@dataclass
+class TrialResult:
+    trial_id: str
+    question_Results: List[QuestionResult] = field(default_factory=list)
+
+@dataclass
+class PatientMatchingTrials:
+    patient_id: str
+    trial_results: List[TrialResult] = field(default_factory=list)
+# ======== 
+
 
 
 def _load_patientDB(database_path: Path) -> chromadb.Client:

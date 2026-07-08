@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-PRCA-005</org_study_id>
+    <nct_id>NCT_SYNTH_005</nct_id>
+  </id_info>
+  <brief_title>Olaparib Plus Docetaxel vs. Docetaxel Alone in BRCA1/2-Mutated Metastatic Castration-Resistant Prostate Cancer (OLADO-mCRPC)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of Olaparib in Combination With Docetaxel Versus Docetaxel Alone in Patients With BRCA1 or BRCA2-Mutated Metastatic Castration-Resistant Prostate Cancer Who Have Progressed on Next-Generation Androgen Receptor-Targeted Therapy</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial tests whether adding olaparib (a PARP inhibitor) to docetaxel chemotherapy
+      improves radiographic progression-free survival compared to docetaxel alone in patients
+      with BRCA1- or BRCA2-mutated metastatic castration-resistant prostate cancer (mCRPC) who
+      have progressed on next-generation androgen receptor pathway inhibitors (e.g., enzalutamide,
+      abiraterone, apalutamide) and who are candidates for docetaxel chemotherapy.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      mCRPC harboring BRCA1 or BRCA2 mutations (germline or somatic) is exquisitely sensitive to
+      PARP inhibition due to homologous recombination repair deficiency. Olaparib monotherapy
+      (PROfound trial) demonstrated superiority over enzalutamide/abiraterone in BRCA1/2-mutated
+      mCRPC. In patients with AR splice variant expression (e.g., AR-V7), resistance to
+      androgen-receptor-targeted therapies is well-established, making chemotherapy a rational
+      next step. Preclinical data suggest synergy between PARP inhibition and taxane-based
+      chemotherapy. This study randomizes BRCA1/2-mutated mCRPC patients who have progressed on
+      an AR-targeted agent to docetaxel 75 mg/m2 IV Q3W + prednisone 5 mg BID + olaparib
+      300 mg BID (tablets, continuous) versus docetaxel 75 mg/m2 IV Q3W + prednisone 5 mg BID
+      alone, for up to 10 cycles of docetaxel followed by olaparib maintenance (experimental arm)
+      or observation (control arm). AR-V7 status is collected as a stratification factor and
+      exploratory biomarker. All patients must maintain ongoing androgen deprivation therapy
+      (surgical or medical castration, testosterone &lt; 50 ng/dL).
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>None (Open Label)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Radiographic Progression-Free Survival (rPFS) by PCWG3-modified RECIST 1.1</measure>
+    <time_frame>From randomization until radiographic progression or death, assessed up to 18 months</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>PSA50 Response Rate (&gt;= 50% decline from baseline PSA)</measure>
+    <time_frame>At 12 weeks and best response, up to 18 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Objective Response Rate (ORR) in patients with measurable soft tissue disease</measure>
+    <time_frame>Up to 18 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Time to symptomatic skeletal event (SSE)</measure>
+    <time_frame>From randomization until first SSE, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0)</measure>
+    <time_frame>During treatment period, up to 18 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed prostate adenocarcinoma
+- Metastatic castration-resistant prostate cancer (mCRPC): documented metastatic disease on imaging (bone scan and/or CT/MRI) with PSA progression (2 consecutive rises at least 1 week apart) or radiographic progression while maintaining castrate testosterone levels (&lt; 50 ng/dL)
+- BRCA1 or BRCA2 mutation confirmed by a validated assay (germline or somatic); testing must be performed on tumor tissue or germline DNA; other HRR mutations (ATM, CDK12, PALB2, etc.) are not eligible for primary analysis (may be enrolled in exploratory cohort)
+- Documented progression on at least one next-generation androgen receptor pathway inhibitor (enzalutamide, abiraterone acetate, apalutamide, or darolutamide) given for mCRPC or nmCRPC
+- Candidate for docetaxel chemotherapy per treating physician assessment
+- Ongoing androgen deprivation therapy (surgical or medical castration); testosterone &lt; 50 ng/dL within 28 days of enrollment
+- Age &gt;= 18 years
+- ECOG Performance Status 0-2
+- Adequate bone marrow: ANC &gt;= 1500/mm3, platelets &gt;= 100,000/mm3, hemoglobin &gt;= 9 g/dL
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 1.5x ULN
+- Adequate renal function: creatinine clearance &gt;= 51 mL/min (Cockcroft-Gault)
+- No prior cytotoxic chemotherapy for mCRPC (docetaxel given for metastatic hormone-sensitive prostate cancer allowed if completed &gt; 12 months prior)
+- AR-V7 status collection by validated assay (circulating tumor cells or tumor tissue) strongly encouraged; results do not affect eligibility
+- Signed informed consent
+
+Exclusion Criteria:
+- Prior PARP inhibitor therapy (olaparib, rucaparib, niraparib, talazoparib)
+- Prior docetaxel for mCRPC (docetaxel for mHSPC completed &gt; 12 months prior is allowed)
+- Pure small cell or neuroendocrine prostate cancer (mixed adenocarcinoma with neuroendocrine features allowed)
+- Active or symptomatic CNS metastases
+- ECOG Performance Status &gt;= 3
+- Known myelodysplastic syndrome (MDS) or active hematologic malignancy
+- Prior allogeneic stem cell or bone marrow transplantation
+- Peripheral neuropathy &gt;= Grade 2 at baseline
+- Active major infection or fever (&gt; 38.5 C) within 7 days of enrollment
+- Concurrent treatment with strong CYP3A4 inhibitors or inducers that cannot be discontinued (pharmacokinetic interaction with olaparib)
+- Known hypersensitivity to olaparib, docetaxel, or prednisone
+- History of active second malignancy within 3 years (adequately treated non-melanoma skin cancer or bladder cancer in situ allowed)
+      </textblock>
+    </criteria>
+    <gender>Male</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Olaparib + Docetaxel</intervention_name>
+    <description>Olaparib 300 mg orally twice daily continuously, plus docetaxel 75 mg/m2 IV every 3 weeks for up to 10 cycles, plus prednisone 5 mg orally twice daily. Following completion of docetaxel, patients continue olaparib 300 mg BID as maintenance until progression or unacceptable toxicity.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Docetaxel Alone</intervention_name>
+    <description>Docetaxel 75 mg/m2 IV every 3 weeks for up to 10 cycles, plus prednisone 5 mg orally twice daily. Following completion of docetaxel, observation until progression.</description>
+  </intervention>
+  <condition>Prostate Cancer</condition>
+  <condition>Metastatic Castration-Resistant Prostate Cancer</condition>
+  <condition>BRCA2 Mutation</condition>
+  <condition>BRCA1 Mutation</condition>
+  <condition>Homologous Recombination Deficiency</condition>
+  <keyword>mCRPC</keyword>
+  <keyword>BRCA2</keyword>
+  <keyword>BRCA1</keyword>
+  <keyword>olaparib</keyword>
+  <keyword>docetaxel</keyword>
+  <keyword>PARP inhibitor</keyword>
+  <keyword>AR-V7</keyword>
+  <keyword>enzalutamide resistance</keyword>
+  <keyword>homologous recombination repair</keyword>
+</clinical_study>

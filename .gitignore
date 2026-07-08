@@ -33,7 +33,10 @@ hugging-face/token
 data/raw/
 data/coral/
 data/CiViC/
-data/synthetic/
+data/synthetic/eval
+data/synthetic/patients
+data/synthetic/trials/SIGIR
+data/synthetic/trials/TREC_2023
 database/
 
 # OS / editor

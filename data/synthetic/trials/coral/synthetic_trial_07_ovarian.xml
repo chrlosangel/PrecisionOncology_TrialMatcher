@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study>
+  <id_info>
+    <org_study_id>SYNTH-OVA-007</org_study_id>
+    <nct_id>NCT_SYNTH_007</nct_id>
+  </id_info>
+  <brief_title>Extended Olaparib Maintenance (3 Years vs. 2 Years) in BRCA-Mutated Advanced Ovarian Cancer After Complete Response (EXTEND-OLA)</brief_title>
+  <official_title>A Phase 2 Randomized Trial of Extended Olaparib Maintenance Therapy for 3 Years Versus Standard 2-Year Olaparib Maintenance in Patients With BRCA1 or BRCA2-Mutated Advanced High-Grade Serous Ovarian, Fallopian Tube, or Primary Peritoneal Carcinoma Who Achieved Complete Response to First-Line Platinum-Based Chemotherapy</official_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Cancer Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <brief_summary>
+    <textblock>
+      This trial evaluates whether extending olaparib maintenance therapy to 3 years (versus the
+      current standard 2-year duration) reduces the risk of disease recurrence in patients with
+      BRCA1 or BRCA2-mutated advanced high-grade serous ovarian, fallopian tube, or primary
+      peritoneal carcinoma who achieved complete clinical response following first-line
+      platinum-taxane chemotherapy and cytoreductive surgery.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Based on the SOLO-1 trial, olaparib maintenance therapy for 2 years after complete or partial
+      response to first-line platinum-based chemotherapy in BRCA-mutated advanced ovarian cancer
+      is standard of care, with a 5-year PFS rate of approximately 48% versus 21% in placebo.
+      However, late recurrences (after olaparib discontinuation) remain common, suggesting that
+      extending the duration of maintenance may further delay or prevent relapse. Patients who
+      achieve a complete radiographic and CA-125 response after surgery and chemotherapy represent
+      a particularly favorable subgroup in whom durable remission may be achievable. This study
+      randomizes BRCA1/2-mutated advanced ovarian cancer patients who have completed 2 years
+      of standard olaparib maintenance and remain in complete response (CR) to continue olaparib
+      300 mg BID for an additional year (total 3 years) versus discontinue olaparib (standard 2-year
+      duration). Patients must have CA-125 within normal limits and no evidence of radiographic
+      disease at the time of randomization. Stratification: BRCA1 vs BRCA2, stage IIIC vs IV,
+      HRD score (Myriad MyChoice &gt;= 42 vs &lt; 42 among non-BRCA HRR carriers; for BRCA-mutated
+      patients, HRD is assumed positive), and surgical debulking status (upfront R0 vs interval
+      debulking).
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design_info>
+    <allocation>Randomized</allocation>
+    <intervention_model>Parallel Assignment</intervention_model>
+    <primary_purpose>Treatment</primary_purpose>
+    <masking>Double (Participant, Investigator)</masking>
+  </study_design_info>
+  <primary_outcome>
+    <measure>Progression-Free Survival 2 (PFS2): time from randomization to second progression or death</measure>
+    <time_frame>From randomization until second disease progression or death, assessed up to 60 months</time_frame>
+  </primary_outcome>
+  <secondary_outcome>
+    <measure>Time to First Recurrence (TTFR) after randomization</measure>
+    <time_frame>From randomization until first CA-125 progression (GCIG criteria) or radiographic recurrence, up to 60 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Overall Survival (OS)</measure>
+    <time_frame>From randomization until death from any cause, up to 84 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Health-Related Quality of Life (HRQoL) assessed by FOSI and EORTC QLQ-OV28</measure>
+    <time_frame>Every 6 months during treatment and follow-up, up to 36 months</time_frame>
+  </secondary_outcome>
+  <secondary_outcome>
+    <measure>Safety and tolerability (NCI CTCAE v5.0), with focus on hematologic toxicity and MDS/AML occurrence</measure>
+    <time_frame>During treatment period, up to 12 months; long-term follow-up for MDS/AML up to 84 months</time_frame>
+  </secondary_outcome>
+  <eligibility>
+    <criteria>
+      <textblock>
+Inclusion Criteria:
+- Histologically confirmed FIGO Stage III or IV high-grade serous carcinoma (HGSC), high-grade endometrioid carcinoma, or undifferentiated ovarian, fallopian tube, or primary peritoneal carcinoma
+- Deleterious or suspected deleterious germline or somatic BRCA1 or BRCA2 mutation confirmed by validated assay (germline testing preferred; somatic testing on tumor tissue acceptable)
+- Homologous Recombination Deficiency (HRD) positive status: for BRCA1/2 carriers, HRD positivity is assumed; Myriad MyChoice HRD score is collected as exploratory biomarker but not required
+- Completed primary treatment: cytoreductive surgery (upfront or interval) + at least 6 cycles of first-line platinum-taxane chemotherapy (carboplatin/paclitaxel or carboplatin/paclitaxel/bevacizumab); bevacizumab use in frontline is allowed but must have been discontinued prior to or at the start of olaparib maintenance
+- Currently on olaparib maintenance therapy and approaching completion of 2 years (18-24 months elapsed); patients must be within 6 months of completing their 2-year olaparib course
+- Complete clinical response at time of randomization:
+  (a) CA-125 within institutional normal limits (&lt; 35 U/mL) AND
+  (b) No evidence of disease on CT chest/abdomen/pelvis with IV contrast or MRI abdomen/pelvis within 8 weeks of randomization
+- No radiographic evidence of recurrence since initiation of olaparib maintenance
+- ECOG Performance Status 0-1
+- Age &gt;= 18 years
+- Adequate bone marrow at time of randomization: ANC &gt;= 1500/mm3, platelets &gt;= 100,000/mm3, hemoglobin &gt;= 10 g/dL (without transfusion support in prior 4 weeks)
+- Adequate hepatic function: total bilirubin &lt;= 1.5x ULN, AST/ALT &lt;= 2.5x ULN
+- Adequate renal function: creatinine clearance &gt;= 51 mL/min (Cockcroft-Gault)
+- Willingness to continue olaparib and to comply with study visits and procedures
+- Signed informed consent
+
+Exclusion Criteria:
+- Evidence of disease recurrence (CA-125 progression per GCIG criteria or radiographic progression) at any point during initial olaparib maintenance prior to randomization
+- Low-grade serous carcinoma, mucinous carcinoma, clear cell carcinoma, or other non-HGSC histologies
+- Non-BRCA HRR mutations (ATM, PALB2, RAD51C/D, BRIP1) without BRCA1/2 mutation; these patients may be eligible for separate HRD cohort
+- Prior PARP inhibitor other than olaparib (e.g., niraparib, rucaparib, talazoparib) as part of first-line maintenance; patients who previously participated in a PARP inhibitor trial in the upfront setting are excluded unless that agent was olaparib
+- Evidence of MDS or acute myeloid leukemia (AML) at time of enrollment; complete blood count abnormalities suspicious for MDS require bone marrow biopsy for confirmation before enrollment
+- Active second malignancy requiring systemic treatment (excluding non-melanoma skin cancer or cervical carcinoma in situ)
+- Known hypersensitivity to olaparib
+- Significant gastrointestinal disorder that may affect olaparib absorption
+- Pregnancy or breastfeeding; effective contraception required for women of childbearing potential (though most patients will be post-menopausal due to disease and treatment)
+- Anticipated inability to comply with olaparib dosing schedule or study visits
+      </textblock>
+    </criteria>
+    <gender>Female</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+  </eligibility>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Extended Olaparib (Third Year)</intervention_name>
+    <description>Olaparib 300 mg orally twice daily for an additional 12 months (total maintenance duration approximately 3 years), following completion of the initial 2-year standard olaparib maintenance period. Dose reductions to 250 mg BID and then 200 mg BID are permitted for toxicity management per protocol.</description>
+  </intervention>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Olaparib Discontinuation (Standard Care)</intervention_name>
+    <description>Discontinuation of olaparib after 2 years of standard maintenance (control arm). Patients are observed with CA-125 measurements every 3 months and CT imaging every 6 months. Olaparib placebo (blinded) will be administered to maintain blinding per protocol.</description>
+  </intervention>
+  <condition>Ovarian Cancer</condition>
+  <condition>High-Grade Serous Ovarian Carcinoma</condition>
+  <condition>BRCA1 Mutation</condition>
+  <condition>BRCA2 Mutation</condition>
+  <condition>Homologous Recombination Deficiency</condition>
+  <condition>Fallopian Tube Carcinoma</condition>
+  <condition>Primary Peritoneal Carcinoma</condition>
+  <keyword>olaparib</keyword>
+  <keyword>PARP inhibitor</keyword>
+  <keyword>BRCA1</keyword>
+  <keyword>BRCA2</keyword>
+  <keyword>ovarian cancer</keyword>
+  <keyword>maintenance therapy</keyword>
+  <keyword>complete response</keyword>
+  <keyword>HRD</keyword>
+  <keyword>extended duration</keyword>
+</clinical_study>
