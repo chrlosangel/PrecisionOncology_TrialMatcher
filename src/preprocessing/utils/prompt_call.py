@@ -1,24 +1,7 @@
 import sys
-# import os                            # not used
-
-# import xml.etree.ElementTree as ET  # not used
-# import json                          # not used
 import re
 from pathlib import Path
-# from enum import Enum                # not used
-# from dataclasses import dataclass    # not used
 from typing import Optional
-# from typing import List              # not used
-# from typing import Union, Tuple      # not used
-# from re import Match                 # not used
-# from ast import pattern              # not used
-
-# import numpy as np                   # not used
-# import pandas as pd                  # not used
-# import matplotlib.pyplot as plt      # not used
-# import seaborn as sns                # not used
-# import requests                      # not used
-# import ast                           # not used
 import logging
 import openai
 import torch

@@ -12,9 +12,7 @@ import sys
 
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))  # Add the src directory to the path
-#import preprocessing.utils.embeddings as embeddingTrials 
-
-
+from src.preprocessing.utils import embeddings as embeddingTrials
 # embeddingTrials contains _parse_questions_from_json
 
 

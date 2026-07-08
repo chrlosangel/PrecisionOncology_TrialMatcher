@@ -1,22 +1,11 @@
-# import xml.etree.ElementTree as ET  # not used
-# import json                          # not used
-# import re                            # not used
+import argparse
+
 from pathlib import Path
-# from enum import Enum                # not used
-# from dataclasses import dataclass    # not used
-# from typing import Union, List, Optional, Tuple  # not used
-# from re import Match                 # not used
-# from ast import pattern              # not used
-
-# import numpy as np                   # not used
-# import pandas as pd                  # not used
-
 import sys, os
 
-import requests
-import ast
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import logging
-import openai
 import torch
 from tqdm import tqdm
 
@@ -34,8 +23,6 @@ import preprocessing.utils.biomarker_CiViC_filter as biomarker_CiViC_filter
 import preprocessing.utils.parsing as parsing_ClinicalTrials
 import preprocessing.utils.prompt_call as prompt_call_ClinicalTrials
 import preprocessing.utils.embeddings as embeddings_ClinicalTrials
-
-import argparse
 
 AVAILABLE_MODELS = [
     "axiong/PMC_LLaMA_13B",
@@ -83,22 +70,23 @@ def main():
           print(f"Error checking CUDA availability: {e}")
           sys.exit(1)
      try:
-          if args.filter_civic:
+          if args.filter_civic == True:
                path="../../../data/CiViC/nightly-VariantSummaries.tsv"
                civic, civic_df, expanded_df,synonyms = biomarker_CiViC_filter.main_(path, type_analysis="CiViC")
                print("CiViC filtering completed.")
-          elif args.cancer_filter:
+          elif args.cancer_filter == True:
                print("Cancer keywords filtering applied.")
                filter_words = ["cancer", "tumor", "neoplasm"]   
           else:
                print("No filtering applied.")
+               filter_words = None
           # The problem right now is that we are just providing one path, when sometimes we can have a full directory with more subs
           trials = parsing_ClinicalTrials.process_clinical_trials(args.clinical_trials_path, 
                                                                   word_filter=filter_words)
 
           #---- Prompts
-          dnf_prompt_dir = Path("../prompts/trialQuestionsPrompt.py")
-          PROMPT_DNF_TEMPLATE = prompt_call_ClinicalTrials.load_DNF_prompt(dnf_prompt_dir)
+          dnf_prompt=  Path(__file__).resolve().parent.parent / "prompts" / "trialQuestionsPrompt.py"
+          PROMPT_DNF_TEMPLATE = prompt_call_ClinicalTrials.load_DNF_prompt(dnf_prompt)
 
           # Initialize the LLM model
           model = args.LLM_model
@@ -106,7 +94,6 @@ def main():
                print("[WARNING]'epfl-llm/meditron-7b' context window is limited to 2048 tokens. Consider using a model with a larger context window for better performance.")
                print("[WARNING]Input text may be truncated if it exceeds the context window size.")
           
-
           config= {
           	'model_name': model,
           	'temperature': 0.0,
@@ -123,7 +110,7 @@ def main():
                     model=config['model_name'],
                     gpu_memory_utilization=0.88,
                     dtype='bfloat16',
-                    max_model_len=config['max_context']
+                    max_model_len=13472
                )
                print(f"LLM model '{model}' initialized successfully.")
                try:
