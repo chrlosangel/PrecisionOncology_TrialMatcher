@@ -1,7 +1,6 @@
-import faiss
+import sys
 from transformers import AutoTokenizer, AutoModel
 import numpy as np
-import re
 import torch
 from tqdm import tqdm
 from pathlib import Path
@@ -9,9 +8,10 @@ from pathlib import Path
 import chromadb
 from chromadb import Collection
 import pickle
-from typing import List, Optional
+from typing import List
 
 from . import parsingPatients as parsingPatients
+Patient=parsingPatients.Patient
 
 # Information retrieval Contrastively Pretrained Transformer model for zero-shot semantic IR in biomedicine
 # Bi encoder architecture, first retriever (query encoder and document encoder), second re-ranker.
@@ -34,7 +34,6 @@ from . import parsingPatients as parsingPatients
 
 print("CUDA available:", torch.cuda.is_available())
 
-Patient=parsingPatients.Patient
 
 
 def embed_text(text: str,tokenizer: AutoTokenizer, model: AutoModel) -> np.ndarray:
@@ -199,8 +198,12 @@ def save_patients_to_pickle(processed_patients: List[Patient], save_dir:str) -> 
 
 	if patients_pkl.exists():
 		print("Adding new patients to existing dataset.")
+		#Added this because we saved a pickle Patient class with the first one, but now we call it with the second
+		# It will work only if the saved pkl was generated with the same Patient class, otherwise it will fail.
+		sys.modules.setdefault("src.preprocessing.utils.parsingPatients", parsingPatients)
+		
 		with open(patients_pkl, "rb") as f:
-			existing_patients = pickle.load(f) 
+			existing_patients = pickle.load(f)
 
 		existing_patients_ids=[p.patient_id for p in existing_patients]
 		new_patients = [p for p in processed_patients if p.patient_id not in existing_patients_ids]
@@ -223,85 +226,86 @@ def save_patients_to_pickle(processed_patients: List[Patient], save_dir:str) -> 
 ### Faiss index creation and saving/loading functions 
 # Might go to graveyard if we choose to use ChromaDB
 
-class PatientVectorStore:
-	"""Class for storing patient embeddings and metadata in a FAISS index."""
-	index: faiss.IndexFlatIP
-	metadata: List[dict]
-	n_chunks: int
+#class PatientVectorStore:
+#	"""Class for storing patient embeddings and metadata in a FAISS index."""
+#	index: faiss.IndexFlatIP
+#	metadata: List[dict]
+#	n_chunks: int
 	
-def build_vector_stores_for_patient(patient:Patient, tokenizer: AutoTokenizer,model: AutoModel,option: str) -> dict:
-	'''Builds a vector store for a patient by embedding their clinical note sections and storing the embeddings in a FAISS index.
-	:param patient: Patient object with extracted sections and chunks
-	:param tokenizer: the tokenizer to use for embedding
-	:param model: the model to use for embedding
-	:param option: String indicating the option for vector store creation, it can be chunks or keywords
-	:return: index and metadata for the vector store based on the specified option'''
-	''' One index per patient, which includes multiple embeddings (one per chunk or keyword)
-	If a patient has 3 sections with 2 chunks each we should have 6 embeddings in the index, and the metadata should reflect which section and chunk each embedding corresponds to, for example:
-	index vector 0  →  chunk_metadata[0] = {patient_id, section: "past medical history", chunk: "..."}
-	index vector 1  →  chunk_metadata[1] = {patient_id, section: "past medical history", chunk: "..."}
-	index vector 2  →  chunk_metadata[2] = {patient_id, section: "family history", chunk: "..."}
-	...
-	'''
-	
-	threshold,dimension = 0.96,768
-	patient_embeddings = []
-	if option == 'chunks':
-		chunk_metadata = [] # we can keep track of the metadata for each chunk, such as the section it came from and the original text, to help with debugging and analysis later on
-		try:
-			index = faiss.IndexFlatIP(dimension)
-			for section in patient.PatientSections:
-				for chunk in section.chunks:
-					embedding = embed_text(chunk, tokenizer, model) #chunks are completely filtered before this step
-					if len(patient_embeddings) > 0:
-						existing_embeddings = np.array(patient_embeddings)
-						norm_embedding = embedding / np.linalg.norm(embedding)
-						norm_existing_embeddings = existing_embeddings / np.linalg.norm(existing_embeddings, axis=1, keepdims=True)
-						cosine_similarities = norm_existing_embeddings @ norm_embedding
-						if np.any(cosine_similarities > threshold):
-							print("Skipping chunk due to similarity")
-							continue
-					patient_embeddings.append(embedding)
-					#What information are we keeping track of?
-					chunk_metadata.append({
-						"patient_id": patient.patient_id,
-						"section": section.section_name,
-						"chunk": chunk,
-					})
-			if patient_embeddings:
-				patient_embeddings = np.array(patient_embeddings)
-				index.add(patient_embeddings)
-				
-			return index, chunk_metadata
-		except Exception as e:
-			print(f"Error building vector store for patient {patient.patient_id}: {e}")
-
-	elif option == 'keywords':
-		keyword_metadata = []
-		try:
-			index = faiss.IndexFlatIP(dimension)
-			for s in patient.PatientSections:
-				if s.keywords is not None:
-					for k in s.keywords:
-						embedding = embed_text(k, tokenizer, model)
-						if len(patient_embeddings) > 0:
-							existing_embeddings = np.array(patient_embeddings)
-							norm_embedding = embedding / np.linalg.norm(embedding)
-							norm_existing_embeddings = existing_embeddings / np.linalg.norm(existing_embeddings, axis=1, keepdims=True)
-							cosine_similarities = norm_existing_embeddings @ norm_embedding
-							if np.any(cosine_similarities > threshold):
-								print("Skipping keyword due to similarity")
-								continue
-						patient_embeddings.append(embedding)
-						keyword_metadata.append({
-							"patient_id": patient.patient_id,
-							"section": s.section_name,
-							"keyword": k,
-						})
-			if patient_embeddings:
-				patient_embeddings = np.array(patient_embeddings)
-				index.add(patient_embeddings)
-			return index, keyword_metadata
-		except Exception as e:
-			print(f"Error building vector store for patient {patient.patient_id}: {e}")
-			return None, None
+#def build_vector_stores_for_patient(patient:Patient, tokenizer: AutoTokenizer,model: AutoModel,option: str) -> dict:
+#	'''Builds a vector store for a patient by embedding their clinical note sections and storing the embeddings in a FAISS index.
+#	:param patient: Patient object with extracted sections and chunks
+#	:param tokenizer: the tokenizer to use for embedding
+#	:param model: the model to use for embedding
+#	:param option: String indicating the option for vector store creation, it can be chunks or keywords
+#	:return: index and metadata for the vector store based on the specified option'''
+#	''' One index per patient, which includes multiple embeddings (one per chunk or keyword)
+#	If a patient has 3 sections with 2 chunks each we should have 6 embeddings in the index, and the metadata should reflect which section and chunk each embedding corresponds to, for example:
+#	index vector 0  →  chunk_metadata[0] = {patient_id, section: "past medical history", chunk: "..."}
+#	index vector 1  →  chunk_metadata[1] = {patient_id, section: "past medical history", chunk: "..."}
+#	index vector 2  →  chunk_metadata[2] = {patient_id, section: "family history", chunk: "..."}
+#	...
+#	'''
+#	
+#	threshold,dimension = 0.96,768
+#	patient_embeddings = []
+#	if option == 'chunks':
+#		chunk_metadata = [] # we can keep track of the metadata for each chunk, such as the section it came from and the original text, to help with debugging and analysis later on
+#		try:
+#			index = faiss.IndexFlatIP(dimension)
+#			for section in patient.PatientSections:
+#				for chunk in section.chunks:
+#					embedding = embed_text(chunk, tokenizer, model) #chunks are completely filtered before this step
+#					if len(patient_embeddings) > 0:
+#						existing_embeddings = np.array(patient_embeddings)
+#						norm_embedding = embedding / np.linalg.norm(embedding)
+#						norm_existing_embeddings = existing_embeddings / np.linalg.norm(existing_embeddings, axis=1, keepdims=True)
+#						cosine_similarities = norm_existing_embeddings @ norm_embedding
+#						if np.any(cosine_similarities > threshold):
+#							print("Skipping chunk due to similarity")
+#							continue
+#					patient_embeddings.append(embedding)
+#					#What information are we keeping track of?
+#					chunk_metadata.append({
+#						"patient_id": patient.patient_id,
+#						"section": section.section_name,
+#						"chunk": chunk,
+#					})
+#			if patient_embeddings:
+#				patient_embeddings = np.array(patient_embeddings)
+#				index.add(patient_embeddings)
+#				
+#			return index, chunk_metadata
+#		except Exception as e:
+#			print(f"Error building vector store for patient {patient.patient_id}: {e}")
+#
+#	elif option == 'keywords':
+#		keyword_metadata = []
+#		try:
+#			index = faiss.IndexFlatIP(dimension)
+#			for s in patient.PatientSections:
+#				if s.keywords is not None:
+#					for k in s.keywords:
+#						embedding = embed_text(k, tokenizer, model)
+#						if len(patient_embeddings) > 0:
+#							existing_embeddings = np.array(patient_embeddings)
+#							norm_embedding = embedding / np.linalg.norm(embedding)
+#							norm_existing_embeddings = existing_embeddings / np.linalg.norm(existing_embeddings, axis=1, keepdims=True)
+#							cosine_similarities = norm_existing_embeddings @ norm_embedding
+#							if np.any(cosine_similarities > threshold):
+#								print("Skipping keyword due to similarity")
+#								continue
+#						patient_embeddings.append(embedding)
+#						keyword_metadata.append({
+#							"patient_id": patient.patient_id,
+#							"section": s.section_name,
+#							"keyword": k,
+#						})
+#			if patient_embeddings:
+#				patient_embeddings = np.array(patient_embeddings)
+#				index.add(patient_embeddings)
+#			return index, keyword_metadata
+#		except Exception as e:
+#			print(f"Error building vector store for patient {patient.patient_id}: {e}")
+#			return None, None
+#		

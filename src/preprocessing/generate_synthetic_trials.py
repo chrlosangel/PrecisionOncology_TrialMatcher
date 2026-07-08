@@ -154,3 +154,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Example usage:
+# python src/preprocessing/generate_synthetic_trials.py \
+#    --notes_dir data/coral/toy_set \
+#    --output_dir data/synthetic/trials/coral \
+#    --api_key $ANTHROPIC_API_KEY

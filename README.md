@@ -97,3 +97,20 @@ hf download MODEL_NAME/HF_ID --cache-dir $HF_HOME
 |---|---|---|---|---|
 | MedCPT | `ncbi/MedCPT-Query-Encoder` | 440 MB | Jin et al. (TrialGPT) 2024 | Biomedical semantic embeddings. Trained on PubMed search logs. Used for FAISS/ChromaDB patient and trial embeddings |
 
+
+
+# Run patients processing and database generation
+```bash
+conda activate trialmatch
+
+patients=$(realpath "./data/coral/toy_set/")
+db=$(realpath "./database/chromadb/")
+
+python src/preprocessing/run_patients.py \
+--patients_path ${patients} \
+--LLM_model "Qwen/Qwen1.5-14B-Chat" \
+--embedding_model "ncbi/MedCPT-Query-Encoder" \
+--save_dir ${db} \
+--sentence_tokenizer "en_core_sci_sm"
+
+```

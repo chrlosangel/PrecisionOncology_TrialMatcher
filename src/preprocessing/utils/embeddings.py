@@ -1,3 +1,4 @@
+import sys
 import chromadb
 from chromadb import Collection
 import pickle
@@ -92,6 +93,8 @@ def save_questions_to_pickle(processed_trials: List[ClinicalTrial], save_dir:str
 	# Save the processed trials to a pickle file
 	if (save_path / f"processed_trials.pkl").exists():
 		print(f"Adding new Clinical Trials to existing dataset.")
+
+		sys.modules.setdefault("src.preprocessing.utils.parsing", parsing_ClinicalTrials)
 		with open(save_path / f"processed_trials.pkl", "rb") as f:
 			existing_trials = pickle.load(f)
 		existing_trials_ids = {trial.name_id for trial in existing_trials}

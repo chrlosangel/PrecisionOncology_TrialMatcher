@@ -2,6 +2,8 @@ import argparse
 import sys, os
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import logging
 
 from tqdm import tqdm
@@ -81,7 +83,7 @@ def main():
           processed_patients, average_chunks_per_patient = chunkPatients.process_patients(patients_parsed,sentence_tokenizer)
 
           #---- Patient Section Keywords Extraction ----
-          keyword_template_path = Path("../prompts/extractKeyWords.py")
+          keyword_template_path = Path(__file__).resolve().parent.parent / "prompts" / "extractKeyWords.py"
           KEYWORD_PROMPT_TEMPLATE = keywordsPatients.load_KEYWORD_prompt(keyword_template_path)
 
 
@@ -144,4 +146,6 @@ def main():
      except Exception as e:
           print(f"Error processing patients: {e}")
           sys.exit(1)
-     
+
+if __name__ == "__main__":
+     main()

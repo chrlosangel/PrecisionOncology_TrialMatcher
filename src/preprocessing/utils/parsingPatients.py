@@ -10,13 +10,11 @@ from typing import Union, List, Optional
 from re import Match
 from ast import pattern
 
-from tqdm import tqdm
 
 
 
 
 # Classes for representing
-@dataclass
 class Gender(str, Enum):
     """Enum type class for representing Gender in topics and clinical trials."""
 
