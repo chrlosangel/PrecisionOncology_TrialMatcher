@@ -54,7 +54,7 @@ hf auth login
 ```
 Stored tokens get saved on \${HF_HOME}/stored_tokens and \${HF_HOME}/token
 
-# Follow the model instructions for downloading 
+# Follow the model instructions for downloading any HF LLM
 ```bash
 hf download MODEL_NAME/HF_ID --cache-dir $HF_HOME
 ```
@@ -118,6 +118,12 @@ python src/preprocessing/run_patients.py \
 # - Either updated or newly generated
 
 ```
+## System version Will implement parameters too
+
+```bash
+mkdir logs
+sbatch test_patients.sh 
+```
 
 # Run Trials processing
 ```bash
@@ -130,4 +136,10 @@ python src/preprocessing/run_trials.py \
 --LLM_model "Qwen/Qwen1.5-14B-Chat" \
 --embedding_model "ncbi/MedCPT-Query-Encoder" \
 --save_dir ${savedir}
+```
+
+## System version Will implement parameters too
+```bash
+mkdir logs
+sbatch test_trials_run.sh 
 ```

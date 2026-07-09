@@ -4,6 +4,7 @@ import pickle
 from pathlib import Path
 from typing import List, Optional
 from dataclasses import dataclass, field
+from tqdm import tqdm
 
 from transformers import AutoTokenizer, AutoModel
 import numpy as np
@@ -35,6 +36,11 @@ class TrialResult:
 class PatientMatchingTrials:
     patient_id: str
     trial_results: List[TrialResult] = field(default_factory=list)
+
+@dataclass
+class PatientsResults:
+    patients_results: List[PatientMatchingTrials] = field(default_factory=list)
+
 # ======== 
 
 
@@ -46,7 +52,7 @@ def _load_patientDB(database_path: Path) -> chromadb.Client:
      """
      client = chromadb.PersistentClient(path=str(database_path))
 
-     return client
+     return client 
 
 def embed_query(text: str, tokenizer: AutoTokenizer, model: AutoModel) -> np.ndarray:
     '''Embed a string of text [chunk]
@@ -61,3 +67,95 @@ def embed_query(text: str, tokenizer: AutoTokenizer, model: AutoModel) -> np.nda
                            max_length=512)
         embeddings = model(**inputs).last_hidden_state[:,0,:].squeeze().numpy() # we take the embedding of the [CLS] token, which is the first token in the input sequence
     return embeddings.astype('float32')
+
+def _process_files(patients_db_path: Path, clinical_trials_file: Path) -> tuple[chromadb.Client, list, list]:
+    """Loads the processed patients and trials from pickle files.
+    :param patients_db_path: Path to the directory where the ChromaDB database is saved
+    :param clinical_trials_file: Path to the pickle file containing the processed trials
+    :return: Tuple containing the processed patients and trials
+    """
+    # Load the processed patients from the ChromaDB database
+    patient_client = _load_patientDB(patients_db_path)
+    patients_file = ((patients_db_path).parent / "processed_patients.pkl").resolve()
+    # Load the processed trials from the pickle file
+    with open(patients_file, "rb") as f:
+        processed_patients = pickle.load(f)
+
+    with open(clinical_trials_file, "rb") as f:
+        processed_trials = pickle.load(f) 
+
+    return patient_client, processed_patients, processed_trials
+
+def process_patients_with_trials(patient_client: chromadb.Client, 
+                                 processed_patients: list, 
+                                 processed_trials: list,
+                                 tokenizer: AutoTokenizer,
+                                 model: AutoModel,
+                                 collection: str = "chunks") -> PatientsResults:
+
+    """Processes the patients and trials, and returns the matching results.
+    :param patient_client: ChromaDB client object
+    :param processed_patients: List of processed patients
+    :param processed_trials: List of processed trials
+    :param tokenizer: the tokenizer to use for embedding, defaults to the MedCPT tokenizer
+    :param model: the model to use for embedding, defaults to the MedCPT model
+    :param collection: Name of the ChromaDB collection to query, defaults to "chunks"
+    :return: PatientsResults object containing the best chunks for each question
+    """
+
+    # Initialize the PatientsResults object to store the results
+    final_results_path = Path("FinalPatientsResults.pkl") # fix it
+    if final_results_path.exists():
+        with open(final_results_path, "rb") as f:
+            FinalPatientsResults = pickle.load(f)
+    else:
+        FinalPatientsResults = PatientsResults(patients_results=[])
+
+    collection = patient_client.get_collection(collection)
+
+    # Iterate over each patient and process their trials
+    for p in tqdm(processed_patients, desc="Patients", unit="patient", dynamic_ncols=True):
+        pid = p.patient_id
+        patient_result = PatientMatchingTrials(patient_id=pid)
+
+        if not collection.get(where={'patient_id': pid})['ids']:
+            tqdm.write(f"Warning: Patient {pid} not found in the database. Skipping this patient.")
+            continue
+
+        tqdm.write(f"Processing patient {pid} with {len(processed_trials)} trials.")
+
+        for trial in tqdm(processed_trials, desc="  Trials", unit="trial", leave=False, dynamic_ncols=True):
+            already_processed = any(
+                t.trial_id == trial.name_id
+                for pmr in FinalPatientsResults.patients_results if pmr.patient_id == pid
+                for t in pmr.trial_results
+            )
+
+            if already_processed:
+                tqdm.write(f"Trial {trial.name_id} already processed for patient {pid}. Skipping.")
+                continue
+            
+            trial_result = TrialResult(trial_id=trial.name_id) # Initialize for a given trial
+
+            questions = embeddingTrials._parse_questions_from_json(trial)
+            for question in tqdm(questions, desc="    Questions", unit="q", dynamic_ncols=True, leave=False):
+                question_result = QuestionResult(question=question, chunks=[], distances=[], metadatas=[]) # Initialize for a given question
+                e = embed_query(question, tokenizer, model)
+
+                results = collection.query(
+                    query_embeddings=[e],
+                    n_results=5,
+                    where={"patient_id": pid},
+                    include=["metadatas", "distances", "documents"]
+                )
+                question_result.chunks = results['documents'][0]
+                question_result.distances = results['distances'][0]
+                question_result.metadatas = results['metadatas'][0]
+
+                trial_result.question_Results.append(question_result)
+            
+            patient_result.trial_results.append(trial_result)
+
+        FinalPatientsResults.patients_results.append(patient_result)
+
+    return FinalPatientsResults

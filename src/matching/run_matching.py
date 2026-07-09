@@ -36,14 +36,7 @@ def main():
           raise FileNotFoundError(f"We couldn't find the processed patients pickle file at '{patients_file}'. Please ensure that the ChromaDB database was generated with run_patients.py and that the processed patients pickle file is present in the parent directory as the ChromaDB database.")
           sys.exit(1)
      
-     # Open all files
-     with open(patients_file, "rb") as f:
-          processed_patients = pickle.load(f)
-
-     with open(clinical_trials_file, "rb") as f:
-          processed_trials = pickle.load(f)
+     patients_DB, processed_patients, processed_trials = retrieval._process_files(patients_database_path, clinical_trials_file)
      
-     patients_DB = retrieval._load_patientDB(patients_database_path)
-
      tokenizer_emb = AutoTokenizer.from_pretrained(args.embedding_model)
      tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
