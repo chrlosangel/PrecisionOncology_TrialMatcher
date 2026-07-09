@@ -11,7 +11,8 @@
 source ~/.bashrc
 conda activate trialmatch
 
-patients=$(realpath "./data/coral/toy_set/")
+patients=$(realpath "./data/coral/")
+#patients=$(realpath "./data/coral/toy_set/")
 db=$(realpath "./database/chromadb/")
 
 python src/preprocessing/run_patients.py \

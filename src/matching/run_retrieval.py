@@ -4,6 +4,8 @@ from pathlib import Path
 import pickle
 from transformers import AutoTokenizer, AutoModel,AutoConfig
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import matching.utils.retrieval as retrieval
 
 def argument_parser():
@@ -19,7 +21,8 @@ def main():
 
      patients_database_path = Path(args.patients_database_path).resolve()
      clinical_trials_file = Path(args.clinical_trials_file).resolve()
-
+     save_dir = clinical_trials_file.parent
+     print(save_dir)
      if clinical_trials_file.suffix != ".pkl":
           raise ValueError(f"Clinical trials file '{clinical_trials_file}' is not a pickle file.")
           sys.exit(1)
@@ -40,3 +43,14 @@ def main():
      
      tokenizer_emb = AutoTokenizer.from_pretrained(args.embedding_model)
      tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
+
+     results=retrieval.process_patients_with_trials(patients_DB, 
+                                            processed_patients, processed_trials, 
+                                            tokenizer_emb, tokenizer_model,save_dir)
+     
+     retrieval._save_results_to_pickle(results, save_dir)
+
+     print(f"Process completed successfully.")
+if __name__ == "__main__":
+     main()
+     

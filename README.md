@@ -116,13 +116,6 @@ python src/preprocessing/run_patients.py \
 
 # Output ${db}/chromaDB_patients 
 # - Either updated or newly generated
-
-```
-## System version Will implement parameters too
-
-```bash
-mkdir logs
-sbatch test_patients.sh 
 ```
 
 # Run Trials processing
@@ -138,8 +131,15 @@ python src/preprocessing/run_trials.py \
 --save_dir ${savedir}
 ```
 
-## System version Will implement parameters too
+# Run patients interrogation with trials 
+
 ```bash
-mkdir logs
-sbatch test_trials_run.sh 
+#Will always be the same 
+ct_processed=$(realpath "./database/chromadb/processed_trials.pkl")
+patients_db=$(realpath "./database/chromadb/chromaDB_patients")
+
+python src/matching/run_retrieval.py \
+--patients_database_path ${patients_db} \
+--clinical_trials_file ${ct_processed} \
+--embedding_model "ncbi/MedCPT-Query-Encoder" 
 ```

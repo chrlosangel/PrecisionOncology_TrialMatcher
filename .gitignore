@@ -38,6 +38,7 @@ data/synthetic/patients
 data/synthetic/trials/SIGIR
 data/synthetic/trials/TREC_2023
 database/
+logs/
 
 # OS / editor
 .DS_Store

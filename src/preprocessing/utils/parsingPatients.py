@@ -68,7 +68,8 @@ def parse_raw_clinical_notes(path: str) -> List[Patient]:
 	out: List[Patient] - a list of Patient dataclass instances with the parsed clinical note data.
 	"""
 	patients = []
-	for file in Path(path).glob("*.txt"):
+	# It just looks to the path, not subdicts
+	for file in Path(path).glob("*.txt"): # We might need to add other file types in the future, but for now we will only process .txt files
 		with open(file, 'r') as f:
 			text = f.read().strip() # removes leading and trailing whitespace
 			text = clean_and_normalize_clinical_note(text)
