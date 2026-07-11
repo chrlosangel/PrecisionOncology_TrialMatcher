@@ -92,14 +92,27 @@ def _format_to_chat(prompt:str,llm:LLM):
 	return chat_prompt
 
 def _parse_answer(json_response:List[str], retrieved_chunks:dict=None) -> PatientTrialQuestionAnswer:
-	# the json file is being wrapped around ``` so we remove those lines first
+	# Strip code fences and language tags (```json, ```, etc.)
 	lines = [l for l in json_response if not l.strip().startswith("```")]
+	text = "\n".join(lines)
 	try:
-		data = json.loads("\n".join(lines))
-	except json.JSONDecodeError as e:
-		raise ValueError(f"LLM returned invalid JSON: {e}")
+		data = json.loads(text)
+	except json.JSONDecodeError:
+		# Fallback: extract the first {...} block in case of surrounding prose
+		match = re.search(r'\{.*\}', text, re.DOTALL)
+		if not match:
+			raise ValueError(f"No JSON object found in LLM output:\n{text}")
+		try:
+			data = json.loads(match.group())
+		except json.JSONDecodeError as e:
+			raise ValueError(f"LLM returned invalid JSON: {e}\nRaw output:\n{text}")
 
 	retrieved_chunks = retrieved_chunks or {}
+	#.get(key)
+	# Because we are accessing to a dictionary in retrieved_chunks and 
+	# the keys are the chunk_ids, we can use .get to get whats inside
+	# which is another dictionary with keys "CHUNK" and "SECTION"
+	# and finally use .get again to get the value of "CHUNK" or "SECTION" or an empty string if not found
 	evidence = [
 		{
 			"chunk_id": e.get("CHUNK_ID"),
@@ -132,8 +145,9 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 
 	os.makedirs(f"{save_dir}/final_answers/", exist_ok=True)
 	
-	final_answers_path = (f"{save_dir}/final_answers/" / "FinalPatientTrialSummaries.pkl").resolve()
-
+	new_dir = Path(f"{save_dir}/final_answers/")
+	final_answers_path = (new_dir / "FinalPatientTrialSummaries.pkl").resolve()
+	
 	if final_answers_path.exists():
 		with open(final_answers_path, "rb") as f:
 			all_patient_summaries = pickle.load(f)
@@ -161,8 +175,8 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 				for i, chunk in enumerate(q.chunks):
 					chunk_id = (f"chunk_{i+1}_{p.patient_id}_{t.trial_id}\n")
 					chunks_trial[chunk_id] = {
-						"CHUNK": f"{chunk}\n",
-						"SECTION": f"{q.metadatas[i]}\n"
+						"CHUNK": f"{chunk}",
+						"SECTION": f"{q.metadatas[i]}"
 					}
 
 				q_prompt = template.format(
@@ -175,7 +189,8 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 				trial_prompts.append(q_prompt) #append the current question prompt
 				trial_chunks.append(chunks_trial) #append the current question's chunks
 			
-			# For one patient and one trial, ask LLM
+			# Trial_prompts is a list of prompts for each question in the trial
+			# Parellely, trial_chunks is a li
 			responses = llm.generate(trial_prompts, sampling_params=sampling_params)
 
 			all_json_responses_for_trial = []  # one entry per question
@@ -187,6 +202,8 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			final_p_t=PatientTrialSummary(trial_id=t.trial_id, question_answers=[])
 			
 			for i, json_response in enumerate(all_json_responses_for_trial):
+				# trial_chunks is a list of dictionaries (one dict per question), and is being controlled by i which corresponds to the question index
+				# once we access to the dictionary, the keys are the chunk_ids and the values are a dictionary with keys "CHUNK" and "SECTION"
 				question_answer = _parse_answer(json_response, retrieved_chunks=trial_chunks[i])
 				final_p_t.question_answers.append(question_answer)
 

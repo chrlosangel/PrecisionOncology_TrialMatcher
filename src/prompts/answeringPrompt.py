@@ -37,16 +37,16 @@ RELEVANT_CHUNKS: {RELEVANT_CHUNKS}
 You MUST provide your output in JSON format as follows:
 
 
-''' json 
+json 
 { 
-     QUESTION: str,
-     ANSWER: str,
-     CONFIDENCE_SCORE: int,
+     QUESTION: str
+     ANSWER: str
+     CONFIDENCE_SCORE: int
      EVIDENCE: list of CHUNK_IDs and SECTIONS
      QUESTION_REASONING: str
      ANSWER_REASONING: str
 }
-'''
+
 """
 
 
