@@ -1,4 +1,4 @@
-prompt = """ You are an experienced clinical trial matching assistant. Your task is to accurately answer a 
+prompt = """You are an experienced clinical trial matching assistant. Your task is to accurately answer a 
 clinical QUESTION about a cancer patient based on their Electronic Health Record (EHR) data.
 
 You will be given:
@@ -28,7 +28,8 @@ You may work out a strep-by-step logical deduction to answer the QUESTION. For e
 - Now based on your verbal answer decide the final answer: YES, NO or N/A
 - Finally, provide a confidence score between 1-5, based on how confident you are.
 
-Input Format:
+This is your INPUT:
+TRIAL_ID: {TRIAL_ID}
 QUESTION: {QUESTION}
 PATIENT_INFO: {PATIENT_INFO}
 RELEVANT_CHUNKS: {RELEVANT_CHUNKS}

@@ -35,10 +35,11 @@ class TrialResult:
 @dataclass
 class PatientMatchingTrials:
     patient_id: str
+    patient_info: Optional[dict] = None
     trial_results: List[TrialResult] = field(default_factory=list)
 
 @dataclass
-class PatientsResults:
+class PatientsResults: #All patients results. we have a list per patient so just access to it as p.
     patients_results: List[PatientMatchingTrials] = field(default_factory=list)
 
 # ======== 
@@ -140,25 +141,37 @@ def process_patients_with_trials(patient_client: chromadb.Client,
         # Iterate over each patient and process their trials
         for p in tqdm(processed_patients, desc="Patients", unit="patient", dynamic_ncols=True):
             pid = p.patient_id
-            patient_result = PatientMatchingTrials(patient_id=pid)
+            patient_Age = p.age
+            patient_Gender = p.gender
+            patient_info = {
+                "age": patient_Age,
+                "gender": patient_Gender
+            }
 
             if not collection.get(where={'patient_id': pid})['ids']:
                 tqdm.write(f"Warning: Patient {pid} not found in the database. Skipping this patient.")
                 continue
 
+            # Reuse existing result if patient was already in the loaded pickle
+            # Next is used to find the first match and then stop searching, returning None if no match is found
+            existing = next((pmr for pmr in FinalPatientsResults.patients_results if pmr.patient_id == pid), None)
+            if existing is not None:
+                patient_result = existing
+                is_new_patient = False
+            else:
+                patient_result = PatientMatchingTrials(patient_id=pid, patient_info=patient_info)
+                is_new_patient = True
+
             tqdm.write(f"Processing patient {pid} with {len(processed_trials)} trials.")
 
             for trial in tqdm(processed_trials, desc="  Trials", unit="trial", leave=False, dynamic_ncols=True):
-                already_processed = any(
-                    t.trial_id == trial.name_id
-                    for pmr in FinalPatientsResults.patients_results if pmr.patient_id == pid
-                    for t in pmr.trial_results
-                )
+                #Check if we have already processed this trial for this patient
+                already_processed = any(t.trial_id == trial.name_id for t in patient_result.trial_results)
 
                 if already_processed:
                     tqdm.write(f"Trial {trial.name_id} already processed for patient {pid}. Skipping.")
                     continue
-                
+
                 trial_result = TrialResult(trial_id=trial.name_id) # Initialize for a given trial
 
                 questions = embeddingTrials._parse_questions_from_json(trial)
@@ -177,10 +190,11 @@ def process_patients_with_trials(patient_client: chromadb.Client,
                     question_result.metadatas = results['metadatas'][0]
 
                     trial_result.question_Results.append(question_result)
-                
+
                 patient_result.trial_results.append(trial_result)
 
-            FinalPatientsResults.patients_results.append(patient_result)
+            if is_new_patient:
+                FinalPatientsResults.patients_results.append(patient_result)
     except Exception as e:
         print(f"An error occurred during interrogation of patients with trials: {e}")
         sys.exit(1)

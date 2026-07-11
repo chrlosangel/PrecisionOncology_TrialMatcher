@@ -138,7 +138,7 @@ python src/preprocessing/run_trials.py \
 ct_processed=$(realpath "./database/chromadb/processed_trials.pkl")
 patients_db=$(realpath "./database/chromadb/chromaDB_patients")
 
-python src/matching/run_retrieval.py \
+python src/matching/run_answering.py \
 --patients_database_path ${patients_db} \
 --clinical_trials_file ${ct_processed} \
 --embedding_model "ncbi/MedCPT-Query-Encoder" 

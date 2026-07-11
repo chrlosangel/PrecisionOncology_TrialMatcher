@@ -81,7 +81,7 @@ def parse_raw_clinical_notes(path: str) -> List[Patient]:
 
 def extract_age(patient: Patient) -> Optional[int]:
 	# the age cannot be preceded by hypen, we added this because we noticed some ranges of treatment were being misclassified as ages, for example "treated for 3-5 years" was being misclassified as age 5. So we added a negative lookbehind to ensure that the age is not preceded by a hypen.
-	pattern = r"(?<![-])(\d+)[\s-](?:year|month)s?|age[d]?\s+(\d+)|(\d+)\s*(?:y[/.]?o\.?|mo?)\b"
+	pattern = r"(?<![-])(\d+)[\s-](?:year|month)s?|age[d]?\s+(\d+)|(\d+)\s*(?:y[/.]?\s*o\.?|mo?)\b"
 	matches = re.search(pattern, patient.description, re.IGNORECASE)
 	if matches:
 		return int(next(g for g in matches.groups() if g is not None))
@@ -92,9 +92,9 @@ def extract_gender(patient: Patient) -> Optional[Gender]:
 	#\b is a word boundary, so we only match whole words
 	# Most cases have the gender after the word "old" so we can add that as a positive signal
 	# ?: is a non-capturing group, so we don't have to worry about the order of the words after "old" because we will jsut check the one that matches
-	if re.search(r"\b(?:-old|y\.?o\.?)\s+(male|man|boy)\b", patient.description, re.IGNORECASE):
+	if re.search(r"\b(?:-old|y\.?\s*o\.?)\s+(male|man|boy)\b", patient.description, re.IGNORECASE):
 		return Gender.male
-	elif re.search(r"\b(?:-old|y\.?o\.?)\s+(female|woman|girl)\b", patient.description, re.IGNORECASE):
+	elif re.search(r"\b(?:-old|y\.?\s*o\.?)\s+(female|woman|girl)\b", patient.description, re.IGNORECASE):
 		return Gender.female
 	else:
 		return Gender.unknown
