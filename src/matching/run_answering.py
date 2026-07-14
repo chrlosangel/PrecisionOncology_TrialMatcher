@@ -36,11 +36,11 @@ def argument_parser():
      parser.add_argument("--clinical_trials_file", required=True, help="Path to the clinical trials file. This is a pickle file containing the processed clinical trials.")
      parser.add_argument("--embedding_model", default="ncbi/MedCPT-Query-Encoder", help="Embedding model to use for generating question embeddings. Must be the same used in run_patients.py")
      
-     #parser.add_argument("--LLM_model",
-     #     default="Qwen/Qwen1.5-14B-Chat",
-     #     choices=AVAILABLE_MODELS,
-     #     help=f"LLM model to use for prompt generation. Choices: {', '.join(AVAILABLE_MODELS)}"
-     #)
+     parser.add_argument("--LLM_model",
+          default="Qwen/Qwen1.5-14B-Chat",
+          choices=AVAILABLE_MODELS,
+          help=f"LLM model to use for prompt generation. Choices: {', '.join(AVAILABLE_MODELS)}"
+     )
      return parser
 
 def main():
@@ -74,7 +74,8 @@ def main():
      tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
 
      try:
-          results=retrieval.process_patients_with_trials(patients_DB, 
+          #Creates the questions for each trial
+          results=retrieval.retrieve_chunks_for_trial_questions_patientxtrial(patients_DB, 
                                             processed_patients, 
                                             processed_trials, 
                                             tokenizer_emb, 
@@ -89,7 +90,7 @@ def main():
      
 
      #Answering section
-     answer = False
+     answer = True
      if answer:
           try:
                # This is exactly what results has, but we load it again to ensure that the file is present and can be loaded without issues

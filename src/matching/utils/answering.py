@@ -95,6 +95,7 @@ def _parse_answer(json_response:List[str], retrieved_chunks:dict=None) -> Patien
 	# Strip code fences and language tags (```json, ```, etc.)
 	lines = [l for l in json_response if not l.strip().startswith("```")]
 	text = "\n".join(lines)
+	text = re.sub(r',\s*([\]}])', r'\1', text)  # strip trailing commas (LLMs often produce these)
 	try:
 		data = json.loads(text)
 	except json.JSONDecodeError:
@@ -167,7 +168,7 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 				for p in all_patient_summaries 
 				for t in p.trial_summaries}
 	else:
-		all_patient_summaries = []  # Store all patient summaries
+		all_patient_summaries = []  # store all patient summaries
 		processed = set()  # tracks (patient_id, trial_id) pairs already completed
 
 
@@ -175,7 +176,16 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 		if not p.trial_results: # If they are empty
 			continue
 		
-		alltrials_patient = PatientAllTrialSummaries(patient_id=p.patient_id, trial_summaries=[])
+		#None = the patient is new
+		
+		existing_patient = next((s for s in all_patient_summaries if s.patient_id == p.patient_id), None)
+
+		# if it already exists in our summaries
+		if existing_patient is not None:
+			alltrials_patient = existing_patient #is a PatientAllTrialSummaries object
+		else:
+			alltrials_patient = PatientAllTrialSummaries(patient_id=p.patient_id, trial_summaries=[])
+		new_trials_added = False
 		for t in tqdm(p.trial_results, desc=f"  Trials [{p.patient_id}]", leave=False):
 			if (p.patient_id, t.trial_id) in processed:
 				tqdm.write(f"  Skipping already processed: patient={p.patient_id}, trial={t.trial_id}")
@@ -219,13 +229,22 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			# Because responses,prompts and trial_chunks are all parallel lists,we can use the index i
 			# to access the corresponding questions answers/jsons and the corresponding trial_chunks for that question
 			for i, json_response in enumerate(all_json_responses_for_trial):
-				# trial_chunks is a list of dictionaries (one dict per question), and is being controlled by i which corresponds to the question index
-				# once we access to the dictionary, the keys are the chunk_ids and the values are a dictionary with keys "CHUNK" and "SECTION"
+				# json_response is expected to be a json string, where each line contains a key and a value, the keys are those we include in the
 				question_answer = _parse_answer(json_response, retrieved_chunks=trial_chunks[i])
 				final_p_t.question_answers.append(question_answer)
 
 			processed.add((p.patient_id, t.trial_id))
 			tqdm.write(f"  Done: patient={p.patient_id}, trial={t.trial_id}")
-			alltrials_patient.trial_summaries.append(final_p_t)
-		all_patient_summaries.append(alltrials_patient)
+
+			#The new trial is automatically added  to th existing object
+			alltrials_patient.trial_summaries.append(final_p_t) # if the patient was already existing here we append to the existing trial_summaries, because
+			# alltrials_patient is already the existing patient object, by appending we are just adding a new entry
+			new_trials_added = True
+
+		if new_trials_added:
+			if existing_patient is None: #if its a new patient
+				all_patient_summaries.append(alltrials_patient) #create the new list of PatientAllTrialSummaries just if the patient is new
+			with open(final_answers_path, "wb") as f: # here we will overwrite the patient if its already existing with the new entries 
+				pickle.dump(all_patient_summaries, f)
+			tqdm.write(f"  Checkpoint saved for patient={p.patient_id}")
 	return all_patient_summaries

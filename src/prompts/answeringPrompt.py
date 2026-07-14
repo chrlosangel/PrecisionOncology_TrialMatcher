@@ -18,8 +18,8 @@ INSTRUCTIONS:
 7. Provide brief, clear, medically sound ANSWER_REASONING that explains how the evidence leads to 
   your answer. Do not introduce information that is not present in PATIENT_INFO or 
   RELEVANT_CHUNKS.
-8. If evidence is incomplete, conflicting, or ambiguous, state this explicitly and lower your 
-   confidence score accordingly rather than guessing.
+8. If evidence is incomplete, conflicting, or ambiguous, lower your confidence score accordingly and state it on your ANSWER_REASONING
+  rather than guessing.
 
 STEP-BY-STEP REASONING:
 You may work out a strep-by-step logical deduction to answer the QUESTION. For example:
@@ -34,7 +34,7 @@ QUESTION: {QUESTION}
 PATIENT_INFO: {PATIENT_INFO}
 RELEVANT_CHUNKS: {RELEVANT_CHUNKS}
 
-You MUST provide your output in JSON format as follows:
+You MUST provide your output in JSON format as follows (do not include any extra field or text):
 
 
 json 

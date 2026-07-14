@@ -102,7 +102,27 @@ def _save_results_to_pickle(results: PatientsResults, path: Path) -> None:
     
     print(f"Patients interrogation with trials saved to {path}")
         
-def process_patients_with_trials(patient_client: chromadb.Client, 
+
+class _RemappedUnpickler(pickle.Unpickler):
+    _MODULE_REMAP = {
+        "src.matching": "matching",
+        "src.preprocessing": "preprocessing",
+        "src.preprocessing.utils": "preprocessing.utils",
+        "src.matching.utils": "matching.utils",
+        "src.preprocessing.utils.parsingPatients": "preprocessing.utils.parsingPatients",
+    }
+
+    def find_class(self, module, name):
+        for old, new in self._MODULE_REMAP.items():
+            if module.startswith(old):
+                module = new + module[len(old):]
+                break
+        return super().find_class(module, name)
+
+def _load_pickle_with_remapped_modules(f):
+    return _RemappedUnpickler(f).load()
+
+def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.Client,
                                  processed_patients: list, 
                                  processed_trials: list,
                                  tokenizer: AutoTokenizer,
@@ -113,7 +133,7 @@ def process_patients_with_trials(patient_client: chromadb.Client,
     """Processes the patients and trials, and returns the matching results.
     :param patient_client: ChromaDB client object
     :param processed_patients: List of processed patients
-    :param processed_trials: List of processed trials
+    :param processed_trials: List of processed trials already containing the questions
     :param tokenizer: the tokenizer to use for embedding, defaults to the MedCPT tokenizer
     :param model: the model to use for embedding, defaults to the MedCPT model
     :param collection: Name of the ChromaDB collection to query, defaults to "chunks"
@@ -126,7 +146,7 @@ def process_patients_with_trials(patient_client: chromadb.Client,
     if final_results_path.exists():
         print(f"Loading existing interrogation results from {final_results_path}")
         with open(final_results_path, "rb") as f:
-            FinalPatientsResults = pickle.load(f)
+            FinalPatientsResults = _load_pickle_with_remapped_modules(f)
     else:
         print(f"Creating new interrogation results at {final_results_path}")
         FinalPatientsResults = PatientsResults(patients_results=[])

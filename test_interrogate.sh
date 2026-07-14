@@ -17,4 +17,5 @@ patients_db=$(realpath "./database/chromadb/chromaDB_patients")
 python src/matching/run_answering.py \
 --patients_database_path ${patients_db} \
 --clinical_trials_file ${ct_processed} \
---embedding_model "ncbi/MedCPT-Query-Encoder" 
+--embedding_model "ncbi/MedCPT-Query-Encoder" \
+--LLM_model "Qwen/Qwen1.5-14B-Chat"
