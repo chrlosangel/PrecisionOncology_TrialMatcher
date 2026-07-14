@@ -191,6 +191,7 @@ def process_patients_with_trials(patient_client: chromadb.Client,
 
                     trial_result.question_Results.append(question_result)
 
+                # Either the patient is new or already processed, we append the trial result in case the trial is new for this patient
                 patient_result.trial_results.append(trial_result)
 
             if is_new_patient:
@@ -199,4 +200,6 @@ def process_patients_with_trials(patient_client: chromadb.Client,
         print(f"An error occurred during interrogation of patients with trials: {e}")
         sys.exit(1)
 
+
+    # PatientsResults object is returned, and can be saved to a pickle file if needed
     return FinalPatientsResults

@@ -131,6 +131,18 @@ def _parse_answer(json_response:List[str], retrieved_chunks:dict=None) -> Patien
 		question_interpretation=data.get("QUESTION_REASONING", "")
 		)
 
+
+def save_patient_summaries(all_patient_summaries:List[PatientAllTrialSummaries], save_dir:Path):
+	"""Saves the patient summaries to a pickle file.
+	:param all_patient_summaries: List of PatientAllTrialSummaries objects
+	:param save_dir: Directory where the pickle file will be saved
+	"""
+	os.makedirs(save_dir, exist_ok=True)
+	final_answers_path = (save_dir / "FinalPatientTrialSummaries.pkl").resolve()
+	with open(final_answers_path, "wb") as f:
+		pickle.dump(all_patient_summaries, f)
+	print(f"Patient summaries saved to {final_answers_path}")
+
 def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults], 
 				   template:str, llm:LLM, config:dict,save_dir:Path) -> List[PatientAllTrialSummaries]:
 	
@@ -173,7 +185,8 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			for q in t.question_Results:
 				chunks_trial = {}
 				for i, chunk in enumerate(q.chunks):
-					chunk_id = (f"chunk_{i+1}_{p.patient_id}_{t.trial_id}\n")
+					chunk_id = (f"chunk_{i+1}_{p.patient_id}_{t.trial_id}")
+					#removed \n because when we tried to access with the keyys, '\n' was interfering with the access
 					chunks_trial[chunk_id] = {
 						"CHUNK": f"{chunk}",
 						"SECTION": f"{q.metadatas[i]}"
@@ -190,10 +203,12 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 				trial_chunks.append(chunks_trial) #append the current question's chunks
 			
 			# Trial_prompts is a list of prompts for each question in the trial
-			# Parellely, trial_chunks is a li
+			# Parellely, trial_chunks is a list of dictionaries (which we can assume are on the same order as the propms per question) where each dictionary has the chunk_ids as keys and the values are a dictionary with keys "CHUNK" and "SECTION"
 			responses = llm.generate(trial_prompts, sampling_params=sampling_params)
 
 			all_json_responses_for_trial = []  # one entry per question
+			# now, responses should be a list same length as trial_prompts, where each entry is the LLM's response for that question
+			# all responses are stored in all_json_responses_for_trial
 			for i, response in enumerate(responses):
 				# All answers for just one trial/patient combination 
 				json_responses = response.outputs[0].text.strip().split("\n")
@@ -201,6 +216,8 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			
 			final_p_t=PatientTrialSummary(trial_id=t.trial_id, question_answers=[])
 			
+			# Because responses,prompts and trial_chunks are all parallel lists,we can use the index i
+			# to access the corresponding questions answers/jsons and the corresponding trial_chunks for that question
 			for i, json_response in enumerate(all_json_responses_for_trial):
 				# trial_chunks is a list of dictionaries (one dict per question), and is being controlled by i which corresponds to the question index
 				# once we access to the dictionary, the keys are the chunk_ids and the values are a dictionary with keys "CHUNK" and "SECTION"

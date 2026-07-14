@@ -129,11 +129,21 @@ def main():
                         dtype='bfloat16',
                         max_model_len=13472
                     )
+
                except Exception as e:
                     print(f"Error initializing LLM: {e}")
                     sys.exit(1)
                
                # Generate responses
+               all_patient_summaries = answering.answer_patient_trials(FinalPatientsResults, 
+                                        template=ANSWERING_PROMPT_TEMPLATE, 
+                                        llm=llm, 
+                                        config=config,
+                                        save_dir=save_dir)
+               new_dir = Path(f"{save_dir}/final_answers/")
+               answering.save_patient_summaries(all_patient_summaries, new_dir)
+
+               print(f"Answering completed successfully. Final patient summaries saved to {new_dir / 'FinalPatientTrialSummaries.pkl'}")
           except Exception as e:
                print(f"Error generating responses: {e}")
                sys.exit(1)
