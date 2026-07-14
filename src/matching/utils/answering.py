@@ -34,6 +34,7 @@ class PatientTrialQuestionAnswer:
 @dataclass
 class PatientTrialSummary:
 	trial_id: str
+	trial_DNF: str
 	question_answers: list[PatientTrialQuestionAnswer]
 
 @dataclass
@@ -114,14 +115,19 @@ def _parse_answer(json_response:List[str], retrieved_chunks:dict=None) -> Patien
 	# the keys are the chunk_ids, we can use .get to get whats inside
 	# which is another dictionary with keys "CHUNK" and "SECTION"
 	# and finally use .get again to get the value of "CHUNK" or "SECTION" or an empty string if not found
-	evidence = [
-		{
-			"chunk_id": e.get("CHUNK_ID"),
-			"section": e.get("SECTION"),
-			"chunk_text": retrieved_chunks.get(e.get("CHUNK_ID"), {}).get("CHUNK", "")
-		}
-		for e in data.get("EVIDENCE", [])
-	]
+	evidence = []
+	for e in data.get("EVIDENCE", []):
+		if isinstance(e, str):
+			chunk_id = e
+			section = ""
+		else:
+			chunk_id = e.get("CHUNK_ID")
+			section = e.get("SECTION", "")
+		evidence.append({
+			"chunk_id": chunk_id,
+			"section": section,
+			"chunk_text": retrieved_chunks.get(chunk_id, {}).get("CHUNK", "")
+		})
 
 	return PatientTrialQuestionAnswer(
 		question=data.get("QUESTION", ""),
@@ -187,6 +193,7 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			alltrials_patient = PatientAllTrialSummaries(patient_id=p.patient_id, trial_summaries=[])
 		new_trials_added = False
 		for t in tqdm(p.trial_results, desc=f"  Trials [{p.patient_id}]", leave=False):
+			trial_dnf = t.DNF if hasattr(t, 'DNF') else None
 			if (p.patient_id, t.trial_id) in processed:
 				tqdm.write(f"  Skipping already processed: patient={p.patient_id}, trial={t.trial_id}")
 				continue
@@ -224,12 +231,13 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 				json_responses = response.outputs[0].text.strip().split("\n")
 				all_json_responses_for_trial.append(json_responses)
 			
-			final_p_t=PatientTrialSummary(trial_id=t.trial_id, question_answers=[])
+			final_p_t=PatientTrialSummary(trial_id=t.trial_id, trial_DNF=trial_dnf, question_answers=[])
 			
 			# Because responses,prompts and trial_chunks are all parallel lists,we can use the index i
 			# to access the corresponding questions answers/jsons and the corresponding trial_chunks for that question
 			for i, json_response in enumerate(all_json_responses_for_trial):
 				# json_response is expected to be a json string, where each line contains a key and a value, the keys are those we include in the
+				print("Raw JSON:", json_response)
 				question_answer = _parse_answer(json_response, retrieved_chunks=trial_chunks[i])
 				final_p_t.question_answers.append(question_answer)
 

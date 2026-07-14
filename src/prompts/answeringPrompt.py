@@ -17,9 +17,9 @@ INSTRUCTIONS:
 6. Cite every piece of EVIDENCE you rely on, using its CHUNK_ID and SECTION.
 7. Provide brief, clear, medically sound ANSWER_REASONING that explains how the evidence leads to 
   your answer. Do not introduce information that is not present in PATIENT_INFO or 
-  RELEVANT_CHUNKS.
-8. If evidence is incomplete, conflicting, or ambiguous, lower your confidence score accordingly and state it on your ANSWER_REASONING
-  rather than guessing.
+  RELEVANT_CHUNKS. Limit your answer to just one line of reasoning, do not add bullet points nor lists.
+8. If evidence is incomplete, conflicting, or ambiguous, lower your confidence score accordingly.
+9. Do not guess or fabricate information. 
 
 STEP-BY-STEP REASONING:
 You may work out a strep-by-step logical deduction to answer the QUESTION. For example:
@@ -34,17 +34,20 @@ QUESTION: {QUESTION}
 PATIENT_INFO: {PATIENT_INFO}
 RELEVANT_CHUNKS: {RELEVANT_CHUNKS}
 
-You MUST provide your output in JSON format as follows (do not include any extra field or text):
-
-
+You MUST provide your output in JSON format as follows, it’s very very crucial for your job to provide the output in proper JSON format.
 json 
 { 
-     QUESTION: str
-     ANSWER: str
+     QUESTION: "A str that was provided in the input"
+     ANSWER: enum("YES", "NO", "N/A")
      CONFIDENCE_SCORE: int
-     EVIDENCE: list of CHUNK_IDs and SECTIONS
-     QUESTION_REASONING: str
-     ANSWER_REASONING: str
+     EVIDENCE: [
+         {
+             "CHUNK_ID": "A string representing the unique identifier of the chunk",
+             "SECTION": "A string representing the section of the EHR from which the chunk was extracted"
+         }
+     ]
+     QUESTION_REASONING: "A string providing the explanation about the QUESTION"
+     ANSWER_REASONING: "A string providing the explanation about the ANSWER"
 }
 
 """

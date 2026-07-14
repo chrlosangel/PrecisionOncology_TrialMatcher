@@ -44,13 +44,16 @@ def _parse_questions_from_json(trial:ClinicalTrial) -> List[str]:
 	:return: List[str] - a list of questions extracted from the trial's JSON representation
 	"""
 	questions = []
+	dnf=[]
 	if trial.dnf_representation:
 		for q in trial.dnf_representation:
+			if q and re.match(r'^\s+"DNF_LOGICAL_EXPRESSION"', q):
+				string_q = re.split(r'"DNF_LOGICAL_EXPRESSION":', q.strip())[1].strip()
+				dnf.append(string_q)
 			if q and re.match(r'^\s+"Q\d+"', q):
 				string_q = re.split(r'"Q\d+":', q.strip())[1].strip()
 				questions.append(string_q)
-	return questions
-
+	return questions, dnf
 def _add_questions(trial:ClinicalTrial,  tokenizer: AutoTokenizer, model: AutoModel,collection: Collection) -> None:
 	'''Embed questions from a trial and add them to the specified ChromaDB collection.
 	:param trial: ClinicalTrial - the trial object containing the questions to be embedded 

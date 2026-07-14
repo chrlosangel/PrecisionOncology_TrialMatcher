@@ -30,6 +30,7 @@ class QuestionResult:
 @dataclass
 class TrialResult:
     trial_id: str
+    DNF: str
     question_Results: List[QuestionResult] = field(default_factory=list)
 
 @dataclass
@@ -192,9 +193,10 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
                     tqdm.write(f"Trial {trial.name_id} already processed for patient {pid}. Skipping.")
                     continue
 
-                trial_result = TrialResult(trial_id=trial.name_id) # Initialize for a given trial
+                questions, dnf = embeddingTrials._parse_questions_from_json(trial)
+                dnf = dnf[0] if dnf else None  # Assuming dnf is a list and we want the first element, or None if empty
+                trial_result = TrialResult(trial_id=trial.name_id, DNF=dnf) # Initialize for a given trial
 
-                questions = embeddingTrials._parse_questions_from_json(trial)
                 for question in tqdm(questions, desc="    Questions", unit="q", dynamic_ncols=True, leave=False):
                     question_result = QuestionResult(question=question, chunks=[], distances=[], metadatas=[]) # Initialize for a given question
                     e = embed_query(question, tokenizer, model)
