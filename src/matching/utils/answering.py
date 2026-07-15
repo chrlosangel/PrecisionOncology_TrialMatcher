@@ -242,7 +242,7 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 			# to access the corresponding questions answers/jsons and the corresponding trial_chunks for that question
 			for i, json_response in enumerate(all_json_responses_for_trial):
 				# json_response is expected to be a json string, where each line contains a key and a value, the keys are those we include in the
-				print("Raw JSON:", json_response)
+				#print("Raw JSON:", json_response)
 				question_answer = _parse_answer(json_response, retrieved_chunks=trial_chunks[i])
 				final_p_t.question_answers.append(question_answer)
 

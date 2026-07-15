@@ -17,6 +17,8 @@ ClinicalTrial=parsing_ClinicalTrials.ClinicalTrial
 print("CUDA available:", torch.cuda.is_available())
 
 from vllm import LLM, SamplingParams
+from vllm.sampling_params import StructuredOutputsParams
+
 import torch.multiprocessing as mp
 mp.set_start_method('spawn', force=True)
 
@@ -24,6 +26,30 @@ logging.basicConfig(level=logging.INFO)
 logging.getLogger("vllm").setLevel(logging.WARNING)
 
 
+# Properties are key-value pairs 
+#Sometimes you want to say that, given a particular kind of property name, the value should
+# match a particular schema. That's where patternProperties comes in: it maps 
+# regular expressions to schemas.
+#additional properties is just to control any other property that is not in the schema
+
+_ANSWER_SCHEMA = {
+    "type": "object",
+    "properties": {
+	   "QUESTIONS": {
+		  "type": "object",
+		  "patternProperties": {
+				"^Q[0-9]+$": {"type": "string"}
+			},
+		  "additionalProperties": False,
+		  "minProperties": 3
+	   },
+        "DNF_LOGICAL_EXPRESSION": {"type": "string"},
+	   "DNF_LOGICAL_EXPRESSION_REASONING": {"type": "string"},
+	   "INCLUSION_BIOMARKER": {"type": "string"},
+	   "EXCLUSION_BIOMARKER": {"type": "string"}
+    },
+    "required": ["QUESTIONS", "DNF_LOGICAL_EXPRESSION", "DNF_LOGICAL_EXPRESSION_REASONING"]
+}
 
 def load_DNF_prompt(template_path: str) -> str:
 	'''Load the DNF prompt template from a file.'''
@@ -132,7 +158,8 @@ def generate_DNF(trial:ClinicalTrial,template:str ,config: dict,
 						inclusion_criteria=inclusion,
 						exclusion_criteria=exclusion)
 			prompt = _format_to_chat(prompt, llm)
-			sampling_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens)
+			structured = StructuredOutputsParams(json=_ANSWER_SCHEMA)
+			sampling_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens, structured_outputs=structured)
                
 			response = llm.generate(prompt, sampling_params=sampling_params)
 			# print(response[0].outputs[0].text.strip().split("\n"))

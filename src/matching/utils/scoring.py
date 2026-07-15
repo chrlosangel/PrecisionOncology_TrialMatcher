@@ -17,6 +17,8 @@ def _eval_dnf(dnf: str, assignment: dict[str, bool]) -> bool:
     Handles both uppercase (AND/OR/NOT) and lowercase (and/or/not) operators.
     """
     expr = dnf.strip()
+    if expr.startswith('"') and expr.endswith('",'):
+        expr = expr[1:-2].strip()
     # Normalize operators to Python lowercase
     expr = re.sub(r'\bAND\b', 'and', expr)
     expr = re.sub(r'\bOR\b',  'or',  expr)

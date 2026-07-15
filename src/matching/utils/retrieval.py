@@ -204,7 +204,7 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
 
                     results = collection.query(
                         query_embeddings=[e],
-                        n_results=5,
+                        n_results=8,
                         where={"patient_id": pid},
                         include=["metadatas", "distances", "documents"]
                     )

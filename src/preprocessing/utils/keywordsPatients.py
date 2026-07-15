@@ -200,7 +200,7 @@ def extract_patient_sections_keywords(p: Patient, n_keywords: int, template: str
 			structured = StructuredOutputsParams(json=_ANSWER_SCHEMA)
 			# Sampling parameters for vLLM generation (takes the parameters to initialize the LLM object)
 			sampling_params = SamplingParams(temperature=config['temperature'], 
-						max_tokens=max_tokens)
+						max_tokens=max_tokens,structured_outputs=structured)
 			try:
 				responses = llm.generate(prompts, sampling_params=sampling_params) #for all generated prompts call the llm and pass the parameters
 				_extract_keywords_from_outputs(section_jobs, responses, p)
