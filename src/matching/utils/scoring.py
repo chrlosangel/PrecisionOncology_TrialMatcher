@@ -10,6 +10,7 @@ from matching.utils.answering import PatientTrialSummary, PatientAllTrialSummari
 THRESHOLD_YES = 0.66
 THRESHOLD_NO  = 0.34
 
+# DRAFT: This is a draft implementation of scoring logic. It may not be fully correct or complete. Use with caution.
 
 def _eval_dnf(dnf: str, assignment: dict[str, bool]) -> bool:
     """Evaluate a DNF boolean expression given a mapping of Qi -> True/False.

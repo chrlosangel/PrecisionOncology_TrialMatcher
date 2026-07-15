@@ -17,6 +17,8 @@ Patient=parsingPatients.Patient
 print("CUDA available:", torch.cuda.is_available())
 
 from vllm import LLM, SamplingParams
+from vllm.sampling_params import StructuredOutputsParams
+
 import torch.multiprocessing as mp
 mp.set_start_method('spawn', force=True)
 
@@ -25,6 +27,17 @@ logging.getLogger("vllm").setLevel(logging.WARNING)
 
 
 
+_ANSWER_SCHEMA = {
+    "type": "object",
+    "properties": {
+	     "KEYWORDS": {
+		  "type": "array",
+		  "items": {"type": "string"}
+	   },
+	    	"KEYWORD_EXTRACTION_REASONING": {"type": "string"}
+    },
+    "required": ["KEYWORDS", "KEYWORD_EXTRACTION_REASONING"]
+}
 
 def load_KEYWORD_prompt(template_path: str) -> str:
 	"""Loads a prompt template from a file.
@@ -184,7 +197,7 @@ def extract_patient_sections_keywords(p: Patient, n_keywords: int, template: str
 
 			if not section_jobs:
 				return
-
+			structured = StructuredOutputsParams(json=_ANSWER_SCHEMA)
 			# Sampling parameters for vLLM generation (takes the parameters to initialize the LLM object)
 			sampling_params = SamplingParams(temperature=config['temperature'], 
 						max_tokens=max_tokens)

@@ -5,7 +5,6 @@ from pathlib import Path
 from transformers import AutoTokenizer
 from dataclasses import dataclass
 from typing import Optional, List, Union, Tuple
-import re
 import json 
 import logging
 import torch
@@ -13,6 +12,7 @@ from tqdm import tqdm
 print("CUDA available:", torch.cuda.is_available())
 
 from vllm import LLM, SamplingParams
+from vllm.sampling_params import StructuredOutputsParams
 import torch.multiprocessing as mp
 mp.set_start_method('spawn', force=True)
 
@@ -34,14 +34,40 @@ class PatientTrialQuestionAnswer:
 @dataclass
 class PatientTrialSummary:
 	trial_id: str
-	trial_DNF: str
 	question_answers: list[PatientTrialQuestionAnswer]
+	trial_DNF: Optional[str] = None
 
 @dataclass
 class PatientAllTrialSummaries:
 	patient_id: str
 	trial_summaries: list[PatientTrialSummary] = None
 
+
+# JSON schema used by vLLM guided decoding — the model can only emit tokens
+# that produce valid JSON matching this structure, so parsing never fails.
+_ANSWER_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "QUESTION":           {"type": "string"},
+        "ANSWER":             {"type": "string", "enum": ["YES", "NO", "N/A"]},
+        "CONFIDENCE_SCORE":   {"type": "integer"},
+        "EVIDENCE": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "CHUNK_ID": {"type": "string"},
+                    "SECTION":  {"type": "string"}
+                },
+                "required": ["CHUNK_ID", "SECTION"]
+            }
+        },
+        "QUESTION_REASONING": {"type": "string"},
+        "ANSWER_REASONING":   {"type": "string"}
+    },
+    "required": ["QUESTION", "ANSWER", "CONFIDENCE_SCORE", "EVIDENCE",
+                 "QUESTION_REASONING", "ANSWER_REASONING"]
+}
 
 _FALLBACK_TEMPLATE = (
     "{% for message in messages %}"
@@ -92,40 +118,17 @@ def _format_to_chat(prompt:str,llm:LLM):
 		)
 	return chat_prompt
 
-def _parse_answer(json_response:List[str], retrieved_chunks:dict=None) -> PatientTrialQuestionAnswer:
-	# Strip code fences and language tags (```json, ```, etc.)
-	lines = [l for l in json_response if not l.strip().startswith("```")]
-	text = "\n".join(lines)
-	text = re.sub(r',\s*([\]}])', r'\1', text)  # strip trailing commas (LLMs often produce these)
-	try:
-		data = json.loads(text)
-	except json.JSONDecodeError:
-		# Fallback: extract the first {...} block in case of surrounding prose
-		match = re.search(r'\{.*\}', text, re.DOTALL)
-		if not match:
-			raise ValueError(f"No JSON object found in LLM output:\n{text}")
-		try:
-			data = json.loads(match.group())
-		except json.JSONDecodeError as e:
-			raise ValueError(f"LLM returned invalid JSON: {e}\nRaw output:\n{text}")
+def _parse_answer(json_response: List[str], retrieved_chunks: dict = None) -> PatientTrialQuestionAnswer:
+	# guided_json guarantees valid JSON — just parse directly
+	data = json.loads("\n".join(json_response))
 
 	retrieved_chunks = retrieved_chunks or {}
-	#.get(key)
-	# Because we are accessing to a dictionary in retrieved_chunks and 
-	# the keys are the chunk_ids, we can use .get to get whats inside
-	# which is another dictionary with keys "CHUNK" and "SECTION"
-	# and finally use .get again to get the value of "CHUNK" or "SECTION" or an empty string if not found
 	evidence = []
 	for e in data.get("EVIDENCE", []):
-		if isinstance(e, str):
-			chunk_id = e
-			section = ""
-		else:
-			chunk_id = e.get("CHUNK_ID")
-			section = e.get("SECTION", "")
+		chunk_id = e.get("CHUNK_ID")
 		evidence.append({
 			"chunk_id": chunk_id,
-			"section": section,
+			"section": e.get("SECTION", ""),
 			"chunk_text": retrieved_chunks.get(chunk_id, {}).get("CHUNK", "")
 		})
 
@@ -159,8 +162,10 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 	# Reserve space for output and template overhead
 	criteria_budget = (max_context - max_tokens - 200) // 2
 
-	sampling_params = SamplingParams(temperature=config['temperature'], 
-						max_tokens=max_tokens)
+	structured = StructuredOutputsParams(json=_ANSWER_SCHEMA)
+	sampling_params = SamplingParams(temperature=config['temperature'],
+	                                 max_tokens=max_tokens,
+	                                 structured_outputs=structured)
 
 	os.makedirs(f"{save_dir}/final_answers/", exist_ok=True)
 	

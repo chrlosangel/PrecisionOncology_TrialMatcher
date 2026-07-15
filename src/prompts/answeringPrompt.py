@@ -34,7 +34,8 @@ QUESTION: {QUESTION}
 PATIENT_INFO: {PATIENT_INFO}
 RELEVANT_CHUNKS: {RELEVANT_CHUNKS}
 
-You MUST provide your output in JSON format as follows, it’s very very crucial for your job to provide the output in proper JSON format.
+You MUST provide your output in JSON format as follows, it’s very very crucial for your job to provide the output in proper JSON format, valid for downprocessing.
+
 json 
 { 
      QUESTION: "A str that was provided in the input"

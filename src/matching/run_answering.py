@@ -111,7 +111,9 @@ def main():
                     print("[WARNING]'epfl-llm/meditron-7b' context window is limited to 2048 tokens. Consider using a model with a larger context window for better performance.")
                     print("[WARNING]Input text may be truncated if it exceeds the context window size.")
 
-
+               # temperature is set to 0 to make this deterministic, aka greedy decoding.
+               # There is not distribution to sample from. Therefore parameters such as top_p or top_k are no longer needed
+               # since they are applied before sampling, but in this case there is no sampling, so they are not needed.
                config= {
                	'model_name': model,
                	'temperature': 0.0,

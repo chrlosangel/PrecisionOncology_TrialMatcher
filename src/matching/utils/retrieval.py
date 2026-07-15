@@ -185,6 +185,7 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
 
             tqdm.write(f"Processing patient {pid} with {len(processed_trials)} trials.")
 
+            new_trials_added = False
             for trial in tqdm(processed_trials, desc="  Trials", unit="trial", leave=False, dynamic_ncols=True):
                 #Check if we have already processed this trial for this patient
                 already_processed = any(t.trial_id == trial.name_id for t in patient_result.trial_results)
@@ -213,7 +214,9 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
 
                     trial_result.question_Results.append(question_result)
 
+                new_trials_added = True
                 # Either the patient is new or already processed, we append the trial result in case the trial is new for this patient
+                # Because we opened the file we are appending on memory and then we return FinalPatientsReults which will already contain the new entries
                 patient_result.trial_results.append(trial_result)
 
             if is_new_patient:
