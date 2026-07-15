@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="7">
+  <required_header>
+    <download_date>ClinicalTrials.gov processed this data on April 2026</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>https://clinicaltrials.gov/show/NCT10000007</url>
+  </required_header>
+  <id_info>
+    <org_study_id>SYN-OVA-007</org_study_id>
+    <nct_id>NCT10000007</nct_id>
+  </id_info>
+  <brief_title>Maintenance Olaparib in BRCA1-Mutated High-Grade Serous Ovarian Carcinoma Following Complete Response to Platinum-Based Chemotherapy</brief_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Oncology Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Synthetic Oncology Research Consortium</source>
+  <oversight_info>
+    <authority>United States: Institutional Review Board</authority>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      This study evaluates maintenance olaparib (300 mg twice daily) in patients with Stage III
+      or IV high-grade serous ovarian carcinoma (HGSC) harboring germline BRCA1 pathogenic
+      variants who achieved complete response or partial response after platinum-based adjuvant
+      chemotherapy following primary debulking surgery. The primary endpoint is progression-free
+      survival. HRD-positive (genomic instability score greater than or equal to 42) patients
+      are the target population.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Eligible patients must have undergone primary debulking surgery with optimal cytoreduction
+      (residual disease R0 or R1 less than 1 cm) followed by 6 cycles of carboplatin and
+      paclitaxel. Germline BRCA1 pathogenic variant must be confirmed by clinical-grade testing.
+      HRD positivity (genomic instability score by myChoice CDx or equivalent assay) is required.
+      Patients begin olaparib maintenance within 8 weeks of completing chemotherapy. Maintenance
+      continues for up to 2 years. CA-125 normalization after chemotherapy is required. Patients
+      with depression or anxiety managed with antidepressants are eligible. Iron deficiency
+      managed with oral supplementation does not constitute an exclusion.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 3</phase>
+  <study_type>Interventional</study_type>
+  <study_design>Intervention Model: Single Group Assignment, Primary Purpose: Treatment</study_design>
+  <condition>Ovarian Cancer</condition>
+  <condition>High-Grade Serous Ovarian Carcinoma</condition>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Olaparib 300 mg PO twice daily (maintenance)</intervention_name>
+  </intervention>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          -  Histologically confirmed high-grade serous ovarian carcinoma (HGSC), fallopian
+             tube carcinoma, or primary peritoneal carcinoma
+
+          -  Stage IIIC or IV disease (FIGO 2014 staging)
+
+          -  Germline BRCA1 pathogenic or likely pathogenic variant confirmed by clinical
+             genetic testing
+
+          -  HRD positive: genomic instability score greater than or equal to 42 on validated
+             assay (myChoice CDx or equivalent)
+
+          -  Primary debulking surgery performed with optimal cytoreduction (R0 or residual
+             disease less than 1 cm)
+
+          -  Completed 6 cycles of platinum-based chemotherapy (carboplatin/paclitaxel or
+             equivalent) with response (complete response or partial response by CA-125 and
+             imaging)
+
+          -  CA-125 within normal limits at end of chemotherapy
+
+          -  Olaparib initiation within 8 weeks of last platinum-based chemotherapy dose
+
+          -  Age 18 to 70 years
+
+          -  ECOG performance status 0 or 1
+
+          -  Adequate organ function: ANC greater than or equal to 1.5, platelets greater
+             than or equal to 100, creatinine less than or equal to 1.5x ULN, AST/ALT less
+             than or equal to 2x ULN, hemoglobin greater than or equal to 10 g/dL
+
+          -  Iron deficiency and mild depression/anxiety managed with medications permitted
+
+        Exclusion Criteria:
+
+          -  Germline BRCA2 pathogenic variant (without BRCA1 co-mutation)
+
+          -  MSI-H tumor status (these patients should be considered for immunotherapy trials)
+
+          -  HRD-negative (genomic instability score less than 42)
+
+          -  Suboptimal cytoreduction (residual disease greater than 1 cm after debulking)
+
+          -  Prior PARP inhibitor therapy
+
+          -  Prior platinum-resistant disease (progression within 6 months of prior platinum)
+
+          -  Myelodysplastic syndrome or acute myeloid leukemia
+
+          -  Active or uncontrolled hepatic disease
+
+          -  Diabetes mellitus or hypertension requiring multiple medications (metabolic
+             comorbidities that may confound safety assessment)
+
+          -  Interval debulking surgery (neoadjuvant approach) — only primary debulking eligible
+
+          -  Mucinous, clear cell, or endometrioid histology
+      </textblock>
+    </criteria>
+    <gender>Female</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>70 Years</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <location>
+    <facility>
+      <name>Gynecologic Oncology Center</name>
+      <address>
+        <city>Seattle</city>
+        <state>Washington</state>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location_countries>
+    <country>United States</country>
+  </location_countries>
+  <verification_date>April 2026</verification_date>
+  <lastchanged_date>April 2, 2026</lastchanged_date>
+  <firstreceived_date>April 2, 2026</firstreceived_date>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <mesh_term>Ovarian Neoplasms</mesh_term>
+    <mesh_term>Carcinoma, Ovarian Epithelial</mesh_term>
+    <mesh_term>Cystadenocarcinoma, Serous</mesh_term>
+  </condition_browse>
+</clinical_study>

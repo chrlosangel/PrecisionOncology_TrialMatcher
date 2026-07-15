@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="10">
+  <required_header>
+    <download_date>ClinicalTrials.gov processed this data on March 2026</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>https://clinicaltrials.gov/show/NCT10000010</url>
+  </required_header>
+  <id_info>
+    <org_study_id>SYN-BLAD-010</org_study_id>
+    <nct_id>NCT10000010</nct_id>
+  </id_info>
+  <brief_title>Erdafitinib in Locally Advanced or Metastatic Urothelial Carcinoma with FGFR3 Mutation After Platinum Failure in Cisplatin-Ineligible Patients</brief_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Oncology Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Synthetic Oncology Research Consortium</source>
+  <oversight_info>
+    <authority>United States: Institutional Review Board</authority>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      This study evaluates erdafitinib (8 mg daily with up-titration) in patients with locally
+      advanced or metastatic high-grade urothelial carcinoma of the bladder harboring FGFR3
+      activating mutations or fusions, who progressed on or after gemcitabine/carboplatin
+      chemotherapy. The study is specifically designed for cisplatin-ineligible patients (CrCl
+      less than 45 mL/min) with CKD. Hyperphosphatemia management with phosphate binders is
+      a pre-specified component of supportive care. The primary endpoint is objective response
+      rate per RECIST 1.1.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Patients with histologically confirmed high-grade urothelial carcinoma of the bladder,
+      muscle-invasive or locally advanced/metastatic disease, FGFR3 activating mutation (S249C,
+      R248C, Y373C, or other known activating mutations) or FGFR3 fusion confirmed by NGS are
+      eligible. Cisplatin ineligibility must be documented by CrCl less than 45 mL/min. Prior
+      treatment with gemcitabine/carboplatin (or gemcitabine/cisplatin if previously eligible)
+      is required with documented disease progression. Patients receive erdafitinib 8 mg orally
+      once daily. Phosphate monitoring is performed every 2 weeks; hyperphosphatemia is managed
+      with dietary phosphate restriction and sevelamer. Patients with pre-existing peripheral
+      neuropathy (Grade 1 or less at baseline) and chronic kidney disease (CrCl 30-45 mL/min)
+      are eligible. Baseline ECOG PS 0-2 is permitted.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design>Intervention Model: Single Group Assignment, Primary Purpose: Treatment</study_design>
+  <condition>Urothelial Carcinoma</condition>
+  <condition>Bladder Cancer</condition>
+  <condition>Muscle-Invasive Bladder Cancer</condition>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>Erdafitinib 8 mg PO daily (FGFR inhibitor)</intervention_name>
+  </intervention>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          -  Histologically confirmed high-grade urothelial carcinoma of the bladder
+
+          -  Locally advanced (cT4a or higher) or nodal (N1-N3) disease without distant
+             metastases, or metastatic (M1) disease
+
+          -  FGFR3 activating mutation (S249C, R248C, Y373C, G380R, or equivalent) or
+             FGFR3 fusion confirmed by validated NGS panel
+
+          -  Cisplatin-ineligible at time of first-line therapy: CrCl less than 45 mL/min
+             by Cockcroft-Gault or equivalent
+
+          -  Prior gemcitabine/carboplatin chemotherapy (1 line) with documented disease
+             progression
+
+          -  CKD stage 3 or higher (CrCl 30-45 mL/min) is acceptable
+
+          -  Pre-existing peripheral neuropathy Grade 1 or less at baseline is permitted
+
+          -  Benign prostatic hyperplasia (male patients) is permitted
+
+          -  Age 18 years or older
+
+          -  ECOG performance status 0, 1, or 2
+
+          -  Adequate organ function: platelets greater than or equal to 75, hemoglobin
+             greater than or equal to 8 g/dL, AST/ALT less than or equal to 3x ULN,
+             total bilirubin less than or equal to 1.5x ULN
+
+        Exclusion Criteria:
+
+          -  Transitional cell carcinoma of upper tract (renal pelvis or ureter) as primary site
+
+          -  FGFR3 wildtype tumor (no FGFR3 mutation or fusion)
+
+          -  Prior FGFR inhibitor therapy (erdafitinib, infigratinib, pemigatinib)
+
+          -  CrCl less than 30 mL/min (severe CKD or dialysis-dependent)
+
+          -  Pre-existing hyperphosphatemia greater than 5.5 mg/dL that is unmanageable
+             with dietary restriction
+
+          -  Active or untreated retinal disorder or central serous retinopathy
+             (erdafitinib ocular toxicity risk)
+
+          -  Uncontrolled hyponatremia (sodium less than 130 mEq/L) at baseline
+
+          -  Prior Grade 3 or higher peripheral neuropathy
+
+          -  Active symptomatic brain metastases
+
+          -  NSAID use (allergy or intolerance noted; NSAIDs are contraindicated due to
+             GI bleed risk in patients with prior NSAID-related GI events)
+
+          -  Cisplatin-eligible patients (CrCl greater than or equal to 60 mL/min)
+      </textblock>
+    </criteria>
+    <gender>Both</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <location>
+    <facility>
+      <name>Urologic Oncology Program</name>
+      <address>
+        <city>Portland</city>
+        <state>Oregon</state>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location_countries>
+    <country>United States</country>
+  </location_countries>
+  <verification_date>March 2026</verification_date>
+  <lastchanged_date>March 12, 2026</lastchanged_date>
+  <firstreceived_date>March 12, 2026</firstreceived_date>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <mesh_term>Urinary Bladder Neoplasms</mesh_term>
+    <mesh_term>Carcinoma, Transitional Cell</mesh_term>
+  </condition_browse>
+</clinical_study>

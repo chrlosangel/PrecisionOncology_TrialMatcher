@@ -106,10 +106,12 @@ conda activate trialmatch
 
 patients=$(realpath "./data/coral/toy_set/")
 db=$(realpath "./database/chromadb/")
+LLM="NousResearch/Hermes-2-Pro-Mistral-7B"
+#"Qwen/Qwen1.5-14B-Chat"
 
 python src/preprocessing/run_patients.py \
 --patients_path ${patients} \
---LLM_model "Qwen/Qwen1.5-14B-Chat" \
+--LLM_model ${LLM} \
 --embedding_model "ncbi/MedCPT-Query-Encoder" \
 --save_dir ${db} \
 --sentence_tokenizer "en_core_sci_sm"
@@ -120,13 +122,14 @@ python src/preprocessing/run_patients.py \
 
 # Run Trials processing
 ```bash
-ct=$(realpath "./data/synthetic/trials/coral/")
+ct=$(realpath "./data/synthetic/trials/coral_new/")
 savedir=$(realpath "./database/chromadb/")
+LLM="NousResearch/Hermes-2-Pro-Mistral-7B"
 
 python src/preprocessing/run_trials.py \
 --clinical_trials_path ${ct} \
 --cancer_filter "False" \
---LLM_model "Qwen/Qwen1.5-14B-Chat" \
+--LLM_model ${LLM} \
 --embedding_model "ncbi/MedCPT-Query-Encoder" \
 --save_dir ${savedir}
 ```

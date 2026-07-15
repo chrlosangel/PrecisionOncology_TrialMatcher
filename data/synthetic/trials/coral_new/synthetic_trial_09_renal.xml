@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="9">
+  <required_header>
+    <download_date>ClinicalTrials.gov processed this data on February 2026</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>https://clinicaltrials.gov/show/NCT10000009</url>
+  </required_header>
+  <id_info>
+    <org_study_id>SYN-RCC-009</org_study_id>
+    <nct_id>NCT10000009</nct_id>
+  </id_info>
+  <brief_title>Ipilimumab Plus Nivolumab in Metastatic Clear Cell Renal Cell Carcinoma with IMDC Intermediate Risk and VHL/PBRM1 Mutations</brief_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Oncology Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Synthetic Oncology Research Consortium</source>
+  <oversight_info>
+    <authority>United States: Institutional Review Board</authority>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      This study evaluates ipilimumab 1 mg/kg plus nivolumab 3 mg/kg every 3 weeks for 4
+      induction cycles followed by nivolumab 480 mg every 4 weeks maintenance, in patients
+      with previously untreated metastatic clear cell renal cell carcinoma (ccRCC) classified
+      as IMDC intermediate risk. Patients with VHL and PBRM1 co-mutation are targeted as a
+      molecular subgroup. Patients with renal vein or possible IVC involvement and concurrent
+      adrenal or pulmonary metastases are eligible. Cytoreductive nephrectomy is deferred
+      pending systemic response. The primary endpoint is objective response rate by RECIST 1.1
+      at 12 weeks.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Patients with histologically confirmed clear cell RCC, Stage IV (M1), classified as
+      IMDC intermediate risk (1-2 risk factors) are eligible. Tumor molecular profiling must
+      confirm VHL pathogenic mutation and PBRM1 pathogenic mutation. BAP1 loss is permitted.
+      Patients with anemia (hemoglobin below lower limit of normal) and hypercalcemia (corrected
+      calcium above upper limit of normal) as the two IMDC risk factors are the target population.
+      Patients with primary tumor in situ (nephrectomy deferred) are eligible. Adrenal and
+      pulmonary metastases are permitted. Hypothyroidism on stable thyroid hormone replacement
+      and hypertension on antihypertensive therapy do not constitute exclusion criteria.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design>Intervention Model: Single Group Assignment, Primary Purpose: Treatment</study_design>
+  <condition>Renal Cell Carcinoma</condition>
+  <condition>Clear Cell Renal Cell Carcinoma</condition>
+  <condition>Metastatic Kidney Cancer</condition>
+  <intervention>
+    <intervention_type>Biological</intervention_type>
+    <intervention_name>Ipilimumab 1 mg/kg + Nivolumab 3 mg/kg IV q3w (induction) followed by Nivolumab 480 mg q4w (maintenance)</intervention_name>
+  </intervention>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          -  Histologically confirmed clear cell renal cell carcinoma (ccRCC), ISUP grade 2
+             or 3
+
+          -  Stage IV metastatic disease (M1)
+
+          -  IMDC intermediate risk: 1 or 2 of the following risk factors present:
+             anemia (hemoglobin below lower limit of normal), hypercalcemia (corrected calcium
+             above upper limit of normal), time from diagnosis to treatment less than 1 year,
+             KPS less than 80, neutrophilia, thrombocytosis
+
+          -  VHL pathogenic mutation confirmed by tumor NGS
+
+          -  PBRM1 pathogenic mutation confirmed by tumor NGS
+
+          -  No prior systemic therapy for metastatic RCC (treatment-naive)
+
+          -  Primary tumor in situ or prior nephrectomy both acceptable
+
+          -  Adrenal, pulmonary, or lymph node metastases permitted
+
+          -  Age 18 years or older
+
+          -  ECOG performance status 0 or 1
+
+          -  Adequate organ function: ANC greater than or equal to 1.5, platelets greater
+             than or equal to 100, creatinine less than or equal to 2.0x ULN, AST/ALT less
+             than or equal to 3x ULN, total bilirubin less than or equal to 1.5x ULN
+
+          -  Hypothyroidism on stable levothyroxine replacement is permitted
+
+          -  Hypertension managed with antihypertensive agents is permitted
+
+        Exclusion Criteria:
+
+          -  Non-clear cell RCC histology (papillary, chromophobe, collecting duct, or sarcomatoid
+             without clear cell component)
+
+          -  IMDC favorable risk (0 risk factors) or poor risk (3 or more risk factors)
+
+          -  MET amplification present
+
+          -  Active brain metastases (untreated or symptomatic)
+
+          -  Prior anti-PD-1, anti-PD-L1, or anti-CTLA-4 immunotherapy
+
+          -  Prior systemic therapy for RCC (VEGF-TKI, mTOR inhibitor, or other)
+
+          -  Active autoimmune disease requiring systemic immunosuppression
+
+          -  Active or chronic hepatitis B or C infection
+
+          -  Uncontrolled hypercalcemia (corrected calcium greater than 12 mg/dL despite
+             bisphosphonate or denosumab treatment)
+
+          -  Active corticosteroid use (prednisone greater than 10 mg/day or equivalent)
+             within 2 weeks prior to enrollment
+
+          -  Shellfish allergy alone is not an exclusion; IV contrast allergy requires
+             premedication protocol per institutional guidelines
+      </textblock>
+    </criteria>
+    <gender>Both</gender>
+    <minimum_age>18 Years</minimum_age>
+    <maximum_age>N/A</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <location>
+    <facility>
+      <name>Kidney Cancer Program, Academic Medical Center</name>
+      <address>
+        <city>Los Angeles</city>
+        <state>California</state>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location_countries>
+    <country>United States</country>
+  </location_countries>
+  <verification_date>February 2026</verification_date>
+  <lastchanged_date>February 5, 2026</lastchanged_date>
+  <firstreceived_date>February 5, 2026</firstreceived_date>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <mesh_term>Carcinoma, Renal Cell</mesh_term>
+    <mesh_term>Kidney Neoplasms</mesh_term>
+  </condition_browse>
+</clinical_study>

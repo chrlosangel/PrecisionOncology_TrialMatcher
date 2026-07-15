@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinical_study rank="8">
+  <required_header>
+    <download_date>ClinicalTrials.gov processed this data on January 2026</download_date>
+    <link_text>Link to the current ClinicalTrials.gov record.</link_text>
+    <url>https://clinicaltrials.gov/show/NCT10000008</url>
+  </required_header>
+  <id_info>
+    <org_study_id>SYN-DLBCL-008</org_study_id>
+    <nct_id>NCT10000008</nct_id>
+  </id_info>
+  <brief_title>R-CHOP for Diffuse Large B-Cell Lymphoma Arising as Richter Transformation from Chronic Lymphocytic Leukemia</brief_title>
+  <sponsors>
+    <lead_sponsor>
+      <agency>Synthetic Oncology Research Consortium</agency>
+      <agency_class>Other</agency_class>
+    </lead_sponsor>
+  </sponsors>
+  <source>Synthetic Oncology Research Consortium</source>
+  <oversight_info>
+    <authority>United States: Institutional Review Board</authority>
+  </oversight_info>
+  <brief_summary>
+    <textblock>
+      This study evaluates R-CHOP (rituximab, cyclophosphamide, doxorubicin, vincristine,
+      prednisone) chemoimmunotherapy in patients with diffuse large B-cell lymphoma (DLBCL)
+      arising as Richter transformation from chronic lymphocytic leukemia (CLL). The study
+      targets patients with GCB-subtype DLBCL, Stage I-II disease (supradiaphragmatic), and
+      IPI score 1 to 3. Patients with underlying CLL on prior watch-and-wait (no prior
+      CLL-directed therapy) are the primary population. The primary endpoint is complete
+      response rate by PET/CT at end of treatment.
+    </textblock>
+  </brief_summary>
+  <detailed_description>
+    <textblock>
+      Patients with biopsy-confirmed DLBCL as Richter transformation from CLL (requiring
+      documented prior CLL diagnosis) are eligible. GCB subtype by Hans algorithm is required.
+      Underlying CLL must not have been treated with cytotoxic chemotherapy or BTK inhibitors
+      prior to transformation. Patients receive R-CHOP every 21 days for 6 planned cycles.
+      Interim PET/CT is performed after cycle 3 to assess early response (Deauville scoring).
+      Patients with dual expressor (BCL2+/MYC protein+) but no MYC rearrangement by FISH are
+      eligible. Tumor lysis syndrome prophylaxis with allopurinol is required. Patients with
+      stable gout managed with allopurinol benefit from dual-purpose prophylaxis.
+    </textblock>
+  </detailed_description>
+  <overall_status>Recruiting</overall_status>
+  <phase>Phase 2</phase>
+  <study_type>Interventional</study_type>
+  <study_design>Intervention Model: Single Group Assignment, Primary Purpose: Treatment</study_design>
+  <condition>Diffuse Large B-Cell Lymphoma</condition>
+  <condition>Richter Transformation</condition>
+  <condition>Chronic Lymphocytic Leukemia</condition>
+  <intervention>
+    <intervention_type>Drug</intervention_type>
+    <intervention_name>R-CHOP (Rituximab, Cyclophosphamide, Doxorubicin, Vincristine, Prednisone)</intervention_name>
+  </intervention>
+  <eligibility>
+    <criteria>
+      <textblock>
+        Inclusion Criteria:
+
+          -  Biopsy-confirmed diffuse large B-cell lymphoma (DLBCL), germinal center B-cell
+             (GCB) subtype by Hans algorithm immunohistochemistry
+
+          -  Documented history of chronic lymphocytic leukemia (CLL) prior to DLBCL diagnosis,
+             consistent with Richter transformation
+
+          -  CLL previously managed with observation (watch-and-wait) only; no prior CLL-directed
+             cytotoxic chemotherapy or BTK inhibitor therapy
+
+          -  CLL immunophenotype: CD5+, CD23+, CD20+ (dim) on flow cytometry
+
+          -  Ann Arbor Stage I or II (supradiaphragmatic disease only)
+
+          -  International Prognostic Index (IPI) score 1 to 3
+
+          -  CD20-positive DLBCL by IHC (CD20 strongly positive)
+
+          -  MYC rearrangement negative by FISH (dual expressor by IHC acceptable if FISH
+             negative for double-hit)
+
+          -  Elevated LDH at diagnosis
+
+          -  Age 50 to 75 years
+
+          -  ECOG performance status 0 or 1
+
+          -  Adequate organ function: ANC greater than or equal to 1.0 (or explained by
+             underlying CLL lymphocytosis), platelets greater than or equal to 75, creatinine
+             less than or equal to 1.5x ULN, AST/ALT less than or equal to 2x ULN, ejection
+             fraction greater than or equal to 50% (required prior to doxorubicin)
+
+        Exclusion Criteria:
+
+          -  Non-GCB (activated B-cell, ABC) subtype DLBCL by Hans algorithm
+
+          -  Double-hit or triple-hit lymphoma: concurrent MYC rearrangement plus BCL2 and/or
+             BCL6 rearrangement by FISH
+
+          -  Stage III or IV disease (infradiaphragmatic or disseminated disease)
+
+          -  Prior CLL therapy with BTK inhibitors (ibrutinib, acalabrutinib) or venetoclax
+
+          -  Prior rituximab or anti-CD20 monoclonal antibody therapy
+
+          -  Large cell lymphoma involving the bone marrow (CLL marrow involvement acceptable)
+
+          -  Active central nervous system lymphoma
+
+          -  Left ventricular ejection fraction less than 50% (contraindication to doxorubicin)
+
+          -  Uncontrolled active infection
+
+          -  Prior allogeneic stem cell transplant
+      </textblock>
+    </criteria>
+    <gender>Both</gender>
+    <minimum_age>50 Years</minimum_age>
+    <maximum_age>75 Years</maximum_age>
+    <healthy_volunteers>No</healthy_volunteers>
+  </eligibility>
+  <location>
+    <facility>
+      <name>Hematologic Malignancies Program</name>
+      <address>
+        <city>Philadelphia</city>
+        <state>Pennsylvania</state>
+        <country>United States</country>
+      </address>
+    </facility>
+  </location>
+  <location_countries>
+    <country>United States</country>
+  </location_countries>
+  <verification_date>January 2026</verification_date>
+  <lastchanged_date>January 22, 2026</lastchanged_date>
+  <firstreceived_date>January 22, 2026</firstreceived_date>
+  <has_expanded_access>No</has_expanded_access>
+  <condition_browse>
+    <mesh_term>Lymphoma, Large B-Cell, Diffuse</mesh_term>
+    <mesh_term>Leukemia, Lymphocytic, Chronic, B-Cell</mesh_term>
+  </condition_browse>
+</clinical_study>
