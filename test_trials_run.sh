@@ -11,7 +11,7 @@
 source ~/.bashrc
 conda activate trialmatch
 
-ct=$(realpath "./data/synthetic/trials/coral/")
+ct=$(realpath "./data/synthetic/trials/coral_new/")
 savedir=$(realpath "./database/chromadb/")
 
 python src/preprocessing/run_trials.py \

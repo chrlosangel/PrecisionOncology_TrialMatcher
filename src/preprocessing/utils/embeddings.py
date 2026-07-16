@@ -1,3 +1,4 @@
+import json
 import sys
 import chromadb
 from chromadb import Collection
@@ -39,21 +40,14 @@ def embed_text(text: str,tokenizer,model) -> np.ndarray:
     return embeddings.astype('float32')
 
 def _parse_questions_from_json(trial:ClinicalTrial) -> List[str]:
-	"""Parse questions from the JSON representation of a trial.
-	:param trial: ClinicalTrial - the trial object containing the JSON representation
-	:return: List[str] - a list of questions extracted from the trial's JSON representation
-	"""
+	data = json.loads("\n".join(trial.dnf_representation))
+	print(data)
 	questions = []
-	dnf=[]
-	if trial.dnf_representation:
-		for q in trial.dnf_representation:
-			if q and re.match(r'^\s+"DNF_LOGICAL_EXPRESSION"', q):
-				string_q = re.split(r'"DNF_LOGICAL_EXPRESSION":', q.strip())[1].strip()
-				dnf.append(string_q)
-			if q and re.match(r'^\s+"Q\d+"', q):
-				string_q = re.split(r'"Q\d+":', q.strip())[1].strip()
-				questions.append(string_q)
+	for i,q in data.get("QUESTIONS", []).items():
+		questions.append(q)
+	dnf = data.get("DNF_LOGICAL_EXPRESSION", None)
 	return questions, dnf
+
 def _add_questions(trial:ClinicalTrial,  tokenizer: AutoTokenizer, model: AutoModel,collection: Collection) -> None:
 	'''Embed questions from a trial and add them to the specified ChromaDB collection.
 	:param trial: ClinicalTrial - the trial object containing the questions to be embedded 
@@ -63,7 +57,7 @@ def _add_questions(trial:ClinicalTrial,  tokenizer: AutoTokenizer, model: AutoMo
 
 	threshold = 0.96
 	embeddings,documents,metadata,ids = [],[],[],[]
-	questions = _parse_questions_from_json(trial)
+	questions, dnf = _parse_questions_from_json(trial)
 	for i, q in tqdm(enumerate(questions), total=len(questions), desc="Processing questions", unit="question", dynamic_ncols=True):
 		e = embed_text(q, tokenizer, model)
 		#print(f"Embedding for question {i}: {e}")

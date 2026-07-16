@@ -8,7 +8,21 @@ QUESTION RULES:
 - Questions must be answerable independently, and phrased only in the affirmative — never negatively. For an exclusion criterion like "must not have heart disease," ask "Does the patient have a history of heart disease?" and negate it in the DNF instead (not Qx).
 
 DNF_LOGICAL_EXPRESSION RULES:
-- Must be a valid Python `eval()`-able boolean string using lowercase connectives (and, or, not) and parentheses for grouping (e.g. "(Q1 or Q2) and Q3").
+- Must be a valid Python `eval()`-able boolean string using ONLY lowercase connectives: `and`, `or`, `not`.
+- STRICT STRUCTURE — Disjunctive Normal Form (DNF) means: a top-level OR of one or more AND-clauses.
+  Each AND-clause contains only literals (Qi or not Qi) joined by `and`. OR never appears inside parentheses.
+
+  VALID DNF examples:
+    Single clause:  "Q1 and not Q2 and Q3"
+    Multiple clauses: "(Q1 and not Q2) or (not Q1 and Q3 and Q4)"
+
+  INVALID (not DNF — OR nested inside AND):
+    "not Q1 and (Q2 or Q3) and Q4"   <- FORBIDDEN
+
+  To fix forbidden forms, distribute using De Morgan / distribution rules:
+    "not Q1 and (Q2 or Q3) and Q4"  ->  "(not Q1 and Q2 and Q4) or (not Q1 and Q3 and Q4)"
+  Always perform this distribution before writing the final expression.
+
 - Exclusion-criterion questions must always appear negated (not Qx), since exclusion criteria disqualify patients.
 - True = patient meets eligibility; False = patient does not.
 - Accuracy is critical — this expression directly determines trial eligibility.

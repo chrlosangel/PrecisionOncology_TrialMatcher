@@ -106,7 +106,7 @@ conda activate trialmatch
 
 patients=$(realpath "./data/coral/toy_set/")
 db=$(realpath "./database/chromadb/")
-LLM="NousResearch/Hermes-2-Pro-Mistral-7B"
+LLM="Qwen/Qwen1.5-14B-Chat"
 #"Qwen/Qwen1.5-14B-Chat"
 
 python src/preprocessing/run_patients.py \
@@ -121,11 +121,11 @@ python src/preprocessing/run_patients.py \
 ```
 
 # Run Trials processing
+
 ```bash
 ct=$(realpath "./data/synthetic/trials/coral_new/")
 savedir=$(realpath "./database/chromadb/")
-LLM="NousResearch/Hermes-2-Pro-Mistral-7B"
-
+LLM="Qwen/Qwen1.5-14B-Chat" 
 python src/preprocessing/run_trials.py \
 --clinical_trials_path ${ct} \
 --cancer_filter "False" \

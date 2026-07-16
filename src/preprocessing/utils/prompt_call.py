@@ -35,14 +35,7 @@ logging.getLogger("vllm").setLevel(logging.WARNING)
 _ANSWER_SCHEMA = {
     "type": "object",
     "properties": {
-	   "QUESTIONS": {
-		  "type": "object",
-		  "patternProperties": {
-				"^Q[0-9]+$": {"type": "string"}
-			},
-		  "additionalProperties": False,
-		  "minProperties": 3
-	   },
+	   "QUESTIONS": {"type": "object"},
         "DNF_LOGICAL_EXPRESSION": {"type": "string"},
 	   "DNF_LOGICAL_EXPRESSION_REASONING": {"type": "string"},
 	   "INCLUSION_BIOMARKER": {"type": "string"},
@@ -162,7 +155,7 @@ def generate_DNF(trial:ClinicalTrial,template:str ,config: dict,
 			sampling_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens, structured_outputs=structured)
                
 			response = llm.generate(prompt, sampling_params=sampling_params)
-			# print(response[0].outputs[0].text.strip().split("\n"))
+			print(response[0].outputs[0].text.strip().split("\n"))
 			trial.dnf_representation =response[0].outputs[0].text.strip().split("\n")
 		except Exception as e:
 			print(f"Error generating DNF: {e}")

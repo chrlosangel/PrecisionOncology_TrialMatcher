@@ -193,9 +193,7 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
                 if already_processed:
                     tqdm.write(f"Trial {trial.name_id} already processed for patient {pid}. Skipping.")
                     continue
-
                 questions, dnf = embeddingTrials._parse_questions_from_json(trial)
-                dnf = dnf[0] if dnf else None  # Assuming dnf is a list and we want the first element, or None if empty
                 trial_result = TrialResult(trial_id=trial.name_id, DNF=dnf) # Initialize for a given trial
 
                 for question in tqdm(questions, desc="    Questions", unit="q", dynamic_ncols=True, leave=False):
