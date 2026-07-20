@@ -147,3 +147,23 @@ python src/matching/run_answering.py \
 --embedding_model "ncbi/MedCPT-Query-Encoder" \
 --LLM_model "Qwen/Qwen1.5-14B-Chat"
 ```
+
+# Run scoring / matching
+```bash
+# First run all patients
+ct_processed=$(realpath "./database/chromadb/processed_trials.pkl")
+patients_db=$(realpath "./database/chromadb/chromaDB_patients")
+
+python src/matching/run_matching.py \
+--patients_database_path ${patients_db} \
+--clinical_trials_file ${ct_processed} \
+--run_all_patients
+
+# Once executed, user can ask for patient ID
+python src/matching/run_matching.py \
+--patients_database_path ${patients_db} \
+--clinical_trials_file ${ct_processed} \
+--patient_id <PATIENT_ID> \
+--top_k_trials 4
+
+```

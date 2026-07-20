@@ -2,9 +2,11 @@ from typing import Optional
 import re
 import sys
 from pathlib import Path
-
+from dataclasses import dataclass
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from matching.utils.answering import PatientTrialSummary, PatientAllTrialSummaries
+
+
 
 def _eval_dnf(dnf: str, assignment: dict[str, bool]) -> bool:
     """Evaluate a DNF boolean expression given a mapping of Qi -> True/False.
@@ -259,6 +261,15 @@ def score_trial_detailed(
     }
 
 
+@dataclass
+class PatientTrialResult:
+    patient_id: str
+    trial: str
+    score: Optional[float]
+    eligible: str
+    questions: list[dict]
+
+
 def score_patient_detailed(
     patient_summaries: PatientAllTrialSummaries,
     na_weight: float = 0.0,
@@ -268,7 +279,76 @@ def score_patient_detailed(
     Returns a dict of trial_id -> score_trial_detailed(...) result.
     Pass na_weight > 0 (e.g. 0.5) to give partial credit to N/A answers.
     """
-    return {
-        t.trial_id: score_trial_detailed(t, na_weight=na_weight)
-        for t in patient_summaries.trial_summaries
-    }
+    trials=[]
+    for t in patient_summaries.trial_summaries:
+        result = score_trial_detailed(t, na_weight=na_weight)
+        # Patient has n PatientTrialResult objects
+        trials.append(PatientTrialResult(
+            patient_id=patient_summaries.patient_id,
+            trial=t.trial_id,
+            score=result["score"],
+            eligible=result["eligible"],
+            questions=result["questions"]
+        ))
+    return trials
+
+def return_best_trial_for_patient(
+        all_patient_results: dict[str, list[PatientTrialResult]],
+        patient_id: str):
+    """Return the best trial for a patient based on the highest score."""
+    all_results = all_patient_results.get(patient_id, [])
+    if not all_results:
+        return None, None
+    best_patient_trial = 0
+    for t in all_results:
+        current_score = t.score
+        if current_score is None:
+            continue
+        if current_score > best_patient_trial:
+            best_patient_trial = current_score
+            best_result = t
+
+    print(f"Best trial for patient '{patient_id}': {best_result.trial}\nScore: {best_patient_trial}\n")
+    for q in best_result.questions:
+        print(f"* Question: {q['question']}\n-Answer based on patient data: {q['answer']}\n-Is it required? (inclusion:YES, exclusion:NO): {q['required']}\n-Patient met criteria: {q['met']}\n-LLM-Reasoning: {q['reasoning']}")
+
+
+def return_top_n_trials_for_patient(
+        all_patient_results: dict[str, list[PatientTrialResult]],
+        patient_id: str,
+        n: int = 5) -> list[PatientTrialResult]:
+    """Return and print the top n trials for a patient ranked by score.
+
+    Args:
+        all_patient_results: dict of patient_id -> list[PatientTrialResult].
+        patient_id: the patient to query.
+        n: how many top trials to show (default 5).
+
+        Trials with score=None (unparseable DNF) are ranked last.
+    """
+    all_results = all_patient_results.get(patient_id, [])
+    if not all_results:
+        print(f"No results found for patient '{patient_id}'.")
+        return []
+
+    sorted_results = sorted(
+        all_results,
+        key=lambda t: t.score if t.score is not None else -1.0,
+        reverse=True,
+    )
+    top_n = sorted_results[:n]
+
+    print(f"Top {len(top_n)} trial(s) for patient '{patient_id}':\n")
+    for rank, result in enumerate(top_n, start=1):
+        print(f"[{rank}] Trial: {result.trial} | Score: {result.score} | Eligible: {result.eligible}")
+        for q in result.questions:
+            print(f"  * Question: {q['question']}")
+            print(f"    - Answer: {q['answer']}")
+            req = q['required']
+            inc_exc = "Inclusion" if req == "YES" else ("Exclusion" if req == "NO" else "N/A (not in best clause)")
+            print(f"    - Inclusion/Exclusion Criteria: {inc_exc}")
+            print(f"    - Patient met criteria: {q['met']}")
+            print(f"    - LLM-Reasoning: {q['reasoning']}")
+        print()
+
+    return top_n
