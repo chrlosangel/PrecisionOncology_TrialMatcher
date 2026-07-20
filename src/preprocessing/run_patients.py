@@ -24,6 +24,7 @@ import preprocessing.utils.keywordsPatients as keywordsPatients
 import preprocessing.utils.embeddingPatients as embeddingPatients
 
 AVAILABLE_MODELS = [
+    "meta-llama/Meta-Llama-3-70B-Instruct",
     "axiong/PMC_LLaMA_13B",
     "epfl-llm/meditron-7b",
     "johnsnowlabs/JSL-MedLlama-3-8B-v2.0",
@@ -34,6 +35,7 @@ AVAILABLE_MODELS = [
     "Qwen/Qwen-14B-Chat",
     "Qwen/Qwen1.5-14B-Chat",
     "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-32B-Instruct",
 ]
 
 
@@ -109,7 +111,9 @@ def main():
                     model=config['model_name'],
                     gpu_memory_utilization=0.88,
                     dtype='bfloat16',
-                    max_model_len=13472
+                    max_model_len=config['max_context'],
+                    tensor_parallel_size=2,
+
                )
                print(f"LLM model '{model}' initialized successfully.")
 

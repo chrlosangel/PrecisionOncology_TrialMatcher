@@ -22,6 +22,7 @@ logging.getLogger("vllm").setLevel(logging.WARNING)
 from . import retrieval
 
 # Dataclasses to store the results of the answers
+# just one question! 
 @dataclass
 class PatientTrialQuestionAnswer:
 	question: str
@@ -182,7 +183,7 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 		all_patient_summaries = []  # store all patient summaries
 		processed = set()  # tracks (patient_id, trial_id) pairs already completed
 
-
+	# List of PatientResults, .patient_results is a list of PatientMatchingTrials
 	for p in tqdm(FinalPatientsResults.patients_results, desc="Patients"):
 		if not p.trial_results: # If they are empty
 			continue
@@ -197,6 +198,9 @@ def answer_patient_trials(FinalPatientsResults:List[retrieval.PatientsResults],
 		else:
 			alltrials_patient = PatientAllTrialSummaries(patient_id=p.patient_id, trial_summaries=[])
 		new_trials_added = False
+
+		# Accessing to .trialresults is a List of TrialResult 
+		# Whuch basically are objects with the questions results and DNF
 		for t in tqdm(p.trial_results, desc=f"  Trials [{p.patient_id}]", leave=False):
 			trial_dnf = t.DNF if hasattr(t, 'DNF') else None
 			if (p.patient_id, t.trial_id) in processed:

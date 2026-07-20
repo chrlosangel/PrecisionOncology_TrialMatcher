@@ -26,38 +26,46 @@ logging.basicConfig(level=logging.INFO)
 logging.getLogger("vllm").setLevel(logging.WARNING)
 
 
-# Properties are key-value pairs 
-#Sometimes you want to say that, given a particular kind of property name, the value should
-# match a particular schema. That's where patternProperties comes in: it maps 
-# regular expressions to schemas.
-#additional properties is just to control any other property that is not in the schema
+import json
 
-_ANSWER_SCHEMA = {
+_INCLUSION_SCHEMA = {
     "type": "object",
     "properties": {
-	   "QUESTIONS": {"type": "object"},
-        "DNF_LOGICAL_EXPRESSION": {"type": "string"},
-	   "DNF_LOGICAL_EXPRESSION_REASONING": {"type": "string"},
-	   "INCLUSION_BIOMARKER": {"type": "string"},
-	   "EXCLUSION_BIOMARKER": {"type": "string"}
+        "QUESTIONS":          {"type": "object"},
+        "INCLUSION_BIOMARKER": {"type": "string"}
     },
-    "required": ["QUESTIONS", "DNF_LOGICAL_EXPRESSION", "DNF_LOGICAL_EXPRESSION_REASONING"]
+    "required": ["QUESTIONS", "INCLUSION_BIOMARKER"]
 }
 
-def load_DNF_prompt(template_path: str) -> str:
-	'''Load the DNF prompt template from a file.'''
+_EXCLUSION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "QUESTIONS":          {"type": "object"},
+        "EXCLUSION_BIOMARKER": {"type": "string"}
+    },
+    "required": ["QUESTIONS", "EXCLUSION_BIOMARKER"]
+}
+
+def load_prompt(template_path: str, placeholders: list[str]) -> str:
+	'''Load a prompt template from a file, restoring the given placeholder names.
+	All braces are first escaped, then the listed placeholders are restored as
+	real format fields so that str.format() can substitute them later.
+	'''
 	try:
 		with open(template_path) as f:
 			raw = f.read()
-			raw = raw.replace('{',"{{").replace('}',"}}")
-
+			raw = raw.replace('{', '{{').replace('}', '}}')
 			prompt_template = raw.split('"""')[1]
-			prompt_template = prompt_template.replace("{{inclusion_criteria}}", "{inclusion_criteria}").replace("{{exclusion_criteria}}", "{exclusion_criteria}")
+			for name in placeholders:
+				prompt_template = prompt_template.replace(f'{{{{{name}}}}}', f'{{{name}}}')
 			return prompt_template
-		
 	except FileNotFoundError:
 		print(f"Prompt template file not found: {template_path}")
 		sys.exit(1)
+
+# Keep old name as an alias so nothing else breaks
+def load_DNF_prompt(template_path: str) -> str:
+	return load_prompt(template_path, ['inclusion_criteria', 'exclusion_criteria'])
 
 _FALLBACK_TEMPLATE = (
     "{% for message in messages %}"
@@ -95,69 +103,119 @@ def _truncate_criteria(text: Optional[str], tokenizer, max_tokens: int) -> str:
 		text = tokenizer.decode(tokens)
 	return text
 
-def generate_DNF(trial:ClinicalTrial,template:str ,config: dict,
-			  type_run: str = 'debug',llm = None)-> ClinicalTrial:
+def _build_dnf(inc_questions: dict, exc_questions: dict) -> tuple[dict, str]:
+	"""Merge inclusion/exclusion question dicts and build a guaranteed-valid DNF string.
 
-	'''Generate a DNF representation of the trial's eligibility criteria using a language model.
+	Inclusion questions keep their keys (Q1, Q2, ...).
+	Exclusion questions are renumbered to continue after inclusion (Q_{n+1}, ...).
+	DNF = (Q1 and Q2 and ... and not Q_{n+1} and not Q_{n+2} and ...)
+	This is always a single AND-clause -> always valid DNF.
+	"""
+	# Renumber exclusion questions to continue from inclusion
+	n_inc = len(inc_questions) #quet the amount of inclusion questions
+	exc_renumbered = {} #store the exclusion questions with new keys
+	#Sort by the question number x[0] is the key´ like Q1, [1:] is the question number (slice from 1 to the end)
+	# enumerate adds another variable to the loop, i, which is the index, and our dictionary has key and value ()
+	for i, (_, q_text) in enumerate(sorted(exc_questions.items(), key=lambda x: int(x[0][1:]))):
+		#New key, same qyuestion text 
+		exc_renumbered[f"Q{n_inc + i + 1}"] = q_text
+
+	all_questions = {**inc_questions, **exc_renumbered}
+
+	inc_part = " and ".join(sorted(inc_questions.keys(),      key=lambda x: int(x[1:])))
+	#  all the elements of the list are added a string not before the question. and then we join each of them with an and, the first one just have a not before, which we later 
+	# convert to and not with dnf join
+	exc_part = " and ".join(f"not {k}" for k in sorted(exc_renumbered.keys(), key=lambda x: int(x[1:])))
+	dnf = " and ".join(filter(None, [inc_part, exc_part]))
+
+	return all_questions, dnf
+
+
+def generate_DNF(trial: ClinicalTrial,
+				 inclusion_template: str,
+				 exclusion_template: str,
+				 config: dict,
+				 type_run: str = 'debug',
+				 llm=None) -> ClinicalTrial:
+	"""Generate questions from inclusion/exclusion criteria via two separate LLM calls,
+	then build a guaranteed-valid DNF expression programmatically.
+
 	:param trial: ClinicalTrial object
-	:param template: Prompt template string
-	:param config: Configuration dictionary for the language model
-	:param type_run: Type of run, either 'debug' which uses a local vLLM OpenAI comparible server (localhost:8000)
-	 			 	'hpc' uses a preinitialized vLLM LLM object for a direct batched inference'''
-
+	:param inclusion_template: Prompt template for inclusion criteria
+	:param exclusion_template: Prompt template for exclusion criteria
+	:param config: Configuration dictionary (model_name, temperature, max_tokens, max_context)
+	:param type_run: 'debug' (local vLLM OpenAI server) or 'hpc' (pre-initialized LLM object)
+	:param llm: Required for type_run='hpc'
+	"""
 	if type_run not in ['debug', 'hpc']:
 		raise ValueError("type_run must be either 'debug' or 'hpc'")
 
-	max_tokens = config.get('max_tokens', 1024)
+	max_tokens  = config.get('max_tokens', 1024)
 	max_context = config.get('max_context', 2048)
-	# Reserve space for output and template overhead
-	criteria_budget = (max_context - max_tokens - 200) // 2
+	criteria_budget = max_context - max_tokens - 200
 
-	if type_run == 'debug':
-		client = openai.OpenAI(base_url="http://localhost:8000/v1",api_key="unused")
+	try:
+		tokenizer = llm.get_tokenizer()
+		inclusion = _truncate_criteria(trial.inclusion_criteria, tokenizer, criteria_budget)
+		exclusion = _truncate_criteria(trial.exclusion_criteria, tokenizer, criteria_budget)
 
-		try:
-			tokenizer = llm.get_tokenizer()
-			# Truncate inclusion and exclusion criteria to fit within the token budget
-			inclusion = _truncate_criteria(trial.inclusion_criteria, tokenizer, criteria_budget)
-			exclusion = _truncate_criteria(trial.exclusion_criteria, tokenizer, criteria_budget)
-			prompt = template.format(
-						inclusion_criteria=inclusion,
-						exclusion_criteria=exclusion)
-			prompt = _format_to_chat(prompt, llm)
+		inc_prompt = _format_to_chat(inclusion_template.format(inclusion_criteria=inclusion), llm)
+		exc_prompt = _format_to_chat(exclusion_template.format(exclusion_criteria=exclusion), llm)
 
-			response = client.chat.completions.create(
-				model=config['model'],
-				messages=[ {"role": "system", "content": "You are an expert in clinical trial eligibility criteria. Output only valid JSON, no extra text or explanations."},
-					{"role": "user", "content": prompt}],
-				temperature=config['temperature'],
-				max_tokens=max_tokens,
-			)
-			trial.dnf_representation = response.choices[0].message.content.strip().split("\n")
+		if type_run == 'debug':
+			client = openai.OpenAI(base_url="http://localhost:8000/v1", api_key="unused")
+			system_msg = {"role": "system", "content": "You are an expert in clinical trial eligibility criteria. Output only valid JSON, no extra text or explanations."}
 
-		except Exception as e:
-			print(f"Error generating DNF: {e}")
-			
-			trial.dnf_representation = None
-	elif type_run == 'hpc':
-		try:
+			inc_response = client.chat.completions.create(
+				model=config['model_name'],
+				messages=[system_msg, {"role": "user", "content": inc_prompt}],
+				temperature=config['temperature'], max_tokens=max_tokens,
+			).choices[0].message.content.strip()
+
+			exc_response = client.chat.completions.create(
+				model=config['model_name'],
+				messages=[system_msg, {"role": "user", "content": exc_prompt}],
+				temperature=config['temperature'], max_tokens=max_tokens,
+			).choices[0].message.content.strip()
+
+		else:  # hpc
 			if llm is None:
-				raise ValueError("type_run='hpc' requires a pre-initialized vLLM LLM object passed as `llm`.")
+				raise ValueError("type_run='hpc' requires a pre-initialized vLLM LLM object.")
 
-			tokenizer = llm.get_tokenizer()
-			inclusion = _truncate_criteria(trial.inclusion_criteria, tokenizer, criteria_budget)
-			exclusion = _truncate_criteria(trial.exclusion_criteria, tokenizer, criteria_budget)
-			prompt = template.format(
-						inclusion_criteria=inclusion,
-						exclusion_criteria=exclusion)
-			prompt = _format_to_chat(prompt, llm)
-			structured = StructuredOutputsParams(json=_ANSWER_SCHEMA)
-			sampling_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens, structured_outputs=structured)
-               
-			response = llm.generate(prompt, sampling_params=sampling_params)
-			print(response[0].outputs[0].text.strip().split("\n"))
-			trial.dnf_representation =response[0].outputs[0].text.strip().split("\n")
-		except Exception as e:
-			print(f"Error generating DNF: {e}")
-			trial.dnf_representation = None
+			inc_structured = StructuredOutputsParams(json=_INCLUSION_SCHEMA)
+			exc_structured = StructuredOutputsParams(json=_EXCLUSION_SCHEMA)
+			inc_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens, structured_outputs=inc_structured)
+			exc_params = SamplingParams(temperature=config['temperature'], max_tokens=max_tokens, structured_outputs=exc_structured)
+
+			# Batch both calls in one generate for efficiency
+			responses = llm.generate([inc_prompt, exc_prompt], sampling_params=[inc_params, exc_params])
+			inc_response = responses[0].outputs[0].text.strip()
+			exc_response = responses[1].outputs[0].text.strip()
+
+		inc_data = json.loads(inc_response)
+		exc_data = json.loads(exc_response)
+
+		inc_questions = inc_data.get("QUESTIONS", {})
+		exc_questions = exc_data.get("QUESTIONS", {})
+		inc_biomarker = inc_data.get("INCLUSION_BIOMARKER", "None")
+		exc_biomarker = exc_data.get("EXCLUSION_BIOMARKER", "None")
+
+		all_questions, dnf = _build_dnf(inc_questions, exc_questions)
+
+		result = {
+			"QUESTIONS":                     all_questions,
+			"DNF_LOGICAL_EXPRESSION":        dnf,
+			"DNF_LOGICAL_EXPRESSION_REASONING": (
+				f"All {len(inc_questions)} inclusion criteria must be met "
+				f"and all {len(exc_questions)} exclusion criteria must be absent."
+			),
+			"INCLUSION_BIOMARKER": inc_biomarker,
+			"EXCLUSION_BIOMARKER": exc_biomarker,
+		}
+		trial.dnf_representation = [json.dumps(result)]
+		print(f"  DNF built: {len(all_questions)} questions — {dnf[:80]}{'...' if len(dnf) > 80 else ''}")
+
+	except Exception as e:
+		print(f"Error generating DNF for trial {getattr(trial, 'name_id', '?')}: {e}")
+		trial.dnf_representation = None
 

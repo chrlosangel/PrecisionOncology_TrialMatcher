@@ -18,6 +18,8 @@ import matching.utils.retrieval as retrieval
 import matching.utils.answering as answering
 
 AVAILABLE_MODELS = [
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "meta-llama/Meta-Llama-3-70B-Instruct",
     "axiong/PMC_LLaMA_13B",
     "epfl-llm/meditron-7b",
     "johnsnowlabs/JSL-MedLlama-3-8B-v2.0",
@@ -28,6 +30,7 @@ AVAILABLE_MODELS = [
     "Qwen/Qwen-14B-Chat",
     "Qwen/Qwen1.5-14B-Chat",
     "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-32B-Instruct",
 ]
 
 def argument_parser():
@@ -74,7 +77,7 @@ def main():
      tokenizer_model = AutoModel.from_pretrained(args.embedding_model)
 
      try:
-          #Creates the questions for each trial
+          #Creates the questions embeddings and retrieves the best chunks for each question in the trial
           results=retrieval.retrieve_chunks_for_trial_questions_patientxtrial(patients_DB, 
                                             processed_patients, 
                                             processed_trials, 
@@ -130,7 +133,8 @@ def main():
                         model=config['model_name'],
                         gpu_memory_utilization=0.88,
                         dtype='bfloat16',
-                        max_model_len=13472
+                        max_model_len=config['max_context'],
+                        tensor_parallel_size=2,
                     )
 
                except Exception as e:

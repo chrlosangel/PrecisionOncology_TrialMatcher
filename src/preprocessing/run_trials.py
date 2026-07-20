@@ -25,6 +25,8 @@ import preprocessing.utils.prompt_call as prompt_call_ClinicalTrials
 import preprocessing.utils.embeddings as embeddings_ClinicalTrials
 
 AVAILABLE_MODELS = [
+    "meta-llama/Llama-3.3-70B-Instruct",
+    "meta-llama/Meta-Llama-3-70B-Instruct",
     "axiong/PMC_LLaMA_13B",
     "epfl-llm/meditron-7b",
     "johnsnowlabs/JSL-MedLlama-3-8B-v2.0",
@@ -35,6 +37,7 @@ AVAILABLE_MODELS = [
     "Qwen/Qwen-14B-Chat",
     "Qwen/Qwen1.5-14B-Chat",
     "Qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen2.5-32B-Instruct",
 ]
 
 
@@ -84,9 +87,14 @@ def main():
           trials = parsing_ClinicalTrials.process_clinical_trials(args.clinical_trials_path, 
                                                                   word_filter=filter_words)
 
-          #---- Prompts
-          dnf_prompt=  Path(__file__).resolve().parent.parent / "prompts" / "trialQuestionsPrompt.py"
-          PROMPT_DNF_TEMPLATE = prompt_call_ClinicalTrials.load_DNF_prompt(dnf_prompt)
+          # Prompts
+          prompts_dir = Path(__file__).resolve().parent.parent / "prompts"
+          INCLUSION_TEMPLATE = prompt_call_ClinicalTrials.load_prompt(
+               prompts_dir / "inclusionQuestionsPrompt.py", ["inclusion_criteria"]
+          )
+          EXCLUSION_TEMPLATE = prompt_call_ClinicalTrials.load_prompt(
+               prompts_dir / "exclusionQuestionsPrompt.py", ["exclusion_criteria"]
+          )
 
           # Initialize the LLM model
           model = args.LLM_model
@@ -110,12 +118,13 @@ def main():
                     model=config['model_name'],
                     gpu_memory_utilization=0.88,
                     dtype='bfloat16',
-                    max_model_len=13472
+                    max_model_len=config['max_context'],
+                    tensor_parallel_size=2,
                )
                print(f"LLM model '{model}' initialized successfully.")
                try:
                     for trial in tqdm(trials, desc="Generating DNF", unit="trial", dynamic_ncols=True):
-                         prompt_call_ClinicalTrials.generate_DNF(trial, PROMPT_DNF_TEMPLATE, config, type_run='hpc', llm=llm)
+                         prompt_call_ClinicalTrials.generate_DNF(trial, INCLUSION_TEMPLATE, EXCLUSION_TEMPLATE, config, type_run='hpc', llm=llm)
               
                except Exception as e:
                     print(f"Error during DNF generation: {e}")

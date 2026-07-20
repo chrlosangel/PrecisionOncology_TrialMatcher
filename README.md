@@ -125,11 +125,11 @@ python src/preprocessing/run_patients.py \
 ```bash
 ct=$(realpath "./data/synthetic/trials/coral_new/")
 savedir=$(realpath "./database/chromadb/")
-LLM="Qwen/Qwen1.5-14B-Chat" 
+LLM_model="meta-llama/Llama-3.3-70B-Instruct"
 python src/preprocessing/run_trials.py \
 --clinical_trials_path ${ct} \
 --cancer_filter "False" \
---LLM_model ${LLM} \
+--LLM_model ${LLM_model} \
 --embedding_model "ncbi/MedCPT-Query-Encoder" \
 --save_dir ${savedir}
 ```

@@ -199,7 +199,8 @@ def retrieve_chunks_for_trial_questions_patientxtrial(patient_client: chromadb.C
                 for question in tqdm(questions, desc="    Questions", unit="q", dynamic_ncols=True, leave=False):
                     question_result = QuestionResult(question=question, chunks=[], distances=[], metadatas=[]) # Initialize for a given question
                     e = embed_query(question, tokenizer, model)
-
+                    # For an specific question in the trial, we query (with the question) the database
+                    # and extract the best patient chunks for that question
                     results = collection.query(
                         query_embeddings=[e],
                         n_results=8,

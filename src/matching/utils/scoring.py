@@ -6,9 +6,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from matching.utils.answering import PatientTrialSummary, PatientAllTrialSummaries
 
-THRESHOLD_YES = 0.66
-THRESHOLD_NO  = 0.34
-
 def _eval_dnf(dnf: str, assignment: dict[str, bool]) -> bool:
     """Evaluate a DNF boolean expression given a mapping of Qi -> True/False.
     Handles both uppercase (AND/OR/NOT) and lowercase (and/or/not) operators.
@@ -40,19 +37,27 @@ def _eval_dnf_threeval(dnf: str, assignment: dict[str, str]) -> str:
     to True gives the same result as fixing them to False, the unknowns are
     irrelevant and the outcome is determinate; otherwise the result is N/A.
     """
-    na_qs   = [q for q, v in assignment.items() if v == "N/A"]
-    known   = {q: (v == "YES") for q, v in assignment.items() if v != "N/A"}
+    # Extract the N/A questions and the known answers
+    na_qs   = [q for q, a in assignment.items() if a == "N/A"]
+    #Known, evaluate True for Yes and False for No
+    known   = {q: (a == "YES") for q, a in assignment.items() if a != "N/A"}
 
+    # If there are no NA questions just evaluate the DNF
+    # Return Yes if the DNF evaluates to True, No if it evaluates to False
     if not na_qs:
-        return "Yes" if _eval_dnf(dnf, known) else "No"
+        return "Yes" if _eval_dnf(dnf, known) else "No" #if true return Yes, if false return No
 
     # if the N/A questions do not affect the outcome regardless of their value, they are irrelevant
     # Yes or No
+    # Fill all NA questions with True and False, and evaluate the DNF in both cases
+
     result_all_true  = _eval_dnf(dnf, {**known, **{q: True  for q in na_qs}})
     result_all_false = _eval_dnf(dnf, {**known, **{q: False for q in na_qs}})
 
+    # If the results are the same, then the NA questions do not affect the outcome
+    # Return Yes to evaluate further, No to evaluate further, and N/A if the results are different
     if result_all_true == result_all_false:
-        return "Yes" if result_all_true else "No"
+        return "Yes" if result_all_true else "No" # it eval is true return yes
     return "N/A"
 
 
@@ -69,10 +74,11 @@ def score_trial(trial_summary: PatientTrialSummary) -> str:
     if not dnf:
         return "N/A"
 
+    # extract each questions answer, literally is just getting the answers back
     assignment = {
-        f"Q{i+1}": qa.answer.strip().upper()
-        for i, qa in enumerate(trial_summary.question_answers)
-    }
+        f"Q{i+1}": qa.answer.strip().upper()  #retrieve the answer field
+        for i, qa in enumerate(trial_summary.question_answers) #qa is a PatirentTrialQuestionAnswer object
+    } # basically jsut retrieving the answers per question
 
     return _eval_dnf_threeval(dnf, assignment)
 
@@ -117,6 +123,7 @@ def _parse_dnf_clauses(dnf: str) -> list[dict[str, bool]]:
     # We split on ' OR ' to avoid matching inside variable names
     clause_strings = re.split(r'\bOR\b', expr) # Because we expect that the LLM gave us the combination of answers that an OR generate (check trialsQuestionsPrompts.py)
     clauses = []
+    q_neg,q_pos = 0,0
     for cs in clause_strings:
         cs = cs.strip().strip('()')
         literals = re.split(r'\bAND\b', cs)
@@ -126,11 +133,15 @@ def _parse_dnf_clauses(dnf: str) -> list[dict[str, bool]]:
             if lit.startswith('NOT'):
                 q = lit[3:].strip()
                 clause[q] = False   # requires NO
+                q_neg += 1
             else:
                 clause[lit] = True  # requires YES
+                q_pos += 1
         if clause:
             clauses.append(clause)
-    return clauses
+    
+    # clauses is a list of dictionaries, where the dictionaries is the question and the value is the needed result
+    return clauses,q_pos,q_neg
 
 
 def score_trial_detailed(
@@ -162,37 +173,50 @@ def score_trial_detailed(
             reasoning    – answer_reasoning from the LLM
     """
     dnf = trial_summary.trial_DNF
+    # The result is yes if the DNF is satisfied by the answers 
+    # The result is no if the DNF is not satisfied by the answers
+    # The return is NA if the DNF with the NA questions filled in with both True and False gives different results
     eligible = score_trial(trial_summary)   # reuse existing Kleene logic
 
     if not dnf:
         return {"score": None, "eligible": eligible, "questions": []}
 
-    clauses = _parse_dnf_clauses(dnf)
+    # Returns what the results should be for each clause, True (if YES) or False  (if NO, not clauses)
+    clauses, q_pos, q_neg = _parse_dnf_clauses(dnf) # List of dictionaties
     if not clauses:
         return {"score": None, "eligible": eligible, "questions": []}
 
-    # Index answers by question key
+    # Make a dictionary where the key is the question ID
+    # and the value is the PatientTrialQuestionAnswer (qa)
     answers = {
-        f"Q{i+1}": qa
+        f"Q{i+1}": qa # take all the PatientTrialQuestionAnswer objects for a trial!
         for i, qa in enumerate(trial_summary.question_answers)
     }
-
     # Find the clause whose requirements best match the patient's answers
     best_score = -1.0
     best_clause: dict[str, bool] = {}
-    for clause in clauses:
+    for clause in clauses: # for each dictionary in the list
         if not clause:
             continue
         points = 0.0
-        for q, required_yes in clause.items():
-            qa = answers.get(q)
+        # The question is the key to get the PatientTrialQuestionAnswer object, and the required_yes is the value needed for that question (True/False)
+        # for each question/ which is the clause 
+        # We are retrieving each question from the dictionary
+        conflicting = {}
+        for q, required_yes in clause.items(): # question key, needed answer value
+            # Get the PatientTrialQuestionAnswer object for that question
+            qa = answers.get(q)  # qa has question, answer, confidence, evidence, answer_reasoning, question interpretation
             if qa is None:
                 continue
-            ans = qa.answer.strip().upper()
+            ans = qa.answer.strip().upper() # answer for a given question
             if ans == "N/A":
                 points += na_weight
+            # If the answer is equal to the required answer then we add a point to the score from that clause
             elif (ans == "YES") == required_yes:
                 points += 1.0
+            # Save those that are conflicted (required_yes is True but answer is NO, or required_yes is False but answer is YES) as 0 points
+            else:
+                conflicting[q] = (ans, required_yes)
         clause_score = points / len(clause)
         if clause_score > best_score:
             best_score = clause_score
@@ -209,10 +233,12 @@ def score_trial_detailed(
             required = None
             met = None
         else:
+            # if true then required is YES, if false then required is NO
             required = "YES" if required_yes else "NO"
             if ans == "N/A":
                 met = None if na_weight == 0.0 else bool(na_weight >= 0.5)
             else:
+                # met is just those that are met or the conflicting 
                 met = (ans == "YES") == required_yes
 
         question_details.append({
@@ -226,8 +252,9 @@ def score_trial_detailed(
         })
 
     return {
-        "score":    round(best_score, 4) if best_score >= 0 else None,
+        "score":    round(best_score, 6) if best_score >= 0 else None,
         "eligible": eligible,
+        "trial_id": trial_summary.trial_id,
         "questions": question_details,
     }
 
