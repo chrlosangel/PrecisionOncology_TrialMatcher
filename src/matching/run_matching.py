@@ -52,11 +52,12 @@ def main():
           print(f"Error loading final answers file '{answers_path}': {e}")
           sys.exit(1)
 
-     all_results_dir = Path(f"{new_dir}/all_results/").resolve()
+     all_results_dir = Path(f"{new_dir}/scoring_results/").resolve()
      if not all_results_dir.exists():
           all_results_dir.mkdir(parents=True, exist_ok=True)
           print(f"Created directory for all results at '{all_results_dir}'.")
 
+     #Final results file for all patients :D It doesn't matter if we run it multiple times, it will be overwritten each time. This is the file that will be used to get the results for a specific patient.
      all_results_file = (all_results_dir / "AllPatientTrialSummariesScores.pkl").resolve()
 
      # Now we have the patient_trial_summaries, we can proceed to scoring

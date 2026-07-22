@@ -352,3 +352,7 @@ def return_top_n_trials_for_patient(
         print()
 
     return top_n
+
+# Next version will include:
+# [] backtracking of all evidence
+# [] Summary of all criteria that was conflicting
