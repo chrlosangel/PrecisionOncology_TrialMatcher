@@ -356,3 +356,4 @@ def return_top_n_trials_for_patient(
 # Next version will include:
 # [] backtracking of all evidence
 # [] Summary of all criteria that was conflicting
+# [] Add a function that allows to return the path to the trials

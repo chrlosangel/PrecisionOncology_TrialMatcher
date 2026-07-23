@@ -1,0 +1,48 @@
+#!/bin/bash
+# Find results of a given patient
+
+if command -v conda &> /dev/null; then
+    source ~/.bashrc
+    eval "$(conda shell.bash hook)"  # Initialize Conda properly
+    conda activate trialmatch
+    echo "[INFO] Using conda environment trialmatch. Python 3.11.15 "
+
+else
+    echo "[ERROR] Conda is not installed or not in PATH. Please install Conda."
+    exit 1
+fi
+
+# Add parameters for user to input
+
+usage() {
+    echo ""
+    echo "Usage: $0 [options]"
+    echo "--patient_id <id>      Patient ID to find results for (required=True). Usually the patient ID is the name of the patient note file without extension."
+    echo "--top_trials <number>      Number of top clinical trials to retrieve (required=False, default=5)"
+    echo "--db_path <path>         Path where the database is stored. Do not include the name of the database. Must match --db_path from the main script (required=False, default=./database/chromadb/)"
+
+    exit 1
+}
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -i|--patient_id) patient_id="$2"; shift 2 ;;
+        -t|--top_trials) top_trials="$2"; shift 2 ;;
+        -d|--db_path) db_path="$2"; shift 2 ;;
+        *) echo "[OncoMatch] [ERROR] Unknown parameter: $1"; usage ;;
+    esac
+done
+
+top_trials=${top_trials:-5}
+db_path=${db_path:-./database/chromadb/}
+
+if [[ -z "$patient_id" ]]; then
+    echo "[OncoMatch] [ERROR] Missing required parameter: patient_id."
+    usage
+fi
+
+python $(realpath ./src/matching/run_matching.py) \
+    --patients_database_path ${db_path} \
+    --clinical_trials_file $(realpath ${db_path}/processed_trials.pkl) \
+    --patient_id ${patient_id} \
+    --top_trials ${top_trials}

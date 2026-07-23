@@ -28,7 +28,7 @@ usage() {
     echo "--db_path <path>         Path to store the patients database (required=False, default=./database/chromadb/)"
     echo "--clinical_trials_path <path> Path to the clinical trials data directory (required=False)"
     echo "--LLM_model <model>          LLM model to use (required=False, default=Qwen/Qwen2.5-32B-Instruct)"
-    echo "--embedding_model <model>    Embedding model to use (required=False, default=ncbi/MedCPT-Query-Encoder)"
+    echo "--embedding_model <model>    Embedding model to use for sentence encoding (required=False, default=ncbi/MedCPT-Query-Encoder)"
     echo "Options:"
     
     exit 1
@@ -48,7 +48,7 @@ done
 LLM_model_for_patients="Qwen/Qwen1.5-14B-Chat"
 sentence_tokenizer="en_core_sci_sm"
 
-LLM_model=${LLM_model:-"Qwen/Qwen1.5-14B-Chat"}
+LLM_model=${LLM_model:-"Qwen/Qwen2.5-32B-Instruct"}
 embedding_model=${embedding_model:-"ncbi/MedCPT-Query-Encoder"}
 
 
@@ -80,13 +80,13 @@ job_trials=$(sbatch --parsable $(realpath ./exc/trials.sh) \
 #Run interrogation
 echo "[OncoMatch] [INFO] Submitting interrogation job..."
 job_interrogate=$(sbatch --parsable --dependency=afterok:${job_patients}:${job_trials} $(realpath ./exc/interrogate.sh) \
-    $(realpath ${db_path})/processed_trials.pkl \
-    $(realpath ${db_path})/chromaDB_patients \
+    $(realpath ${db_path}/processed_trials.pkl) \
+    $(realpath ${db_path}/chromaDB_patients) \
      ${LLM_model} ${embedding_model})
 
 job_scoring=$(sbatch --parsable --dependency=afterok:${job_interrogate} $(realpath ./exc/scoring.sh) \
-    $(realpath ${db_path})/chromaDB_patients \
-    $(realpath ${db_path})/processed_trials.pkl
+    $(realpath ${db_path}/chromaDB_patients) \
+    $(realpath ${db_path}/processed_trials.pkl)
 )
 
 echo "[OncoMatch] Summary of submitted jobs:"

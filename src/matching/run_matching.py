@@ -13,7 +13,7 @@ def argument_parser():
      parser.add_argument("--clinical_trials_file", required=True, help="Path to the clinical trials file. This is a pickle file containing the processed clinical trials.")
      parser.add_argument("--run_all_patients", action="store_true", help="If set, the script will run matching for all patients in the database. If not set, it will only run for a single patient specified by --patient_id.")
      parser.add_argument("--patient_id", type=str, help="Patient ID to run matching for. Required if --run_all_patients is not set.")
-     parser.add_argument("--top_k_trials", type=int, default=2, help="Only if --patient_id is set, if set, the top k trials for the patient will be returned. Default is 2.")
+     parser.add_argument("--top_trials", type=int, default=2, help="Only if --patient_id is set, if set, the top k trials for the patient will be returned. Default is 2.")
      return parser
 
 def main():
@@ -89,12 +89,11 @@ def main():
                     all_patient_results = pickle.load(f)
                print(f"All patient trial summaries scores loaded from '{all_results_file}'.")
                if args.patient_id in all_patient_results:
-                    print(f"Results for patient ID '{args.patient_id}': {all_patient_results[args.patient_id]}")
+                    #print(f"Results for patient ID '{args.patient_id}': {all_patient_results[args.patient_id]}")
                     try:
                          # Dictionary
-                         if args.top_k_trials is not None:
-                              top_k_results = scoring.return_best_trial_for_patient(all_patient_results, args.patient_id, top_k=args.top_k_trials)
-                              print(f"Top {args.top_k_trials} trials for patient ID '{args.patient_id}': {top_k_results}")
+                         if args.top_trials is not None:
+                              top_k_results = scoring.return_top_n_trials_for_patient(all_patient_results, args.patient_id, n=args.top_trials)
                     except KeyError:
                          print(f"No results found for patient ID '{args.patient_id}'. Please ensure the patient ID is correct and that the matching scoring has been run for this patient.")
                          sys.exit(1)
