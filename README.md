@@ -53,9 +53,8 @@ Follow the model instructions for downloading any HF LLM:
 hf download MODEL_NAME/HF_ID --cache-dir $HF_HOME
 ```
 # Execution
-Once the environment and the proper requirements have been installed you can run the main process. It is recommended to have ALL patients and ALL trials in their respective folders (one folder per trial and one per patient). It is designed to run overnight; however, if the paths for patients or clinical trials are changed, please run it manually.
-
-# Run process 
+Once the environment and the proper requirements have been installed you can run the main process. It is recommended to have ALL patients and ALL trials in their respective folders (one folder per trial and one per patient). This section is to be executed by the user, where all paths can be specified, however if an automated nightly run is desired check Nighly Processing section.
+## Run process 
 ```bash
 sbatch main.sh \
      --patients_path $(realpath "./data/coral/toy_set/") \
@@ -65,9 +64,30 @@ sbatch main.sh \
      --embedding_model "ncbi/MedCPT-Query-Encoder"
 ```
 
+The database and processing is scheduled to run every night, using cron. If not available on your system check details
+
+## Nightly processing
+This section hardcodes all files please edit scheduler.sh with your desired paths. For example, if you have a new path with new trials, you can either move all trials to the harcoded path (recommended) or change the path to the new one. 
+
+[WARNING] cron does not accept relative paths, absolute paths are required.
+
+If setting up for the first time on your system:
+
+```bash
+
+chmod +X scheduler.sh
+crontab -e # opens cron, copy and paste the following line
+# Cron does not accept relative paths, please modify with your absolute path [assumming you are on precision_oncology dir]
+# /your/path/ = /users/jcc2340/g2lab/projects/precision_oncology <- example
+
+0 23 * * 0,1,2,3,4 /your/path/scheduler >> /your/path/logs/cron.log >> 2&1
+
+```
+
 # Display patient best n results
 
 If your data was processed correctly you can retrieve the top n trials for any given patient. If the patient is not found, please confirm the previous process was executed successfully and that the patient notes are actually in the specified folder.
+Note: The patient ID is the name of the patient file record without the extension.
 
 ```bash
 bash OncoMatch --patient_id "note_03_colorectal" --top_trials 3
