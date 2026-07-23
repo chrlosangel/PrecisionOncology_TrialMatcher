@@ -12,6 +12,9 @@ dependencies:
   - pandas
   - pip
   - pip:
+    
+    # Webapp
+    - flask
     # XML parsing (trial side)
     - lxml                      # fast XML parser for ClinicalTrials.gov files
     - ujson                     # fast JSON serialization for large trial files

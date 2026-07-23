@@ -58,6 +58,7 @@ if [[ -z "$patients_path" || -z "$db_path" ]]; then
 fi
 # Preprocessing 
 
+mkdir -p ${db_path}
 # Run Patients
 echo "[OncoMatch] [INFO] Submitting patients preprocessing job..."
 job_patients=$(sbatch --parsable $(realpath ./exc/patients.sh) \
@@ -107,6 +108,6 @@ echo "[OncoMatch] - Interrogation datastructure: ${db_path}/PatientwTrials.pkl"
 echo "[OncoMatch] - Interrogation results: ${db_path}/final_answers/FinalPatientTrialSummaries.pkl"
 echo " ------------- "
 echo "[OncoMatch] From scoring:"
-echo "[OncoMatch] - Scoring results: ${db_path}/final_answers/AllPatientTrialSummariesScores.pkl"
+echo "[OncoMatch] - Scoring results: ${db_path}/final_answers/scoring_results/AllPatientTrialSummariesScores.pkl"
 echo " ------------- "
 
